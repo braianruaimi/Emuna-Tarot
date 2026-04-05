@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b021d">
+    <meta name="description" content="Emuna - Tarot Evolutivo. Lecturas, limpieza energética y alineación espiritual en una experiencia web mística y app instalable.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icon-192.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <title>Emuna - Tarot Evolutivo</title>
+</head>
+<body>
+    <div class="aurora aurora-left"></div>
+    <div class="aurora aurora-right"></div>
+
+    <header class="site-header">
+        <a class="brand" href="#inicio">Emuna</a>
+        <nav class="site-nav" aria-label="Principal">
+            <a href="#conexion">Conexión</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#sobre-mi">Sobre Mí</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+        <button class="install-button hidden" id="installButton" type="button">Instalar App</button>
+    </header>
+
+    <main>
+        <section class="hero reveal" id="inicio">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="eyebrow">Tarot evolutivo, energía y expansión del alma</p>
+                <h1>Emuna: Tu Evolución a través del Tarot</h1>
+                <p class="hero-text">Abrí un portal de claridad para escuchar tu intuición, ordenar tu energía y avanzar con dirección espiritual en cada etapa de tu camino.</p>
+                <div class="hero-actions">
+                    <a class="primary-button" href="#contacto">Inicia tu Viaje</a>
+                    <a class="secondary-button" href="#servicios">Explorar Servicios</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="conexion">
+            <div class="section-heading">
+                <p class="eyebrow">Conexión</p>
+                <h2>Despertar espiritual con intención y contención</h2>
+            </div>
+            <div class="connection-card framed-panel">
+                <p>En Emuna, cada consulta está pensada para ayudarte a mirar tu presente con conciencia, liberar cargas energéticas y reconocer el mensaje que tu alma viene a revelar.</p>
+                <p>Las lecturas evolutivas y los rituales de limpieza te acompañan a soltar bloqueos, abrir percepción y alinear tus decisiones con una frecuencia más serena, clara y expansiva.</p>
+            </div>
+        </section>
+
+        <section class="section reveal" id="servicios">
+            <div class="section-heading">
+                <p class="eyebrow">Servicios</p>
+                <h2>Rituales y sesiones para tu proceso evolutivo</h2>
+            </div>
+            <div class="services-grid">
+                <article class="service-card framed-panel">
+                    <span class="service-index">01</span>
+                    <h3>Lectura Evolutiva</h3>
+                    <p>Una sesión de tarot terapéutico para comprender patrones, desbloquear tu intuición y dar sentido a tus próximos movimientos.</p>
+                </article>
+                <article class="service-card framed-panel">
+                    <span class="service-index">02</span>
+                    <h3>Limpieza Energética</h3>
+                    <p>Ritual 3/3 para depurar cargas densas, proteger tu campo vibracional y restaurar la calma en cuerpo, mente y hogar.</p>
+                </article>
+                <article class="service-card framed-panel">
+                    <span class="service-index">03</span>
+                    <h3>Alineación de Portales</h3>
+                    <p>Trabajo energético orientado a ciclos, aperturas y momentos clave para que atravieses cambios con presencia y coherencia interna.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section reveal" id="sobre-mi">
+            <div class="section-heading">
+                <p class="eyebrow">Sobre Mí</p>
+                <h2>Bren – Tarot & Energía</h2>
+            </div>
+            <div class="about-layout framed-panel">
+                <div>
+                    <p>Bren acompaña procesos de transformación personal integrando tarot evolutivo, lectura intuitiva y trabajo energético enfocado en presencia, limpieza y expansión.</p>
+                    <p>Su enfoque combina sensibilidad, escucha y ritualidad para ofrecer una experiencia profunda, humana y práctica, en la que cada mensaje se convierte en guía concreta para tu vida cotidiana.</p>
+                </div>
+                <div class="about-quote">
+                    <p>"La energía se ordena cuando tu verdad encuentra un espacio seguro para revelarse."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="contacto">
+            <div class="section-heading">
+                <p class="eyebrow">Reserva Tu Espacio</p>
+                <h2>Solicitá tu lectura o ritual</h2>
+            </div>
+            <div class="contact-wrapper framed-panel">
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="field-group">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" name="nombre" type="text" autocomplete="given-name" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="apellido">Apellido</label>
+                        <input id="apellido" name="apellido" type="text" autocomplete="family-name" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <input id="fechaNacimiento" name="fechaNacimiento" type="date" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="edad">Edad</label>
+                        <input id="edad" name="edad" type="number" min="18" max="120" inputmode="numeric" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="signo">Signo</label>
+                        <select id="signo" name="signo" required>
+                            <option value="">Seleccionar</option>
+                            <option>Aries</option>
+                            <option>Tauro</option>
+                            <option>Géminis</option>
+                            <option>Cáncer</option>
+                            <option>Leo</option>
+                            <option>Virgo</option>
+                            <option>Libra</option>
+                            <option>Escorpio</option>
+                            <option>Sagitario</option>
+                            <option>Capricornio</option>
+                            <option>Acuario</option>
+                            <option>Piscis</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" required>
+                    </div>
+                    <div class="field-group">
+                        <label for="telefono">Teléfono</label>
+                        <input id="telefono" name="telefono" type="tel" autocomplete="tel" required>
+                    </div>
+                    <div class="field-group field-group-full">
+                        <label for="asunto">Asunto</label>
+                        <input id="asunto" name="asunto" type="text" placeholder="Contame qué querés trabajar" required>
+                    </div>
+                    <div class="form-actions field-group-full">
+                        <button class="primary-button neon-button" id="submitButton" type="submit">Enviar Mensaje</button>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <button class="floating-install hidden" id="floatingInstallButton" type="button" aria-label="Instalar app">Instalar App</button>
+
+    <script src="app.js"></script>
+</body>
+</html>
