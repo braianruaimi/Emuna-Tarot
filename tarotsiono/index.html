@@ -671,10 +671,10 @@
 						<button class="mode-button" id="modeThree" type="button" data-mode="three" aria-pressed="false">3 Cartas</button>
 					</div>
 				</div>
-				<p class="mode-meta" id="modeMeta">En Sí o No eliges una sola carta y recibes una respuesta concreta para entender qué energía acompaña hoy tu pregunta.</p>
+				<p class="mode-meta" id="modeMeta">En Sí o No elegís una sola carta y recibís una respuesta concreta para entender qué energía acompaña hoy tu pregunta.</p>
 				<button class="action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
 				<button class="ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
-				<p class="status" id="statusText">Elegí la carta que más te llama y deja que la lectura acomode el mensaje.</p>
+				<p class="status" id="statusText">Elegí la carta que más te llama y dejá que la lectura acomode el mensaje.</p>
 			</aside>
 		</section>
 
@@ -806,7 +806,7 @@
 				energia: 1,
 				veredicto: "SÍ",
 				mensaje_corto: "Hay movimiento, dirección y fuerza para avanzar.",
-				interpretacion: "El Carro muestra una energía decidida que empuja el proceso hacia adelante. Si mantienes el foco, puedes salir del estancamiento.",
+				interpretacion: "El Carro muestra una energía decidida que empuja el proceso hacia adelante. Si mantenés el foco, podés salir del estancamiento.",
 				consejo: "No retrocedas por dudas de último momento. Avanza con dirección y cuida tu centro emocional.",
 				color_aura: "var(--blue-electric)",
 				simbolo: "➳"
@@ -1009,10 +1009,10 @@
 
 		function getModeText() {
 			if (mode === "yesno") {
-				return "En Sí o No eliges una sola carta y recibes una respuesta concreta para entender qué energía acompaña hoy tu pregunta.";
+				return "En Sí o No elegís una sola carta y recibís una respuesta concreta para entender qué energía acompaña hoy tu pregunta.";
 			}
 
-			return "En la tirada de 3 cartas observas pasado, presente y futuro para entender el proceso completo y ver hacia dónde se está moviendo tu energía.";
+			return "En la tirada de 3 cartas observás pasado, presente y futuro para entender el proceso completo y ver hacia dónde se está moviendo tu energía.";
 		}
 
 		function updateSelectionHint() {
@@ -1093,7 +1093,7 @@
 				});
 			});
 
-			setStatus("Elegí la carta que más te llama y deja que la lectura acomode el mensaje.");
+			setStatus("Elegí la carta que más te llama y dejá que la lectura acomode el mensaje.");
 			modeMeta.textContent = getModeText();
 			updateSelectionHint();
 		}
@@ -1116,7 +1116,7 @@
 				state.element.querySelector(".card-position").textContent = "";
 			} else {
 				if (selectedKeys.length >= required) {
-					setStatus(`Ya elegiste ${required} carta${required > 1 ? "s" : ""}. Puedes ver tu lectura o cambiar tu selección.`);
+					setStatus(`Ya elegiste ${required} carta${required > 1 ? "s" : ""}. Podés ver tu lectura o cambiar tu selección.`);
 					return;
 				}
 
@@ -1143,7 +1143,7 @@
 			if (selectedKeys.length === required) {
 				setStatus("Tu selección ya está lista. Cuando quieras, abre la lectura y mira qué se revela.");
 			} else {
-				setStatus(`Llevas ${selectedKeys.length} de ${required}. Sigue eligiendo y deja que la energía termine de ordenarse.`);
+				setStatus(`Llevás ${selectedKeys.length} de ${required}. Seguí eligiendo y dejá que la energía termine de ordenarse.`);
 			}
 
 			updateSelectionHint();
@@ -1294,7 +1294,7 @@
 				flipSelectedCards();
 				setTimeout(() => {
 					renderReadingResult();
-					setStatus("La lectura ya está abierta. Si querés, puedes volver a mezclar el mazo y consultar otra vez.");
+					setStatus("La lectura ya está abierta. Si querés, podés volver a mezclar el mazo y consultar otra vez.");
 				}, 880);
 			}, 420);
 		}
