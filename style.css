@@ -714,6 +714,61 @@ h1 {
     padding: 2rem 0 4rem;
 }
 
+.oracle-spotlight {
+    padding-top: 1rem;
+}
+
+.oracle-spotlight-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.95fr);
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.oracle-spotlight-main,
+.oracle-spotlight-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.oracle-spotlight-main p:last-of-type {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.oracle-spotlight-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.oracle-kpis {
+    display: grid;
+    gap: 1rem;
+}
+
+.oracle-kpi {
+    padding: 1rem 1.1rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(64, 224, 208, 0.18);
+    box-shadow: inset 0 1px 0 rgba(249, 242, 149, 0.08);
+}
+
+.oracle-kpi strong {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--gold-b);
+}
+
+.oracle-kpi span {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
 .section-heading {
     margin-bottom: 1.8rem;
 }
@@ -1452,8 +1507,13 @@ select:user-invalid {
     }
 
     .hero-actions,
-    .form-actions {
+    .form-actions,
+    .oracle-spotlight-actions {
         align-items: stretch;
+    }
+
+    .oracle-spotlight-grid {
+        grid-template-columns: 1fr;
     }
 
     .contact-form {

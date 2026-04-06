@@ -654,12 +654,12 @@
 			<article class="glass-panel hero-copy">
 				<p class="eyebrow">Tarot Evolutivo</p>
 				<h1>Claridad directa para lo que hoy necesitás ver</h1>
-				<p class="lead">No siempre hace falta una lectura extensa para sentir dirección. Este espacio está pensado para ayudarte a ordenar lo que intuís, ver la energía del momento y recibir una respuesta clara que te permita avanzar con más conciencia.</p>
+				<p class="lead">No siempre hace falta una sesión extensa para sentir dirección. Este espacio está pensado para ayudarte a ordenar lo que intuís, escuchar la energía del momento y recibir una respuesta clara que te permita avanzar con más conciencia.</p>
 				<div class="benefits">
 					<span class="benefit">22 Arcanos Mayores</span>
 					<span class="benefit">Lectura Sí o No</span>
 					<span class="benefit">Tirada de 3 cartas</span>
-					<span class="benefit">Consejo directo y claro</span>
+					<span class="benefit">Mensaje claro y consejo directo</span>
 				</div>
 			</article>
 
@@ -671,10 +671,10 @@
 						<button class="mode-button" id="modeThree" type="button" data-mode="three" aria-pressed="false">3 Cartas</button>
 					</div>
 				</div>
-				<p class="mode-meta" id="modeMeta">En Sí o No eliges una sola carta y recibes una respuesta concreta con interpretación y consejo para este momento.</p>
+				<p class="mode-meta" id="modeMeta">En Sí o No eliges una sola carta y recibes una respuesta concreta para entender qué energía acompaña hoy tu pregunta.</p>
 				<button class="action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
 				<button class="ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
-				<p class="status" id="statusText">Elegí una carta del abanico y deja que la lectura revele lo que hoy pide claridad.</p>
+				<p class="status" id="statusText">Elegí la carta que más te llama y deja que la lectura acomode el mensaje.</p>
 			</aside>
 		</section>
 
@@ -1009,10 +1009,10 @@
 
 		function getModeText() {
 			if (mode === "yesno") {
-				return "En Sí o No eliges una sola carta y recibes una respuesta concreta con interpretación y consejo para este momento.";
+				return "En Sí o No eliges una sola carta y recibes una respuesta concreta para entender qué energía acompaña hoy tu pregunta.";
 			}
 
-			return "En la tirada de 3 cartas miras pasado, presente y futuro para entender el proceso completo y ver hacia dónde se mueve tu energía.";
+			return "En la tirada de 3 cartas observas pasado, presente y futuro para entender el proceso completo y ver hacia dónde se está moviendo tu energía.";
 		}
 
 		function updateSelectionHint() {
@@ -1093,7 +1093,7 @@
 				});
 			});
 
-			setStatus("Elegí una carta del abanico y deja que la lectura revele lo que hoy pide claridad.");
+			setStatus("Elegí la carta que más te llama y deja que la lectura acomode el mensaje.");
 			modeMeta.textContent = getModeText();
 			updateSelectionHint();
 		}
@@ -1116,7 +1116,7 @@
 				state.element.querySelector(".card-position").textContent = "";
 			} else {
 				if (selectedKeys.length >= required) {
-					setStatus(`Ya elegiste ${required} carta${required > 1 ? "s" : ""}. Pulsa "Ver mi resultado" o cambia tu selección.`);
+					setStatus(`Ya elegiste ${required} carta${required > 1 ? "s" : ""}. Puedes ver tu lectura o cambiar tu selección.`);
 					return;
 				}
 
@@ -1141,9 +1141,9 @@
 			});
 
 			if (selectedKeys.length === required) {
-				setStatus("Tu selección ya está lista. Pulsa \"Ver mi resultado\" para abrir la lectura.");
+				setStatus("Tu selección ya está lista. Cuando quieras, abre la lectura y mira qué se revela.");
 			} else {
-				setStatus(`Llevas ${selectedKeys.length} de ${required}. Sigue eligiendo y deja que la energía termine de mostrarse.`);
+				setStatus(`Llevas ${selectedKeys.length} de ${required}. Sigue eligiendo y deja que la energía termine de ordenarse.`);
 			}
 
 			updateSelectionHint();
@@ -1268,7 +1268,7 @@
 
 			openModal({
 				finalData: {
-					nombre: "Resultado Global",
+					nombre: "Síntesis de la tirada",
 					veredicto: finalVerdict,
 					interpretacion: `Score energético total: ${score}. ${finalVerdict}.`,
 					consejo: "No te quedes solo con una impresión rápida. Integra las tres posiciones y usa esta lectura para tomar decisiones con más claridad y coherencia.",
@@ -1294,7 +1294,7 @@
 				flipSelectedCards();
 				setTimeout(() => {
 					renderReadingResult();
-					setStatus("La lectura ya está abierta. Si quieres, puedes volver a mezclar el mazo y consultar de nuevo.");
+					setStatus("La lectura ya está abierta. Si querés, puedes volver a mezclar el mazo y consultar otra vez.");
 				}, 880);
 			}, 420);
 		}
