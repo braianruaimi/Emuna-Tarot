@@ -277,6 +277,21 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// --- Scroll custom para anclas del menú ---
+document.querySelectorAll('.site-nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+            e.preventDefault();
+            const header = document.querySelector('.site-header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    });
+});
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
