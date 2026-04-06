@@ -1,3 +1,148 @@
+// --- Lógica de RESERVAR y WhatsApp ---
+const reservarBtns = document.querySelectorAll('.reservar-btn');
+const contactoSection = document.getElementById('contacto');
+const servicioInputId = 'servicioSeleccionado';
+
+// Agregar campo oculto para el servicio seleccionado si no existe
+let servicioInput = document.getElementById(servicioInputId);
+if (!servicioInput && form) {
+    servicioInput = document.createElement('input');
+    servicioInput.type = 'hidden';
+    servicioInput.id = servicioInputId;
+    servicioInput.name = 'servicio';
+    form.appendChild(servicioInput);
+}
+
+reservarBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const card = btn.closest('.service-card');
+        if (card && card.dataset.service) {
+            servicioInput.value = card.dataset.service;
+        }
+        if (contactoSection) {
+            contactoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // Enfocar el campo nombre para UX
+        setTimeout(() => {
+            const nombre = document.getElementById('nombre');
+            if (nombre) nombre.focus();
+        }, 600);
+    });
+});
+
+if (form) {
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!validateForm()) return;
+        submitButton.disabled = true;
+        setFormStatus('Enviando...', '');
+
+        // Armar mensaje para WhatsApp
+        const nombre = form.nombre.value;
+        const apellido = form.apellido.value;
+        const fecha = form.fechaNacimiento.value;
+        const edad = form.edad.value;
+        const signo = form.signo.value;
+        const email = form.email.value;
+        const telefono = form.telefono.value;
+        const asunto = form.asunto.value;
+        const servicio = servicioInput.value || '';
+        const mensaje =
+            `Hola Bren!%0AQuiero reservar el servicio: *${servicio}*%0A` +
+            `Nombre: ${nombre} ${apellido}%0A` +
+            `Fecha de nacimiento: ${fecha} (${edad} años)%0A` +
+            `Signo: ${signo}%0A` +
+            `Email: ${email}%0A` +
+            `Teléfono: ${telefono}%0A` +
+            `Motivo: ${asunto}`;
+        const numero = '5492215047962'; // Número real de Bren actualizado
+        const waUrl = `https://wa.me/${numero}?text=${mensaje}`;
+
+        setTimeout(() => {
+            window.open(waUrl, '_blank');
+            form.reset();
+            servicioInput.value = '';
+            submitButton.disabled = false;
+            setFormStatus('¡Mensaje enviado por WhatsApp!', 'success');
+        }, 1200);
+    });
+}
+// --- Tarot Service Modal ---
+const serviceCards = document.querySelectorAll('.tarot-card');
+const serviceModal = document.getElementById('service-modal');
+const serviceModalContent = serviceModal?.querySelector('.service-modal-content');
+const serviceModalCard = serviceModal?.querySelector('.service-modal-card');
+const serviceModalClose = serviceModal?.querySelector('.service-modal-close');
+
+const serviceData = [
+    {
+        title: 'Lectura Evolutiva',
+        desc: 'Ideal si necesitás respuestas, claridad y dirección. Vas a poder comprender patrones, validar lo que intuís y salir con una lectura que te ayude a decidir con más seguridad.'
+    },
+    {
+        title: 'Limpieza Energética',
+        desc: 'Un ritual profundo para liberar cargas densas, cortar bloqueos y recuperar calma mental, emocional y energética cuando sentís peso, agotamiento o desorden interno.'
+    },
+    {
+        title: 'Alineación de Portales',
+        desc: 'Un trabajo enfocado en fechas y momentos de alta potencia vibracional para ayudarte a ordenar intención, sostener manifestación y atravesar cambios con conciencia.'
+    }
+];
+
+function openServiceModal(idx, cardEl) {
+    if (!serviceModal || !serviceModalCard) return;
+    // Animación de vuelo
+    const rect = cardEl.getBoundingClientRect();
+    const flyCard = cardEl.cloneNode(true);
+    flyCard.classList.add('tarot-fly');
+    flyCard.style.position = 'fixed';
+    flyCard.style.left = rect.left + 'px';
+    flyCard.style.top = rect.top + 'px';
+    flyCard.style.width = rect.width + 'px';
+    flyCard.style.height = rect.height + 'px';
+    flyCard.style.zIndex = 9999;
+    document.body.appendChild(flyCard);
+    setTimeout(() => {
+        flyCard.remove();
+        serviceModal.classList.add('active');
+        serviceModal.classList.remove('hidden');
+        serviceModalCard.innerHTML = `<h3>${serviceData[idx].title}</h3><p>${serviceData[idx].desc}</p>`;
+        serviceModalCard.focus();
+    }, 600);
+}
+
+function closeServiceModal() {
+    if (!serviceModal) return;
+    serviceModal.classList.remove('active');
+    setTimeout(() => {
+        serviceModal.classList.add('hidden');
+        serviceModalCard.innerHTML = '';
+    }, 350);
+}
+
+serviceCards.forEach((card, i) => {
+    card.addEventListener('click', () => openServiceModal(i, card));
+    card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            openServiceModal(i, card);
+        }
+    });
+});
+if (serviceModalClose) {
+    serviceModalClose.addEventListener('click', closeServiceModal);
+}
+if (serviceModal) {
+    serviceModal.addEventListener('click', (e) => {
+        if (e.target === serviceModal || e.target.classList.contains('service-modal-backdrop')) {
+            closeServiceModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (serviceModal.classList.contains('active') && e.key === 'Escape') {
+            closeServiceModal();
+        }
+    });
+}
 const form = document.querySelector('#contactForm');
 const formStatus = document.querySelector('#formStatus');
 const submitButton = document.querySelector('#submitButton');
@@ -25,7 +170,7 @@ const validateForm = () => {
     if (firstInvalidField) {
         firstInvalidField.reportValidity();
         firstInvalidField.focus();
-        setFormStatus('Completá todos los campos obligatorios antes de enviar.', 'error');
+        setFormStatus('Completá los campos obligatorios para que pueda indicarte la mejor sesión para tu momento actual.', 'error');
         return false;
     }
 
@@ -49,7 +194,7 @@ if (form) {
 
         form.reset();
         submitButton.disabled = false;
-        setFormStatus('Tu mensaje fue enviado con éxito. Pronto vas a recibir una respuesta.', 'success');
+        setFormStatus('Recibí tu mensaje. En breve te respondo para orientarte y reservar tu espacio.', 'success');
     });
 }
 

@@ -1,10 +1,13 @@
-const CACHE_NAME = 'emuna-tarot-v1';
+const CACHE_NAME = 'emuna-tarot-v5';
 const APP_SHELL = [
     './',
     'index.html',
     'style.css',
     'app.js',
     'manifest.json',
+    'assets/chica luna.jpg',
+    'assets/descarga.jpg',
+    'assets/luna-after-hero.jpg',
     'assets/icon-192.svg',
     'assets/icon-512.svg'
 ];
