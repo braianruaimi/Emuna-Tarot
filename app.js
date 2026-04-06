@@ -11,6 +11,8 @@ const bookingModal = document.querySelector('#bookingModal');
 const bookingModalClose = document.querySelector('#bookingModalClose');
 const bookingServiceSummary = document.querySelector('#bookingServiceSummary');
 const openBookingButtons = document.querySelectorAll('.open-booking-btn');
+const servicesTrack = document.querySelector('#servicesTrack');
+const carouselArrows = document.querySelectorAll('[data-carousel-arrow]');
 
 // --- Lógica de RESERVAR y WhatsApp ---
 const reservarBtns = document.querySelectorAll('.reservar-btn');
@@ -83,6 +85,44 @@ openBookingButtons.forEach((button) => {
         openBookingModal(servicioInput?.value || '');
     });
 });
+
+const updateCarouselArrows = () => {
+    if (!servicesTrack || !carouselArrows.length) {
+        return;
+    }
+
+    const maxScrollLeft = servicesTrack.scrollWidth - servicesTrack.clientWidth;
+
+    carouselArrows.forEach((arrow) => {
+        const direction = arrow.dataset.carouselArrow;
+
+        if (direction === 'prev') {
+            arrow.disabled = servicesTrack.scrollLeft <= 8;
+        }
+
+        if (direction === 'next') {
+            arrow.disabled = servicesTrack.scrollLeft >= maxScrollLeft - 8;
+        }
+    });
+};
+
+if (servicesTrack && carouselArrows.length) {
+    carouselArrows.forEach((arrow) => {
+        arrow.addEventListener('click', () => {
+            const direction = arrow.dataset.carouselArrow === 'next' ? 1 : -1;
+            const travel = Math.max(servicesTrack.clientWidth * 0.78, 260);
+
+            servicesTrack.scrollBy({
+                left: travel * direction,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    servicesTrack.addEventListener('scroll', updateCarouselArrows, { passive: true });
+    window.addEventListener('resize', updateCarouselArrows);
+    updateCarouselArrows();
+}
 
 if (bookingModalClose) {
     bookingModalClose.addEventListener('click', closeBookingModal);

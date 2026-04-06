@@ -222,59 +222,67 @@
                 <h2>Elige tu experiencia de Tarot</h2>
             </div>
             <div class="services-carousel framed-panel" aria-label="Carrusel de servicios">
-                <div class="services-track modern-services">
-                    <article class="service-card tarot-card mystic-card" data-service="Lectura Esencial" tabindex="0">
-                        <div class="card-header-icon">
-                            <span class="icon-tarot">&#9733;</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Lectura Esencial</h3>
-                            <div class="card-detail">1 Lectura Evolutiva<br><span class="card-detail-plus">+ 1 Pregunta concreta</span></div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-precio">$3.000</span>
-                            <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
-                        </div>
-                    </article>
-                    <article class="service-card tarot-card mystic-card" data-service="Lectura de Claridad" tabindex="0">
-                        <div class="card-header-icon">
-                            <span class="icon-tarot">&#9889;</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Lectura de Claridad</h3>
-                            <div class="card-detail">1 Lectura Evolutiva<br><span class="card-detail-plus">+ 3 Preguntas profundas</span></div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-precio">$8.000</span>
-                            <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
-                        </div>
-                    </article>
-                    <article class="service-card tarot-card mystic-card" data-service="Inmersión Evolutiva (Completa)" tabindex="0">
-                        <div class="card-header-icon">
-                            <span class="icon-tarot">&#10024;</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Inmersión Evolutiva</h3>
-                            <div class="card-detail">Lectura completa<br><span class="card-detail-plus">+ 3 Preguntas + Consejo del oráculo</span></div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-precio">$15.000</span>
-                            <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
-                        </div>
-                    </article>
-                    <article class="service-card tarot-card mystic-card modern-destacado" data-service="Acompañamiento Evolutivo Mensual" tabindex="0">
-                        <div class="card-header-icon">
-                            <span class="icon-tarot icon-destacado">&#128171;</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Acompañamiento Mensual</h3>
-                            <div class="card-detail">Seguimiento del proceso<br><span class="card-detail-plus">+ Guía y soporte evolutivo durante el mes</span></div>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-precio">$12.000</span>
-                            <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
-                        </div>
-                    </article>
+                <div class="services-carousel-shell">
+                    <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Ver servicio anterior" data-carousel-arrow="prev">
+                        <span aria-hidden="true">&#10094;</span>
+                    </button>
+                    <div class="services-track modern-services" id="servicesTrack">
+                        <article class="service-card tarot-card mystic-card" data-service="Lectura Esencial" tabindex="0">
+                            <div class="card-header-icon">
+                                <span class="icon-tarot">&#9733;</span>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Lectura Esencial</h3>
+                                <div class="card-detail">1 Lectura Evolutiva<br><span class="card-detail-plus">+ 1 Pregunta concreta</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="card-precio">$3.000</span>
+                                <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
+                            </div>
+                        </article>
+                        <article class="service-card tarot-card mystic-card" data-service="Lectura de Claridad" tabindex="0">
+                            <div class="card-header-icon">
+                                <span class="icon-tarot">&#9889;</span>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Lectura de Claridad</h3>
+                                <div class="card-detail">1 Lectura Evolutiva<br><span class="card-detail-plus">+ 3 Preguntas profundas</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="card-precio">$8.000</span>
+                                <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
+                            </div>
+                        </article>
+                        <article class="service-card tarot-card mystic-card" data-service="Inmersión Evolutiva (Completa)" tabindex="0">
+                            <div class="card-header-icon">
+                                <span class="icon-tarot">&#10024;</span>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Inmersión Evolutiva</h3>
+                                <div class="card-detail">Lectura completa<br><span class="card-detail-plus">+ 3 Preguntas + Consejo del oráculo</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="card-precio">$15.000</span>
+                                <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
+                            </div>
+                        </article>
+                        <article class="service-card tarot-card mystic-card modern-destacado" data-service="Acompañamiento Evolutivo Mensual" tabindex="0">
+                            <div class="card-header-icon">
+                                <span class="icon-tarot icon-destacado">&#128171;</span>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Acompañamiento Mensual</h3>
+                                <div class="card-detail">Seguimiento del proceso<br><span class="card-detail-plus">+ Guía y soporte evolutivo durante el mes</span></div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="card-precio">$12.000</span>
+                                <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
+                            </div>
+                        </article>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Ver siguiente servicio" data-carousel-arrow="next">
+                        <span aria-hidden="true">&#10095;</span>
+                    </button>
                 </div>
             </div>
         </section>
