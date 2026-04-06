@@ -59,7 +59,31 @@
             </div>
         </section>
 
-        <section class="section reveal oracle-spotlight" id="oraculo-home">
+        <!-- MINI ORÁCULO DEMO -->
+        <section class="section reveal mini-oraculo-demo" id="mini-oraculo-demo" data-aos="fade-up" data-aos-delay="80">
+            <div class="mini-oraculo-container framed-panel">
+                <div class="mini-oraculo-header">
+                    <p class="eyebrow">Mini Oráculo Gratis</p>
+                    <h2>¿Qué energía te acompaña hoy?</h2>
+                </div>
+                <div class="mini-oraculo-body">
+                    <div class="mini-oraculo-carta" id="miniOraculoCarta" tabindex="0" aria-label="Haz click para revelar tu mensaje">
+                        <div class="mini-oraculo-carta-inner">
+                            <div class="mini-oraculo-carta-front">
+                                <span class="mini-oraculo-symbol">✶</span>
+                                <span class="mini-oraculo-txt">Toca para revelar</span>
+                            </div>
+                            <div class="mini-oraculo-carta-back" id="miniOraculoMensaje">
+                                <!-- Mensaje generado por JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mini-oraculo-leyenda">Esta carta es una muestra. El oráculo completo te espera con más profundidad.</p>
+            </div>
+        </section>
+        <!-- FIN MINI ORÁCULO DEMO -->
+        <section class="section reveal oracle-spotlight" id="oraculo-home" data-aos="fade-up" data-aos-delay="120">
             <div class="oracle-spotlight-grid framed-panel">
                 <div class="oracle-spotlight-main">
                     <p class="eyebrow">Oráculo Emuna</p>
@@ -108,7 +132,7 @@
             </div>
         </section>
 
-        <section class="section reveal" id="conexion">
+        <section class="section reveal" id="conexion" data-aos="fade-up" data-aos-delay="180">
             <div class="section-heading">
                 <p class="eyebrow">Conexión</p>
                 <h2>Información clara, energía alineada y una propuesta que se siente</h2>
@@ -152,7 +176,7 @@
             </div>
         </section>
 
-        <section class="section reveal" id="rituales">
+        <section class="section reveal" id="rituales" data-aos="fade-up" data-aos-delay="200">
             <div class="ritual-visual framed-panel" aria-hidden="true">
                 <div class="ritual-visual-copy">
                     <p class="eyebrow">Luna y Ritual</p>
@@ -227,7 +251,7 @@
                         <span aria-hidden="true">&#10094;</span>
                     </button>
                     <div class="services-track modern-services" id="servicesTrack">
-                        <article class="service-card tarot-card mystic-card" data-service="Lectura Esencial" tabindex="0">
+                        <article class="service-card tarot-card mystic-card" data-service="Lectura Esencial" tabindex="0" data-aos="zoom-in" data-aos-delay="100">
                             <div class="card-header-icon">
                                 <span class="icon-tarot">&#9733;</span>
                             </div>
@@ -240,7 +264,7 @@
                                 <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
                             </div>
                         </article>
-                        <article class="service-card tarot-card mystic-card" data-service="Lectura de Claridad" tabindex="0">
+                        <article class="service-card tarot-card mystic-card" data-service="Lectura de Claridad" tabindex="0" data-aos="zoom-in" data-aos-delay="180">
                             <div class="card-header-icon">
                                 <span class="icon-tarot">&#9889;</span>
                             </div>
@@ -253,7 +277,7 @@
                                 <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
                             </div>
                         </article>
-                        <article class="service-card tarot-card mystic-card" data-service="Inmersión Evolutiva (Completa)" tabindex="0">
+                        <article class="service-card tarot-card mystic-card" data-service="Inmersión Evolutiva (Completa)" tabindex="0" data-aos="zoom-in" data-aos-delay="260">
                             <div class="card-header-icon">
                                 <span class="icon-tarot">&#10024;</span>
                             </div>
@@ -266,7 +290,7 @@
                                 <button class="primary-button neon-button reservar-btn" type="button">Reservar</button>
                             </div>
                         </article>
-                        <article class="service-card tarot-card mystic-card modern-destacado" data-service="Acompañamiento Evolutivo Mensual" tabindex="0">
+                        <article class="service-card tarot-card mystic-card modern-destacado" data-service="Acompañamiento Evolutivo Mensual" tabindex="0" data-aos="zoom-in" data-aos-delay="340">
                             <div class="card-header-icon">
                                 <span class="icon-tarot icon-destacado">&#128171;</span>
                             </div>
@@ -287,7 +311,7 @@
             </div>
         </section>
 
-        <section class="section reveal" id="sobre-mi">
+        <section class="section reveal" id="sobre-mi" data-aos="fade-up" data-aos-delay="220">
             <div class="section-heading">
                 <p class="eyebrow">Sobre Mí</p>
                 <h2>Bren – Tarot & Energía</h2>
@@ -303,7 +327,7 @@
             </div>
         </section>
 
-        <section class="section reveal" id="contacto">
+        <section class="section reveal" id="contacto" data-aos="fade-up" data-aos-delay="240">
             <div class="section-heading">
                 <p class="eyebrow">Reserva Tu Espacio</p>
                 <h2>Solicitá tu lectura o ritual antes de que se completen los cupos</h2>
@@ -318,7 +342,24 @@
                 </div>
             </div>
         </section>
-    </main>
+        </main>
+        <script src="vanilla-tilt.min.js"></script>
+        <script src="aos.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.VanillaTilt) {
+                    VanillaTilt.init(document.querySelectorAll('.service-card'), {
+                        max: 18,
+                        speed: 400,
+                        glare: true,
+                        "max-glare": 0.18,
+                        scale: 1.04,
+                        perspective: 1100,
+                    });
+                }
+                if (window.AOS) AOS.init();
+            });
+        </script>
 
     <div class="booking-modal hidden" id="bookingModal" aria-hidden="true">
         <div class="booking-modal-backdrop" data-close-booking="true"></div>

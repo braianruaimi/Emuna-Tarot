@@ -1,3 +1,32 @@
+// --- MINI ORÁCULO DEMO ---
+const miniOraculoCarta = document.getElementById('miniOraculoCarta');
+const miniOraculoMensaje = document.getElementById('miniOraculoMensaje');
+const mensajesOraculo = [
+    'Confía en el proceso. Lo que hoy parece confuso, mañana será claridad.',
+    'La energía disponible te invita a soltar el control y abrirte a lo inesperado.',
+    'Hoy es un buen día para sembrar una intención y dejar que el universo la nutra.',
+    'Escucha tu intuición: la respuesta que buscas ya está dentro tuyo.',
+    'El cambio que temes es la puerta a tu evolución.',
+    'Permítete recibir. Hay ayuda y guía disponibles para vos.',
+    'La calma es tu mejor aliada. Respira y observa antes de actuar.',
+    'Hoy, la sincronicidad te mostrará el camino. Estate atenta a las señales.',
+    'Tu energía está lista para manifestar algo nuevo. Da el primer paso.',
+    'Recuerda: lo que das, vuelve multiplicado. Siembra luz.'
+];
+if (miniOraculoCarta && miniOraculoMensaje) {
+    let revelada = false;
+    function revelarCarta() {
+        if (revelada) return;
+        revelada = true;
+        const idx = Math.floor(Math.random() * mensajesOraculo.length);
+        miniOraculoMensaje.textContent = mensajesOraculo[idx];
+        miniOraculoCarta.classList.add('revelada');
+    }
+    miniOraculoCarta.addEventListener('click', revelarCarta);
+    miniOraculoCarta.addEventListener('keypress', e => {
+        if (e.key === 'Enter' || e.key === ' ') revelarCarta();
+    });
+}
 document.body.classList.add('js-ready');
 
 const WHATSAPP_NUMBER = '2215566392';
