@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#16052f">
+    <meta name="description" content="Oráculo Tarot Sí o No de Emuna con animación 3D y experiencia responsive.">
+    <title>Tarot Sí o No | Emuna</title>
+    <style>
+        :root {
+            --bg: #0b021d;
+            --bg-soft: rgba(20, 8, 44, 0.86);
+            --panel: rgba(14, 4, 31, 0.76);
+            --gold: #d4af37;
+            --gold-soft: #f9f295;
+            --cyan: #40e0d0;
+            --violet: #a020f0;
+            --text: #f4ebff;
+            --muted: #cab7e8;
+            --success: #27ae60;
+            --danger: #c0392b;
+            --warning: #f39c12;
+            --info: #2980b9;
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.12), transparent 14%),
+                radial-gradient(circle at 20% 20%, rgba(160, 32, 240, 0.16), transparent 24%),
+                radial-gradient(circle at 80% 22%, rgba(64, 224, 208, 0.14), transparent 20%),
+                linear-gradient(180deg, #05000f 0%, #0b021d 42%, #16052f 100%);
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            background-image:
+                radial-gradient(circle at 30% 10%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+                radial-gradient(circle at 55% 65%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+            background-size: 220px 220px, 280px 280px, 320px 320px;
+            opacity: 0.55;
+        }
+
+        body::after {
+            background: linear-gradient(180deg, rgba(5, 0, 15, 0.18), rgba(11, 2, 29, 0.3));
+        }
+
+        .app-shell {
+            width: min(100%, 1080px);
+            display: grid;
+            grid-template-columns: minmax(280px, 420px) minmax(280px, 1fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .panel {
+            position: relative;
+            padding: clamp(24px, 4vw, 38px);
+            border-radius: 32px;
+            background:
+                linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box,
+                linear-gradient(145deg, rgba(212, 175, 55, 0.95), rgba(64, 224, 208, 0.75)) border-box;
+            border: 1px solid transparent;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42), 0 0 40px rgba(160, 32, 240, 0.16);
+            backdrop-filter: blur(20px);
+        }
+
+        .intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--gold-soft);
+            font-size: clamp(2.3rem, 4vw, 4rem);
+            line-height: 1.02;
+        }
+
+        .lead {
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 18px 0 0;
+            max-width: 34ch;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .pill {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--text);
+            font-size: 0.92rem;
+        }
+
+        .oracle-panel {
+            display: grid;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .card-container {
+            perspective: 1400px;
+            width: min(100%, 280px);
+            aspect-ratio: 2 / 3.2;
+            margin: 8px auto 22px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 24px;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 22px rgba(64, 224, 208, 0.18);
+        }
+
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .card-face::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .card-back {
+            background:
+                linear-gradient(160deg, rgba(12, 8, 30, 0.94), rgba(22, 33, 62, 0.98)) padding-box,
+                linear-gradient(145deg, var(--gold), var(--cyan)) border-box;
+        }
+
+        .card-back::before {
+            background:
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.2) 0 2px, transparent 2px),
+                radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px);
+            background-size: 26px 26px, 110px 110px, 140px 140px;
+            opacity: 0.9;
+        }
+
+        .card-back-symbol {
+            position: relative;
+            width: 118px;
+            height: 118px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(249, 242, 149, 0.4);
+            color: var(--gold-soft);
+            font-size: 2.8rem;
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.28);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.14), transparent 70%);
+        }
+
+        .card-front {
+            transform: rotateY(180deg);
+            background:
+                linear-gradient(180deg, rgba(253, 252, 240, 0.98), rgba(242, 234, 216, 0.98)) padding-box,
+                linear-gradient(145deg, var(--gold), #8a6b1f) border-box;
+            color: #2b2330;
+            justify-content: space-between;
+        }
+
+        .card-topline {
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #6e5a1b;
+        }
+
+        .card-icon {
+            font-size: clamp(3rem, 8vw, 4rem);
+            line-height: 1;
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+        }
+
+        .card-title {
+            margin: 12px 0 0;
+            font-size: 1.18rem;
+            font-weight: 800;
+        }
+
+        .response-text {
+            margin: 8px 0 0;
+            font-size: clamp(1.65rem, 5vw, 2.2rem);
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+
+        .card-meaning {
+            margin: 0;
+            font-size: 0.98rem;
+            line-height: 1.55;
+            color: #4b4354;
+        }
+
+        .actions {
+            display: grid;
+            gap: 14px;
+            width: min(100%, 360px);
+        }
+
+        button {
+            appearance: none;
+            border: 0;
+            min-height: 52px;
+            padding: 14px 20px;
+            border-radius: 999px;
+            cursor: pointer;
+            color: var(--text);
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            background:
+                linear-gradient(var(--panel), var(--panel)) padding-box,
+                linear-gradient(145deg, var(--gold), var(--gold-soft)) border-box;
+            border: 1px solid transparent;
+            box-shadow: 0 0 22px rgba(160, 32, 240, 0.24), 0 10px 28px rgba(0, 0, 0, 0.28);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover,
+        button:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 0 26px rgba(64, 224, 208, 0.28), 0 12px 30px rgba(0, 0, 0, 0.34);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .secondary-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .secondary-link:hover,
+        .secondary-link:focus-visible {
+            color: var(--gold-soft);
+        }
+
+        .instruction {
+            margin: 0;
+            color: var(--muted);
+            font-style: italic;
+            line-height: 1.6;
+            min-height: 1.6em;
+        }
+
+        @media (max-width: 900px) {
+            .app-shell {
+                grid-template-columns: 1fr;
+                max-width: 620px;
+            }
+
+            .intro {
+                text-align: center;
+                align-items: center;
+            }
+
+            .lead {
+                max-width: 42ch;
+            }
+
+            .pill-row {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 14px;
+            }
+
+            .panel {
+                border-radius: 24px;
+                padding: 20px 16px;
+            }
+
+            .card-container {
+                width: min(100%, 240px);
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="app-shell" aria-label="Tarot Sí o No">
+        <section class="panel intro">
+            <p class="eyebrow">Oráculo interactivo</p>
+            <h1>Tarot Sí o No</h1>
+            <p class="lead">Concentrate en tu pregunta, respira una vez profundo y deja que el oráculo revele la energía del momento.</p>
+            <div class="pill-row" aria-hidden="true">
+                <span class="pill">Respuesta instantánea</span>
+                <span class="pill">Animación 3D</span>
+                <span class="pill">Responsive móvil y desktop</span>
+            </div>
+        </section>
+
+        <section class="panel oracle-panel">
+            <div class="card-container" id="cardContainer" role="button" tabindex="0" aria-label="Voltear carta del oráculo">
+                <div class="card" id="card">
+                    <div class="card-face card-back">
+                        <div class="card-back-symbol">✦</div>
+                    </div>
+                    <div class="card-face card-front">
+                        <div class="card-topline">Arcano revelado</div>
+                        <div class="card-icon" id="cardIcon" aria-hidden="true">🔮</div>
+                        <div>
+                            <div class="card-title" id="cardTitle">Arcano</div>
+                            <div class="response-text" id="responseText">SÍ</div>
+                        </div>
+                        <p class="card-meaning" id="cardMeaning">El oráculo apunta a una apertura favorable para tu pregunta.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="button" id="drawBtn">Consultar Oráculo</button>
+                <p class="instruction" id="statusText">Haz tu pregunta mentalmente y revela la carta cuando estés listo.</p>
+                <a class="secondary-link" href="index.html">Volver a Emuna</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const responses = [
+            {
+                text: "SÍ",
+                color: "#27ae60",
+                icon: "☀️",
+                arcano: "El Sol",
+                meaning: "La energía acompaña tu intención. Hay claridad, expansión y una señal de avance positivo."
+            },
+            {
+                text: "NO",
+                color: "#c0392b",
+                icon: "🌑",
+                arcano: "La Luna",
+                meaning: "Todavía hay sombras o información oculta. Conviene esperar, observar y no forzar la respuesta."
+            },
+            {
+                text: "TAL VEZ",
+                color: "#f39c12",
+                icon: "☁️",
+                arcano: "El Colgado",
+                meaning: "La respuesta depende de un cambio de perspectiva. No se trata de apurar, sino de comprender mejor."
+            },
+            {
+                text: "ES PROBABLE",
+                color: "#27ae60",
+                icon: "🌟",
+                arcano: "La Estrella",
+                meaning: "Hay una tendencia favorable. Seguí sosteniendo tu enfoque porque el proceso está bien aspectado."
+            },
+            {
+                text: "AHORA NO",
+                color: "#c0392b",
+                icon: "⏳",
+                arcano: "La Ermita",
+                meaning: "El momento todavía no está maduro. La mejor respuesta ahora es pausa, revisión y prudencia."
+            },
+            {
+                text: "TÚ DECIDES",
+                color: "#2980b9",
+                icon: "⚖️",
+                arcano: "La Justicia",
+                meaning: "El oráculo devuelve tu poder de elección. El resultado dependerá de tus actos y tu coherencia."
+            }
+        ];
+
+        const card = document.getElementById("card");
+        const drawButton = document.getElementById("drawBtn");
+        const cardContainer = document.getElementById("cardContainer");
+        const responseText = document.getElementById("responseText");
+        const cardTitle = document.getElementById("cardTitle");
+        const cardIcon = document.getElementById("cardIcon");
+        const cardMeaning = document.getElementById("cardMeaning");
+        const statusText = document.getElementById("statusText");
+
+        function drawCard() {
+            card.classList.remove("is-flipped");
+            drawButton.disabled = true;
+            statusText.textContent = "Consultando el oráculo...";
+
+            setTimeout(() => {
+                const result = responses[Math.floor(Math.random() * responses.length)];
+
+                responseText.textContent = result.text;
+                responseText.style.color = result.color;
+                cardTitle.textContent = result.arcano;
+                cardIcon.textContent = result.icon;
+                cardMeaning.textContent = result.meaning;
+                card.classList.add("is-flipped");
+                statusText.textContent = "Si quieres una nueva respuesta, vuelve a consultar.";
+
+                setTimeout(() => {
+                    drawButton.disabled = false;
+                }, 1000);
+            }, 320);
+        }
+
+        drawButton.addEventListener("click", drawCard);
+        cardContainer.addEventListener("click", drawCard);
+        cardContainer.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                drawCard();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#07070c">
+	<meta name="description" content="Tarot evolutivo interactivo de Emuna con lectura Sí/No y tirada de 3 cartas en una experiencia mística y directa.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<title>Tarot Evolutivo | Emuna</title>
+	<style>
+		:root {
+			--bg-main: radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.08), transparent 16%), radial-gradient(circle at 20% 20%, rgba(160, 32, 240, 0.16), transparent 24%), radial-gradient(circle at 80% 22%, rgba(64, 224, 208, 0.12), transparent 20%), linear-gradient(180deg, #05000f 0%, #0b021d 42%, #16052f 100%);
+			--card-back: linear-gradient(135deg, #16052f 0%, #0b021d 100%);
+			--gold-electric: #d4af37;
+			--gold-soft: #f9f295;
+			--gold-glow: rgba(212, 175, 55, 0.4);
+			--blue-electric: #40e0d0;
+			--red-electric: #ff8db5;
+			--violet-electric: #a020f0;
+			--cyan-electric: #40e0d0;
+			--glass-bg: rgba(20, 8, 44, 0.78);
+			--glass-border: rgba(249, 242, 149, 0.16);
+			--text-main: #f4ebff;
+			--text-soft: #cab7e8;
+			--panel-shadow: 0 24px 70px rgba(0, 0, 0, 0.42), 0 0 40px rgba(160, 32, 240, 0.16);
+			--card-width: 158px;
+			--card-height: 270px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			color-scheme: dark;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			font-family: "Manrope", sans-serif;
+			color: var(--text-main);
+			background: var(--bg-main);
+			overflow-x: hidden;
+		}
+
+		body::before,
+		body::after {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			z-index: -2;
+		}
+
+		body::before {
+			background:
+				radial-gradient(circle at 20% 20%, rgba(64, 224, 208, 0.1), transparent 22%),
+				radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.12), transparent 18%),
+				radial-gradient(circle at 50% 60%, rgba(160, 32, 240, 0.14), transparent 26%);
+			transform: translate3d(var(--parallax-x, 0), var(--parallax-y, 0), 0);
+			transition: transform 120ms linear;
+		}
+
+		body::after {
+			background-image:
+				radial-gradient(circle at 30% 10%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+				radial-gradient(circle at 70% 25%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+				radial-gradient(circle at 55% 70%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px);
+			background-size: 220px 220px, 280px 280px, 320px 320px;
+			opacity: 0.5;
+			z-index: -1;
+		}
+
+		.page {
+			width: min(1400px, calc(100% - 32px));
+			margin: 0 auto;
+			padding: 28px 0 48px;
+		}
+
+		.hero {
+			display: grid;
+			grid-template-columns: minmax(280px, 480px) minmax(320px, 1fr);
+			gap: 28px;
+			align-items: stretch;
+			margin-bottom: 28px;
+		}
+
+		.glass-panel {
+			position: relative;
+			background: linear-gradient(180deg, rgba(20, 8, 44, 0.76), rgba(11, 2, 29, 0.9));
+			border: 1px solid var(--glass-border);
+			border-radius: 28px;
+			box-shadow: var(--panel-shadow);
+			backdrop-filter: blur(18px);
+		}
+
+		.hero-copy,
+		.result-shell,
+		.controls,
+		.board-shell {
+			padding: 28px;
+		}
+
+		.eyebrow {
+			margin: 0 0 14px;
+			font-size: 0.78rem;
+			text-transform: uppercase;
+			letter-spacing: 0.24em;
+			color: var(--cyan-electric);
+		}
+
+		h1,
+		h2,
+		h3,
+		.card-name,
+		.modal-title {
+			font-family: "Cinzel", serif;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: clamp(2.4rem, 4vw, 4.8rem);
+			line-height: 0.96;
+			color: var(--gold-soft);
+			text-wrap: balance;
+		}
+
+		.lead {
+			margin: 18px 0 0;
+			color: var(--text-soft);
+			font-size: 1.05rem;
+			line-height: 1.8;
+			max-width: 40ch;
+		}
+
+		.benefits {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 22px;
+		}
+
+		.benefit {
+			padding: 10px 14px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(212, 175, 55, 0.18);
+			color: var(--text-main);
+			font-size: 0.92rem;
+		}
+
+		.controls {
+			display: grid;
+			align-content: center;
+			gap: 18px;
+		}
+
+		.mode-switch {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 10px;
+		}
+
+		.mode-button,
+		.action-button,
+		.ghost-button,
+		.modal-close {
+			appearance: none;
+			border: 1px solid transparent;
+			cursor: pointer;
+			transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background-color 0.24s ease;
+			font: inherit;
+		}
+
+		.mode-button,
+		.action-button,
+		.ghost-button {
+			min-height: 52px;
+			border-radius: 999px;
+			padding: 0.9rem 1.2rem;
+			color: var(--text-main);
+		}
+
+		.mode-button {
+			background: rgba(255, 255, 255, 0.05);
+			border-color: rgba(255, 255, 255, 0.08);
+		}
+
+		.mode-button.is-active {
+			background: linear-gradient(135deg, rgba(212, 175, 55, 0.22), rgba(64, 224, 208, 0.14));
+			border-color: rgba(212, 175, 55, 0.48);
+			box-shadow: 0 0 26px rgba(212, 175, 55, 0.16);
+		}
+
+		.action-button {
+			background: linear-gradient(135deg, rgba(212, 175, 55, 0.24), rgba(160, 32, 240, 0.2));
+			border-color: rgba(212, 175, 55, 0.5);
+			box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 24px rgba(212, 175, 55, 0.14);
+			font-weight: 700;
+			letter-spacing: 0.04em;
+		}
+
+		.ghost-button,
+		.modal-close {
+			background: rgba(255, 255, 255, 0.04);
+			border-color: rgba(255, 255, 255, 0.08);
+		}
+
+		.mode-button:hover,
+		.action-button:hover,
+		.ghost-button:hover,
+		.modal-close:hover,
+		.mode-button:focus-visible,
+		.action-button:focus-visible,
+		.ghost-button:focus-visible,
+		.modal-close:focus-visible {
+			transform: translateY(-2px);
+		}
+
+		.mode-meta,
+		.status,
+		.result-summary,
+		.reading-meta,
+		.selected-hint {
+			color: var(--text-soft);
+			line-height: 1.7;
+		}
+
+		.status {
+			min-height: 1.7em;
+			font-style: italic;
+		}
+
+		.board-shell {
+			min-height: 620px;
+		}
+
+		.board-header {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 16px;
+			margin-bottom: 22px;
+		}
+
+		.board-header h2 {
+			margin: 0 0 6px;
+			font-size: clamp(1.7rem, 2.2vw, 2.4rem);
+			color: var(--gold-soft);
+		}
+
+		.selected-hint strong {
+			color: var(--gold-electric);
+		}
+
+		.spread-board {
+			position: relative;
+			min-height: 470px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			padding: 26px 12px 12px;
+		}
+
+		.flip-card {
+			position: absolute;
+			width: var(--card-width);
+			height: var(--card-height);
+			opacity: 0;
+			transform: translateX(0) translateY(60px) rotate(0deg) scale(0.9);
+			transition: transform 0.8s ease, opacity 0.55s ease, filter 0.35s ease;
+			cursor: pointer;
+			perspective: 1000px;
+			will-change: transform;
+		}
+
+		.flip-card.is-visible {
+			opacity: 1;
+		}
+
+		.flip-card-inner {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			transition: transform 0.8s;
+			transform-style: preserve-3d;
+			box-shadow: 0 10px 26px rgba(0, 0, 0, 0.38);
+			border-radius: 18px;
+		}
+
+		.flip-card.is-flipped .flip-card-inner {
+			transform: rotateY(180deg);
+		}
+
+		.flip-card.is-selected {
+			filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.5));
+			z-index: 35;
+		}
+
+		.flip-card.is-dimmed {
+			opacity: 0.08;
+			pointer-events: none;
+		}
+
+		.flip-card.is-hidden {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.flip-card.is-center {
+			z-index: 40;
+		}
+
+		.flip-card.is-aura .flip-card-front {
+			animation: auraPulse 1.8s ease-in-out infinite alternate;
+		}
+
+		.flip-card-front,
+		.flip-card-back {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+			border-radius: 18px;
+			border: 2px solid var(--gold-electric);
+			overflow: hidden;
+		}
+
+		.flip-card-back {
+			background: var(--card-back);
+		}
+
+		.flip-card-back::before,
+		.flip-card-back::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+		}
+
+		.flip-card-back::before {
+			background:
+				radial-gradient(circle at center, rgba(212, 175, 55, 0.18) 0 2px, transparent 2px),
+				radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+				radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+			background-size: 24px 24px, 110px 110px, 130px 130px;
+			opacity: 0.85;
+		}
+
+		.flip-card-back::after {
+			inset: 16px;
+			border: 1px solid rgba(212, 175, 55, 0.35);
+			border-radius: 12px;
+		}
+
+		.card-back-emblem {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			color: rgba(255, 248, 216, 0.9);
+			font-size: 2.8rem;
+			text-shadow: 0 0 18px rgba(212, 175, 55, 0.24);
+		}
+
+		.flip-card-front {
+			transform: rotateY(180deg);
+			background: linear-gradient(180deg, rgba(250, 247, 238, 0.99), rgba(234, 225, 207, 0.99));
+			color: #16131f;
+			padding: 18px 16px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.card-label {
+			font-size: 0.72rem;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+			color: #766736;
+		}
+
+		.card-symbol {
+			font-size: 2.4rem;
+			text-align: center;
+			margin-top: 8px;
+		}
+
+		.card-name {
+			margin: 8px 0 0;
+			font-size: 1.25rem;
+			line-height: 1.1;
+			text-align: center;
+		}
+
+		.card-verdict {
+			margin-top: 12px;
+			text-align: center;
+			font-size: 1.08rem;
+			font-weight: 800;
+			letter-spacing: 0.04em;
+		}
+
+		.card-short {
+			margin: 10px 0 0;
+			font-size: 0.95rem;
+			text-align: center;
+			line-height: 1.45;
+			color: #312c3e;
+		}
+
+		.card-position {
+			align-self: center;
+			margin-top: 8px;
+			padding: 6px 10px;
+			border-radius: 999px;
+			background: rgba(22, 19, 31, 0.08);
+			font-size: 0.72rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.result-shell {
+			margin-top: 24px;
+			display: none;
+		}
+
+		.result-shell.is-visible {
+			display: block;
+			animation: fadeInUp 0.45s ease;
+		}
+
+		.result-shell h3 {
+			margin: 0;
+			font-size: 1.5rem;
+			color: var(--gold-soft);
+		}
+
+		.result-verdict {
+			margin: 12px 0 0;
+			font-size: clamp(1.4rem, 3vw, 2rem);
+			font-weight: 900;
+			letter-spacing: 0.04em;
+		}
+
+		.reading-grid {
+			display: grid;
+			gap: 16px;
+			margin-top: 18px;
+		}
+
+		.reading-card-summary {
+			padding: 16px 18px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.reading-card-summary strong {
+			color: #fff0ba;
+		}
+
+		.modal {
+			position: fixed;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			padding: 18px;
+			background: rgba(5, 5, 10, 0.82);
+			backdrop-filter: blur(12px);
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.28s ease;
+			z-index: 80;
+		}
+
+		.modal.is-open {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.modal-card {
+			width: min(100%, 620px);
+			padding: 24px;
+			border-radius: 26px;
+			background: linear-gradient(180deg, rgba(20, 8, 44, 0.88), rgba(11, 2, 29, 0.94));
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			box-shadow: var(--panel-shadow);
+			transform: translateY(24px) scale(0.96);
+			transition: transform 0.28s ease;
+		}
+
+		.modal.is-open .modal-card {
+			transform: translateY(0) scale(1);
+		}
+
+		.modal-header {
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: start;
+			margin-bottom: 14px;
+		}
+
+		.modal-title {
+			margin: 0;
+			font-size: 1.8rem;
+			color: var(--gold-soft);
+		}
+
+		.modal-close {
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+			color: var(--text-main);
+		}
+
+		.modal-verdict {
+			font-size: 1.28rem;
+			font-weight: 800;
+			margin: 0 0 16px;
+		}
+
+		.modal-block {
+			padding: 14px 16px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			margin-top: 12px;
+		}
+
+		.modal-block strong {
+			color: var(--gold-soft);
+			display: block;
+			margin-bottom: 6px;
+		}
+
+		.modal-note {
+			margin-top: 12px;
+			color: var(--text-soft);
+			font-size: 0.94rem;
+		}
+
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		@keyframes auraPulse {
+			0% {
+				box-shadow: 0 0 18px var(--aura-color, var(--gold-electric));
+			}
+			100% {
+				box-shadow: 0 0 34px var(--aura-color, var(--gold-electric));
+			}
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(12px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 1100px) {
+			.hero {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 780px) {
+			.page {
+				width: min(100%, calc(100% - 20px));
+				padding-top: 18px;
+			}
+
+			.hero-copy,
+			.result-shell,
+			.controls,
+			.board-shell,
+			.modal-card {
+				padding: 20px;
+			}
+
+			.spread-board {
+				min-height: 420px;
+			}
+
+			.flip-card {
+				width: 122px;
+				height: 208px;
+			}
+		}
+
+		@media (max-width: 560px) {
+			.page {
+				width: calc(100% - 12px);
+			}
+
+			.board-header {
+				flex-direction: column;
+			}
+
+			.mode-switch {
+				grid-template-columns: 1fr;
+			}
+
+			.flip-card {
+				width: 98px;
+				height: 166px;
+			}
+
+			.spread-board {
+				min-height: 320px;
+			}
+
+			.card-name {
+				font-size: 0.92rem;
+			}
+
+			.card-short,
+			.card-position,
+			.card-verdict,
+			.card-label {
+				font-size: 0.68rem;
+			}
+
+			.card-symbol {
+				font-size: 1.6rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<section class="hero">
+			<article class="glass-panel hero-copy">
+				<p class="eyebrow">Tarot Evolutivo</p>
+				<h1>Claridad directa para lo que hoy necesitás ver</h1>
+				<p class="lead">No siempre hace falta una lectura extensa para sentir dirección. Este espacio está pensado para ayudarte a ordenar lo que intuís, ver la energía del momento y recibir una respuesta clara que te permita avanzar con más conciencia.</p>
+				<div class="benefits">
+					<span class="benefit">22 Arcanos Mayores</span>
+					<span class="benefit">Lectura Sí o No</span>
+					<span class="benefit">Tirada de 3 cartas</span>
+					<span class="benefit">Consejo directo y claro</span>
+				</div>
+			</article>
+
+			<aside class="glass-panel controls" aria-label="Controles de lectura">
+				<div>
+					<p class="eyebrow">Tu lectura</p>
+					<div class="mode-switch" role="tablist" aria-label="Modo de tirada">
+						<button class="mode-button is-active" id="modeYesNo" type="button" data-mode="yesno" aria-pressed="true">Sí / No</button>
+						<button class="mode-button" id="modeThree" type="button" data-mode="three" aria-pressed="false">3 Cartas</button>
+					</div>
+				</div>
+				<p class="mode-meta" id="modeMeta">En Sí o No eliges una sola carta y recibes una respuesta concreta con interpretación y consejo para este momento.</p>
+				<button class="action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
+				<button class="ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
+				<p class="status" id="statusText">Elegí una carta del abanico y deja que la lectura revele lo que hoy pide claridad.</p>
+			</aside>
+		</section>
+
+		<section class="glass-panel board-shell">
+			<div class="board-header">
+				<div>
+					<p class="eyebrow">Portal de lectura</p>
+					<h2>Abanico de arcanos para tu consulta</h2>
+				</div>
+				<p class="selected-hint" id="selectionHint">Seleccionadas: <strong>0 / 1</strong></p>
+			</div>
+
+			<div class="spread-board" id="tablero" aria-live="polite"></div>
+
+			<div class="result-shell glass-panel" id="resultShell">
+				<p class="eyebrow">Tu mensaje</p>
+				<h3 id="resultTitle">Energía disponible</h3>
+				<p class="result-verdict" id="resultVerdict"></p>
+				<p class="result-summary" id="resultSummary"></p>
+				<div class="reading-grid" id="readingGrid"></div>
+			</div>
+		</section>
+	</main>
+
+	<div class="modal" id="cardModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+		<div class="modal-card">
+			<div class="modal-header">
+				<div>
+					<p class="eyebrow">Mensaje del arcano</p>
+					<h3 class="modal-title" id="modalTitle"></h3>
+				</div>
+				<button class="modal-close" id="modalClose" type="button" aria-label="Cerrar detalle">×</button>
+			</div>
+			<p class="modal-verdict" id="modalVerdict"></p>
+			<div class="modal-block">
+				<strong>Interpretación</strong>
+				<span id="modalInterpretation"></span>
+			</div>
+			<div class="modal-block">
+				<strong>Consejo</strong>
+				<span id="modalAdvice"></span>
+			</div>
+			<p class="modal-note" id="modalNote"></p>
+		</div>
+	</div>
+
+	<script>
+		const TarotDeck = {
+			el_loco: {
+				id: "loco",
+				nombre: "El Loco (0)",
+				energia: 0,
+				veredicto: "TAL VEZ",
+				mensaje_corto: "Algo nuevo se mueve, pero todavía pide confianza y presencia.",
+				interpretacion: "El Loco aparece cuando tu proceso necesita aire, apertura y una mirada menos rígida. La energía está viva, aunque no todo esté resuelto.",
+				consejo: "Escucha el impulso, pero no te desconectes de la realidad. Avanza si de verdad sientes que ese paso te expande.",
+				color_aura: "var(--cyan-electric)",
+				simbolo: "✦"
+			},
+			el_mago: {
+				id: "mago",
+				nombre: "El Mago (I)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Tienes recursos, claridad y energía para mover esto.",
+				interpretacion: "El Mago confirma que no te falta poder, sino decisión para usarlo. Hay herramientas, intención y capacidad para transformar lo que hoy consultas.",
+				consejo: "Deja de postergarte. Lo que necesitas para empezar ya está en ti; ahora toca enfocarlo.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "☀"
+			},
+			la_sacerdotisa: {
+				id: "sacerdotisa",
+				nombre: "La Sacerdotisa (II)",
+				energia: 0,
+				veredicto: "AÚN NO",
+				mensaje_corto: "Todavía no es momento de forzar una respuesta.",
+				interpretacion: "La Sacerdotisa indica que algo importante todavía se está ordenando por dentro. No todo está a la vista, y por eso la claridad aún no termina de bajar.",
+				consejo: "Baja el ruido, escucha tu intuición y deja que la verdad madure antes de decidir.",
+				color_aura: "var(--blue-electric)",
+				simbolo: "☾"
+			},
+			la_emperatriz: {
+				id: "emperatriz",
+				nombre: "La Emperatriz (III)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Hay crecimiento, apertura y buena energía para que esto florezca.",
+				interpretacion: "La Emperatriz trae expansión, receptividad y una energía fértil para vínculos, proyectos y procesos personales. Lo que estás moviendo puede crecer de verdad.",
+				consejo: "Sostén lo que deseas con amor, constancia y presencia. Lo valioso necesita cuidado, no apuro.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "❀"
+			},
+			el_emperador: {
+				id: "emperador",
+				nombre: "El Emperador (IV)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Sí, pero necesita orden, foco y compromiso real.",
+				interpretacion: "El Emperador muestra que el resultado puede sostenerse si construyes sobre bases firmes. No alcanza con desear; hace falta dirección y estructura.",
+				consejo: "Pon límites, organiza prioridades y deja de dispersar energía en lo que no suma.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "♜"
+			},
+			el_hierofante: {
+				id: "hierofante",
+				nombre: "El Hierofante (V)",
+				energia: 0,
+				veredicto: "DEPENDE",
+				mensaje_corto: "La respuesta pasa por lo que ya has sostenido o prometido.",
+				interpretacion: "El Hierofante señala creencias, acuerdos y aprendizajes que condicionan esta situación. Antes de avanzar, necesitas ver desde qué verdad estás decidiendo.",
+				consejo: "Revisa tus valores y no te apartes de lo que sabes que es coherente para ti.",
+				color_aura: "var(--violet-electric)",
+				simbolo: "✢"
+			},
+			los_enamorados: {
+				id: "enamorados",
+				nombre: "Los Enamorados (VI)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "La respuesta aparece cuando dejas de dividirte por dentro.",
+				interpretacion: "Los Enamorados hablan de una elección que debe salir de tu verdad, no del miedo ni de la necesidad de agradar. Aquí la coherencia lo cambia todo.",
+				consejo: "No decidas desde la culpa. Elige lo que realmente se alinea con lo que sientes y sostienes.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "♥"
+			},
+			el_carro: {
+				id: "carro",
+				nombre: "El Carro (VII)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Hay movimiento, dirección y fuerza para avanzar.",
+				interpretacion: "El Carro muestra una energía decidida que empuja el proceso hacia adelante. Si mantienes el foco, puedes salir del estancamiento.",
+				consejo: "No retrocedas por dudas de último momento. Avanza con dirección y cuida tu centro emocional.",
+				color_aura: "var(--blue-electric)",
+				simbolo: "➳"
+			},
+			la_fuerza: {
+				id: "fuerza",
+				nombre: "La Fuerza (VIII)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Tu fuerza interna es mayor de lo que hoy crees.",
+				interpretacion: "La Fuerza aparece cuando el proceso exige templanza, presencia y una firmeza que no necesita violencia. Lo que buscas puede sostenerse desde tu centro.",
+				consejo: "No quieras controlar todo. Respira, sostén y deja que tu energía se ordene antes de actuar.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "♌"
+			},
+			el_ermitano: {
+				id: "ermitano",
+				nombre: "El Ermitaño (IX)",
+				energia: -1,
+				veredicto: "AHORA NO",
+				mensaje_corto: "Todavía no es tiempo de empujar esta respuesta.",
+				interpretacion: "El Ermitaño marca una pausa necesaria. Hay algo que sólo puede comprenderse cuando bajas la ansiedad y vuelves a escucharte de verdad.",
+				consejo: "No te apures a cerrar algo que aún necesita silencio, observación y maduración.",
+				color_aura: "var(--blue-electric)",
+				simbolo: "☷"
+			},
+			rueda_de_la_fortuna: {
+				id: "rueda",
+				nombre: "La Rueda de la Fortuna (X)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "La energía cambia y empieza a abrir otra posibilidad.",
+				interpretacion: "La Rueda de la Fortuna muestra un giro que puede mover lo que estaba quieto. Algo comienza a ordenarse distinto, incluso si todavía no controlas todo.",
+				consejo: "No te aferres a lo viejo. Acompaña el cambio y aprovecha el momento cuando la puerta se abra.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "☸"
+			},
+			la_justicia: {
+				id: "justicia",
+				nombre: "La Justicia (XI)",
+				energia: 0,
+				veredicto: "TÚ DECIDES",
+				mensaje_corto: "La respuesta no cae del cielo: también depende de ti.",
+				interpretacion: "La Justicia muestra que esta situación necesita equilibrio, verdad y responsabilidad. Lo que elijas ahora tendrá peso real en el resultado.",
+				consejo: "Sé claro contigo, ordena lo que estás sosteniendo y decide desde la coherencia, no desde el impulso.",
+				color_aura: "var(--blue-electric)",
+				simbolo: "⚖"
+			},
+			el_colgado: {
+				id: "colgado",
+				nombre: "El Colgado (XII)",
+				energia: -1,
+				veredicto: "TAL VEZ",
+				mensaje_corto: "La respuesta no está cerrada, pero sí detenida por ahora.",
+				interpretacion: "El Colgado aparece cuando algo necesita una pausa profunda para ser visto desde otro lugar. La incomodidad forma parte del aprendizaje.",
+				consejo: "No fuerces definición. Detente, cambia el ángulo y deja que el sentido aparezca sin presión.",
+				color_aura: "var(--violet-electric)",
+				simbolo: "☁"
+			},
+			la_muerte: {
+				id: "muerte",
+				nombre: "La Muerte (XIII)",
+				energia: -1,
+				veredicto: "NO",
+				mensaje_corto: "Así como está, esa etapa ya cumplió su ciclo.",
+				interpretacion: "La Muerte no trae castigo: trae cierre. Lo que consultas necesita una transformación real y quizá no pueda seguir bajo la forma actual.",
+				consejo: "Acepta lo que termina. Hay procesos que sólo se abren de verdad cuando dejas de insistir en lo que ya cayó.",
+				color_aura: "var(--red-electric)",
+				simbolo: "☥"
+			},
+			la_templanza: {
+				id: "templanza",
+				nombre: "La Templanza (XIV)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Sí, pero desde la calma y el equilibrio, no desde el exceso.",
+				interpretacion: "La Templanza muestra una energía que se ordena de forma gradual. Lo que preguntas puede avanzar si respetas los tiempos y dejas que todo se acomode.",
+				consejo: "No busques extremos. Integra, regula y permite que el proceso se vuelva más claro paso a paso.",
+				color_aura: "var(--cyan-electric)",
+				simbolo: "⚗"
+			},
+			el_diablo: {
+				id: "diablo",
+				nombre: "El Diablo (XV)",
+				energia: -1,
+				veredicto: "NO",
+				mensaje_corto: "Hay algo detrás que te ata más de lo que admites.",
+				interpretacion: "El Diablo expone apegos, miedos, obsesiones o vínculos de dependencia que distorsionan la respuesta. No es sólo lo que deseas: es desde dónde lo estás deseando.",
+				consejo: "Mira con honestidad qué te está condicionando. Liberarte de eso ya es parte del camino.",
+				color_aura: "var(--red-electric)",
+				simbolo: "♄"
+			},
+			la_torre: {
+				id: "torre",
+				nombre: "La Torre (XVI)",
+				energia: -1,
+				veredicto: "NO (POR AHORA)",
+				mensaje_corto: "Algo necesita romperse para que puedas ver la verdad.",
+				interpretacion: "La Torre trae un movimiento brusco que desarma lo que ya no se sostiene. Aunque incomode, esa caída puede ser exactamente lo que necesitas para reordenarte de verdad.",
+				consejo: "No te aferres a lo que se está desarmando. Deja caer la estructura vieja y prepara una base más honesta.",
+				color_aura: "var(--red-electric)",
+				simbolo: "⚡"
+			},
+			la_estrella: {
+				id: "estrella",
+				nombre: "La Estrella (XVII)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Hay alivio, guía y una luz real sosteniendo tu proceso.",
+				interpretacion: "La Estrella trae una energía de reparación, esperanza y apertura. Cuando aparece, recuerda que todavía hay camino, sentido y belleza en lo que estás atravesando.",
+				consejo: "No abandones tu visión por cansancio. Sigue, pero desde un lugar más suave y más verdadero.",
+				color_aura: "var(--cyan-electric)",
+				simbolo: "✶"
+			},
+			la_luna: {
+				id: "luna",
+				nombre: "La Luna (XVIII)",
+				energia: -1,
+				veredicto: "NO",
+				mensaje_corto: "Hay demasiada niebla emocional para definir esto ahora.",
+				interpretacion: "La Luna señala confusión, proyecciones y emociones que todavía distorsionan la lectura de la situación. No es momento para certezas rígidas.",
+				consejo: "No tomes una decisión definitiva desde el miedo, la idealización o la ansiedad. Primero aclárate por dentro.",
+				color_aura: "var(--blue-electric)",
+				simbolo: "☾"
+			},
+			el_sol: {
+				id: "sol",
+				nombre: "El Sol (XIX)",
+				energia: 1,
+				veredicto: "SÍ ROTUNDO",
+				mensaje_corto: "Sí, con claridad, apertura y energía completamente a favor.",
+				interpretacion: "El Sol confirma que la situación se ilumina. Hay verdad, vitalidad y una respuesta limpia que permite avanzar sin tanta confusión.",
+				consejo: "Muéstrate tal cual eres y actúa con confianza. Cuando la energía está tan clara, toca sostenerla sin sabotearla.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "☀"
+			},
+			el_juicio: {
+				id: "juicio",
+				nombre: "El Juicio (XX)",
+				energia: 1,
+				veredicto: "SÍ",
+				mensaje_corto: "Algo se despierta y ya no puede seguir siendo ignorado.",
+				interpretacion: "El Juicio habla de comprensión, cierre y renacimiento. Trae una verdad que ordena el proceso y te muestra con más claridad qué hacer con ello.",
+				consejo: "Responde al llamado con valentía. Si ya viste la verdad, no vuelvas a dormirla.",
+				color_aura: "var(--gold-electric)",
+				simbolo: "📯"
+			},
+			el_mundo: {
+				id: "mundo",
+				nombre: "El Mundo (XXI)",
+				energia: 1,
+				veredicto: "SÍ ROTUNDO",
+				mensaje_corto: "Hay integración, cierre y una respuesta plena a favor.",
+				interpretacion: "El Mundo confirma que el proceso encuentra sentido, cierre y alineación. Es una carta de logro, plenitud y concreción madura.",
+				consejo: "Confía en lo que ya está listo para manifestarse. No minimices el camino recorrido ni la expansión que has logrado.",
+				color_aura: "var(--cyan-electric)",
+				simbolo: "◎"
+			}
+		};
+
+		const board = document.getElementById("tablero");
+		const modeButtons = document.querySelectorAll(".mode-button");
+		const modeMeta = document.getElementById("modeMeta");
+		const statusText = document.getElementById("statusText");
+		const selectionHint = document.getElementById("selectionHint");
+		const resetButton = document.getElementById("resetButton");
+		const revealButton = document.getElementById("revealButton");
+		const resultShell = document.getElementById("resultShell");
+		const resultTitle = document.getElementById("resultTitle");
+		const resultVerdict = document.getElementById("resultVerdict");
+		const resultSummary = document.getElementById("resultSummary");
+		const readingGrid = document.getElementById("readingGrid");
+		const cardModal = document.getElementById("cardModal");
+		const modalClose = document.getElementById("modalClose");
+		const modalTitle = document.getElementById("modalTitle");
+		const modalVerdict = document.getElementById("modalVerdict");
+		const modalInterpretation = document.getElementById("modalInterpretation");
+		const modalAdvice = document.getElementById("modalAdvice");
+		const modalNote = document.getElementById("modalNote");
+
+		const deckEntries = Object.entries(TarotDeck);
+		const positionLabels = ["Pasado", "Presente", "Futuro"];
+		let mode = "yesno";
+		let selectedKeys = [];
+		let cardStates = new Map();
+		let locked = false;
+
+		function shuffle(array) {
+			const clone = [...array];
+			for (let index = clone.length - 1; index > 0; index -= 1) {
+				const swapIndex = Math.floor(Math.random() * (index + 1));
+				[clone[index], clone[swapIndex]] = [clone[swapIndex], clone[index]];
+			}
+			return clone;
+		}
+
+		function getRequiredSelections() {
+			return mode === "yesno" ? 1 : 3;
+		}
+
+		function getModeText() {
+			if (mode === "yesno") {
+				return "En Sí o No eliges una sola carta y recibes una respuesta concreta con interpretación y consejo para este momento.";
+			}
+
+			return "En la tirada de 3 cartas miras pasado, presente y futuro para entender el proceso completo y ver hacia dónde se mueve tu energía.";
+		}
+
+		function updateSelectionHint() {
+			selectionHint.innerHTML = `Seleccionadas: <strong>${selectedKeys.length} / ${getRequiredSelections()}</strong>`;
+			revealButton.disabled = selectedKeys.length !== getRequiredSelections() || locked;
+		}
+
+		function setStatus(message) {
+			statusText.textContent = message;
+		}
+
+		function getCardState(key) {
+			return cardStates.get(key);
+		}
+
+		function createCardElement([key, data], index, total) {
+			const card = document.createElement("button");
+			card.type = "button";
+			card.className = "flip-card";
+			card.dataset.key = key;
+			card.setAttribute("aria-label", `Seleccionar ${data.nombre}`);
+			card.style.zIndex = String(index + 1);
+			card.innerHTML = `
+				<span class="sr-only">${data.nombre}</span>
+				<div class="flip-card-inner">
+					<div class="flip-card-back">
+						<div class="card-back-emblem">✦</div>
+					</div>
+					<div class="flip-card-front">
+						<div>
+							<div class="card-label">Arcano Mayor</div>
+							<div class="card-symbol">${data.simbolo}</div>
+							<div class="card-name">${data.nombre}</div>
+							<div class="card-verdict">${data.veredicto}</div>
+							<p class="card-short">${data.mensaje_corto}</p>
+						</div>
+						<div class="card-position"></div>
+					</div>
+				</div>
+			`;
+
+			const spreadOffset = index - (total - 1) / 2;
+			const translateX = spreadOffset * 34;
+			const rotate = spreadOffset * 2.3;
+			const translateY = Math.abs(spreadOffset) * 3;
+
+			requestAnimationFrame(() => {
+				setTimeout(() => {
+					card.classList.add("is-visible");
+					card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg)`;
+				}, index * 45);
+			});
+
+			card.addEventListener("click", () => handleCardSelection(key));
+			return card;
+		}
+
+		function desplegarCartas() {
+			board.innerHTML = "";
+			cardStates = new Map();
+			selectedKeys = [];
+			locked = false;
+			resultShell.classList.remove("is-visible");
+			readingGrid.innerHTML = "";
+			const shuffledDeck = shuffle(deckEntries);
+
+			shuffledDeck.forEach((entry, index) => {
+				const key = entry[0];
+				const element = createCardElement(entry, index, shuffledDeck.length);
+				board.appendChild(element);
+				cardStates.set(key, {
+					key,
+					data: entry[1],
+					element,
+					orientation: "upright",
+					finalData: null,
+					position: ""
+				});
+			});
+
+			setStatus("Elegí una carta del abanico y deja que la lectura revele lo que hoy pide claridad.");
+			modeMeta.textContent = getModeText();
+			updateSelectionHint();
+		}
+
+		function handleCardSelection(key) {
+			if (locked) {
+				return;
+			}
+
+			const required = getRequiredSelections();
+			const state = getCardState(key);
+			if (!state) {
+				return;
+			}
+
+			const alreadySelected = selectedKeys.includes(key);
+			if (alreadySelected) {
+				selectedKeys = selectedKeys.filter((selectedKey) => selectedKey !== key);
+				state.element.classList.remove("is-selected");
+				state.element.querySelector(".card-position").textContent = "";
+			} else {
+				if (selectedKeys.length >= required) {
+					setStatus(`Ya elegiste ${required} carta${required > 1 ? "s" : ""}. Pulsa "Ver mi resultado" o cambia tu selección.`);
+					return;
+				}
+
+				selectedKeys.push(key);
+				state.element.classList.add("is-selected");
+			}
+
+			selectedKeys.forEach((selectedKey, index) => {
+				const selectedState = getCardState(selectedKey);
+				if (selectedState) {
+					const label = mode === "three" ? positionLabels[index] : "Seleccionada";
+					selectedState.position = label;
+					selectedState.element.querySelector(".card-position").textContent = label;
+				}
+			});
+
+			cardStates.forEach((cardState) => {
+				if (!selectedKeys.includes(cardState.key)) {
+					cardState.position = "";
+					cardState.element.querySelector(".card-position").textContent = "";
+				}
+			});
+
+			if (selectedKeys.length === required) {
+				setStatus("Tu selección ya está lista. Pulsa \"Ver mi resultado\" para abrir la lectura.");
+			} else {
+				setStatus(`Llevas ${selectedKeys.length} de ${required}. Sigue eligiendo y deja que la energía termine de mostrarse.`);
+			}
+
+			updateSelectionHint();
+		}
+
+		function applyInversion(cardData) {
+			const isReversed = Math.random() < 0.3;
+			const finalEnergy = isReversed ? cardData.energia * -1 : cardData.energia;
+			let finalVerdict = cardData.veredicto;
+			if (isReversed) {
+				if (cardData.energia > 0) {
+					finalVerdict = "NO / BLOQUEADO";
+				} else if (cardData.energia < 0) {
+					finalVerdict = "QUIZÁS / SE LIBERA";
+				} else {
+					finalVerdict = "INCIERTO";
+				}
+			}
+
+			return {
+				...cardData,
+				energia: finalEnergy,
+				veredicto: finalVerdict,
+				invertida: isReversed,
+				interpretacion: isReversed
+					? `La carta sale invertida, indicando bloqueos o retrasos en ${cardData.interpretacion.charAt(0).toLowerCase()}${cardData.interpretacion.slice(1)}`
+					: cardData.interpretacion
+			};
+		}
+
+		function centerSelectedCards() {
+			const spacing = mode === "yesno" ? 0 : 196;
+			selectedKeys.forEach((key, index) => {
+				const state = getCardState(key);
+				const offset = index - (selectedKeys.length - 1) / 2;
+				const translateX = offset * spacing;
+				const translateY = 0;
+				state.element.classList.add("is-center");
+				state.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(0deg) scale(1.05)`;
+			});
+		}
+
+		function fadeOtherCards() {
+			cardStates.forEach((state) => {
+				if (!selectedKeys.includes(state.key)) {
+					state.element.classList.add("is-dimmed");
+				}
+			});
+		}
+
+		function flipSelectedCards() {
+			selectedKeys.forEach((key, index) => {
+				const state = getCardState(key);
+				const finalData = applyInversion(state.data);
+				state.finalData = finalData;
+				state.orientation = finalData.invertida ? "invertida" : "upright";
+				state.element.classList.add("is-flipped", "is-aura");
+				state.element.style.setProperty("--aura-color", finalData.color_aura);
+				state.element.querySelector(".card-verdict").textContent = finalData.veredicto;
+				state.element.querySelector(".card-short").textContent = finalData.mensaje_corto;
+				if (mode === "three") {
+					state.element.querySelector(".card-position").textContent = positionLabels[index];
+				}
+			});
+		}
+
+		function calcularResultadoTirada(cartasSeleccionadas) {
+			let scoreTotal = 0;
+			cartasSeleccionadas.forEach((cardData) => {
+				scoreTotal += cardData.energia;
+			});
+
+			if (scoreTotal >= 2) {
+				return "SÍ ROTUNDO (Energía Muy Positiva)";
+			}
+			if (scoreTotal > 0) {
+				return "SÍ (Con reservas)";
+			}
+			if (scoreTotal === 0) {
+				return "INCIERTO (Energía Neutra)";
+			}
+			if (scoreTotal > -2) {
+				return "NO (Con dificultades)";
+			}
+
+			return "NO ROTUNDO (Mucha resistencia)";
+		}
+
+		function renderReadingResult() {
+			const resolvedStates = selectedKeys.map((key) => getCardState(key));
+			const resolvedCards = resolvedStates.map((state) => state.finalData);
+			resultShell.classList.add("is-visible");
+			readingGrid.innerHTML = "";
+
+			if (mode === "yesno") {
+				const [state] = resolvedStates;
+				resultTitle.textContent = state.finalData.nombre;
+				resultVerdict.textContent = state.finalData.veredicto;
+				resultVerdict.style.color = state.finalData.color_aura;
+				resultSummary.textContent = state.finalData.interpretacion;
+				openModal(state);
+				return;
+			}
+
+			const score = resolvedCards.reduce((total, card) => total + card.energia, 0);
+			const finalVerdict = calcularResultadoTirada(resolvedCards);
+				resultTitle.textContent = "Lectura evolutiva de tu tirada";
+			resultVerdict.textContent = finalVerdict;
+			resultVerdict.style.color = score >= 1 ? "#d4af37" : score <= -1 ? "#ff7272" : "#a8d8ff";
+				resultSummary.textContent = "Esta lectura une pasado, presente y futuro para mostrarte qué se está moviendo, dónde está el aprendizaje y hacia qué dirección conviene ir ahora.";
+
+			resolvedStates.forEach((state, index) => {
+				const item = document.createElement("article");
+				item.className = "reading-card-summary";
+				item.innerHTML = `
+					<strong>${positionLabels[index]}: ${state.finalData.nombre}</strong>
+					<p class="reading-meta">${state.finalData.interpretacion}</p>
+					<p class="reading-meta"><strong>Consejo:</strong> ${state.finalData.consejo}</p>
+				`;
+				readingGrid.appendChild(item);
+			});
+
+			openModal({
+				finalData: {
+					nombre: "Resultado Global",
+					veredicto: finalVerdict,
+					interpretacion: `Score energético total: ${score}. ${finalVerdict}.`,
+					consejo: "No te quedes solo con una impresión rápida. Integra las tres posiciones y usa esta lectura para tomar decisiones con más claridad y coherencia.",
+					color_aura: score >= 1 ? "var(--gold-electric)" : score <= -1 ? "var(--red-electric)" : "var(--cyan-electric)",
+					invertida: false
+				},
+				position: "Tirada completa"
+			});
+		}
+
+		function revealSelection() {
+			if (selectedKeys.length !== getRequiredSelections() || locked) {
+				return;
+			}
+
+			locked = true;
+			revealButton.disabled = true;
+			setStatus("Abriendo el mensaje que esta lectura tiene para vos...");
+			fadeOtherCards();
+			centerSelectedCards();
+
+			setTimeout(() => {
+				flipSelectedCards();
+				setTimeout(() => {
+					renderReadingResult();
+					setStatus("La lectura ya está abierta. Si quieres, puedes volver a mezclar el mazo y consultar de nuevo.");
+				}, 880);
+			}, 420);
+		}
+
+		function openModal(state) {
+			const { finalData } = state;
+			modalTitle.textContent = finalData.nombre;
+			modalVerdict.textContent = finalData.veredicto;
+			modalVerdict.style.color = finalData.color_aura;
+			modalInterpretation.textContent = finalData.interpretacion;
+			modalAdvice.textContent = finalData.consejo;
+			modalNote.textContent = state.position
+				? `${state.position}${finalData.invertida ? " · Carta invertida" : " · Carta en posición natural"}`
+				: finalData.invertida
+					? "Carta invertida"
+					: "Carta en posición natural";
+			cardModal.classList.add("is-open");
+			cardModal.setAttribute("aria-hidden", "false");
+		}
+
+		function closeModal() {
+			cardModal.classList.remove("is-open");
+			cardModal.setAttribute("aria-hidden", "true");
+		}
+
+		function setMode(nextMode) {
+			mode = nextMode;
+			modeButtons.forEach((button) => {
+				const active = button.dataset.mode === nextMode;
+				button.classList.toggle("is-active", active);
+				button.setAttribute("aria-pressed", active ? "true" : "false");
+			});
+			desplegarCartas();
+		}
+
+		modeButtons.forEach((button) => {
+			button.addEventListener("click", () => setMode(button.dataset.mode));
+		});
+
+		resetButton.addEventListener("click", desplegarCartas);
+		revealButton.addEventListener("click", revealSelection);
+		modalClose.addEventListener("click", closeModal);
+		cardModal.addEventListener("click", (event) => {
+			if (event.target === cardModal) {
+				closeModal();
+			}
+		});
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") {
+				closeModal();
+			}
+		});
+
+		window.addEventListener("pointermove", (event) => {
+			const x = ((event.clientX / window.innerWidth) - 0.5) * 18;
+			const y = ((event.clientY / window.innerHeight) - 0.5) * 18;
+			document.body.style.setProperty("--parallax-x", `${x}px`);
+			document.body.style.setProperty("--parallax-y", `${y}px`);
+		});
+
+		desplegarCartas();
+	</script>
+</body>
+</html>
