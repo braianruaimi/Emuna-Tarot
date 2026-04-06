@@ -1,7 +1,7 @@
 /* --- Layout Responsive y Contenedor Central --- */
 .container {
     width: 100%;
-    max-width: 1140px;
+    max-width: 1040px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.2rem;
@@ -12,7 +12,7 @@
 main > section,
 .section {
     width: 100%;
-    max-width: 900px;
+    max-width: 860px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.2rem;
@@ -612,7 +612,7 @@ h3 {
 
 h1 {
     margin: 0;
-    font-size: clamp(2.8rem, 6vw, 5.6rem);
+    font-size: clamp(2.35rem, 5vw, 4.35rem);
     line-height: 1.04;
     text-wrap: balance;
 }
@@ -628,12 +628,12 @@ h1 {
 
 .hero-text {
     max-width: 40rem;
-    font-size: 1.05rem;
-    margin: 1.5rem 0 0;
+    font-size: 0.98rem;
+    margin: 1.15rem 0 0;
 }
 
 .hero-actions {
-    margin-top: 2rem;
+    margin-top: 1.45rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -664,11 +664,14 @@ h1 {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 3.25rem;
-    padding: 0.85rem 1.4rem;
+    min-height: 2.9rem;
+    padding: 0.72rem 1.05rem;
     border: 1px solid transparent;
     border-radius: 999px;
     color: var(--text);
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
     cursor: pointer;
     transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
@@ -703,7 +706,7 @@ h1 {
 }
 
 .section {
-    padding: 2rem 0 4rem;
+    padding: 1.6rem 0 3.1rem;
 }
 
 .oracle-spotlight {
@@ -834,12 +837,12 @@ h1 {
 
 h2 {
     margin: 0;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.65rem, 3vw, 2.45rem);
 }
 
 h3 {
     margin: 0.75rem 0 1rem;
-    font-size: 1.45rem;
+    font-size: 1.2rem;
 }
 
 .framed-panel {
@@ -858,14 +861,27 @@ h3 {
     padding: 2rem;
 }
 
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(220px, 1fr));
-    gap: 2.2rem;
-    justify-items: center;
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
+.services-carousel {
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.services-track {
+    display: flex;
+    gap: 0.95rem;
+    overflow-x: auto;
+    padding: 0.2rem 0.15rem 0.8rem;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+}
+
+.services-track::-webkit-scrollbar {
+    height: 8px;
+}
+
+.services-track::-webkit-scrollbar-thumb {
+    background: rgba(64, 224, 208, 0.28);
+    border-radius: 999px;
 }
 
 #rituales {
@@ -1122,12 +1138,12 @@ h3 {
 }
 
 .tarot-card {
-    width: 140px;
-    min-width: 120px;
-    max-width: 180px;
-    aspect-ratio: 2/3;
-    margin: 0 auto;
-    padding: 1.2rem 0.5rem 1.1rem 0.5rem;
+    width: 11.9rem;
+    min-width: 11.9rem;
+    max-width: 11.9rem;
+    min-height: 18.6rem;
+    margin: 0;
+    padding: 0.95rem 0.75rem 0.9rem;
     border-radius: 18px;
     background:
         linear-gradient(120deg, rgba(20,0,44,0.98) 60%, rgba(160,32,240,0.22) 100%) padding-box,
@@ -1141,22 +1157,23 @@ h3 {
     justify-content: center;
     text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
+    font-size: 0.98rem;
     position: relative;
     transition: transform 220ms cubic-bezier(.4,1.6,.4,1), box-shadow 220ms cubic-bezier(.4,1.6,.4,1);
     z-index: 1;
+    scroll-snap-align: start;
 }
 .tarot-card:focus-visible, .tarot-card:hover {
-    transform: scale(1.08) rotate(-2deg) translateY(-8px);
+    transform: scale(1.03) rotate(-1deg) translateY(-4px);
     box-shadow: 0 0 44px #a020f0, 0 0 64px #40e0d0, 0 16px 48px rgba(0,0,0,0.48);
     outline: 2px solid #40e0d0;
 }
 .tarot-card h3 {
-    margin: 0.7rem 0 0;
-    font-size: 1.08rem;
+    margin: 0.45rem 0 0;
+    font-size: 0.96rem;
     font-weight: 600;
     color: var(--text);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
 }
 .tarot-card .service-index {
     font-size: 1.5rem;
@@ -1165,10 +1182,53 @@ h3 {
     color: #fff;
     box-shadow: 0 0 12px #a020f0;
 }
-.services-grid {
-    grid-template-columns: repeat(3, minmax(120px, 1fr));
-    gap: 2.2rem;
-    justify-items: center;
+.modern-services .service-card {
+    min-height: 18.6rem;
+    max-width: 11.9rem;
+}
+
+.modern-services .card-header-icon {
+    margin-bottom: 0.35rem;
+    font-size: 1.65rem;
+}
+
+.modern-services .card-title {
+    font-size: 0.96rem;
+    line-height: 1.2;
+}
+
+.modern-services .card-detail {
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+
+.modern-services .card-detail-plus {
+    font-size: 0.78rem;
+}
+
+.modern-services .card-footer {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+    margin-top: 0.7rem;
+}
+
+.modern-services .card-precio {
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.modern-services .primary-button {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
+.modern-destacado {
+    border-width: 2px;
 }
 
 @media (max-width: 900px) {
@@ -1188,109 +1248,6 @@ h3 {
         max-width: 99vw;
         font-size: 1rem;
     }
-}
-
-.service-modal {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 350ms cubic-bezier(.4,1.6,.4,1);
-}
-.service-modal.active {
-    pointer-events: all;
-    opacity: 1;
-}
-.service-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 2, 28, 0.92);
-    backdrop-filter: blur(8px);
-    z-index: 0;
-}
-.service-modal-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 320px;
-    min-height: 420px;
-    max-width: 96vw;
-    max-height: 96vh;
-    padding: 0;
-    border-radius: 22px;
-    background: none;
-    box-shadow: none;
-}
-.service-modal-card {
-    width: 320px;
-    min-height: 420px;
-    background:
-        linear-gradient(120deg, rgba(20,0,44,0.98) 60%, rgba(160,32,240,0.22) 100%) padding-box,
-        linear-gradient(45deg, #a020f0 10%, #40e0d0 90%) border-box;
-    border: 2.5px solid #a020f0;
-    box-shadow: 0 0 44px #a020f0, 0 0 64px #40e0d0, 0 16px 48px rgba(0,0,0,0.48);
-    border-radius: 22px;
-    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
-    color: var(--text);
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    opacity: 0;
-    transform: scale(0.7) translateY(80px);
-    transition: opacity 350ms cubic-bezier(.4,1.6,.4,1), transform 350ms cubic-bezier(.4,1.6,.4,1);
-}
-.service-modal.active .service-modal-card {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    transition-delay: 120ms;
-}
-.service-modal-close {
-    position: absolute;
-    top: 0.7rem;
-    right: 1.1rem;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2.2rem;
-    cursor: pointer;
-    z-index: 2;
-    filter: drop-shadow(0 0 8px #a020f0);
-    transition: color 180ms;
-}
-.service-modal-close:hover {
-    color: #40e0d0;
-}
-
-@keyframes tarotFly {
-    0% {
-        opacity: 1;
-        transform: scale(1) translateY(0) rotate(0deg);
-        z-index: 100;
-    }
-    60% {
-        opacity: 1;
-        transform: scale(1.2) translateY(-40vh) rotate(-8deg);
-        z-index: 100;
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.7) translateY(-60vh) rotate(0deg);
-        z-index: 100;
-    }
-}
-.tarot-fly {
-    animation: tarotFly 0.6s cubic-bezier(.4,1.6,.4,1) forwards;
 }
 
 .service-card:hover,
@@ -1386,6 +1343,75 @@ h3 {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
+}
+
+.contact-cta-panel {
+    display: grid;
+    gap: 1rem;
+}
+
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+}
+
+.booking-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.booking-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 2, 19, 0.82);
+    backdrop-filter: blur(10px);
+}
+
+.booking-modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 44rem);
+    max-height: min(92vh, 52rem);
+    overflow: auto;
+    padding: 1.35rem;
+}
+
+.booking-modal-header {
+    margin-bottom: 1rem;
+}
+
+.booking-modal-header p:last-child {
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.booking-modal-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.9rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.booking-form {
+    padding-top: 0.25rem;
 }
 
 .field-group {
@@ -1495,10 +1521,6 @@ body.js-ready .reveal.is-visible {
         grid-template-columns: 1.15fr 0.95fr;
     }
 
-    .services-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
     .portal-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -1526,6 +1548,10 @@ body.js-ready .reveal.is-visible {
         width: 100%;
         justify-content: space-between;
         font-size: 0.92rem;
+    }
+
+    .services-track {
+        gap: 0.8rem;
     }
 }
 
@@ -1570,7 +1596,8 @@ body.js-ready .reveal.is-visible {
 
     .hero-actions,
     .form-actions,
-    .oracle-spotlight-actions {
+    .oracle-spotlight-actions,
+    .contact-actions {
         align-items: stretch;
     }
 
@@ -1597,6 +1624,10 @@ body.js-ready .reveal.is-visible {
         grid-template-columns: 1fr;
     }
 
+    .booking-modal-dialog {
+        padding: 1.1rem;
+    }
+
     .ritual-steps {
         grid-template-columns: 1fr;
     }
@@ -1615,6 +1646,14 @@ body.js-ready .reveal.is-visible {
         left: 0.75rem;
         right: 0.75rem;
         width: auto;
+    }
+
+    .tarot-card,
+    .modern-services .service-card {
+        width: 10.7rem;
+        min-width: 10.7rem;
+        max-width: 10.7rem;
+        min-height: 17rem;
     }
 }
 
