@@ -1,3 +1,12 @@
+document.body.classList.add('js-ready');
+
+const form = document.querySelector('#contactForm');
+const formStatus = document.querySelector('#formStatus');
+const submitButton = document.querySelector('#submitButton');
+const installButton = document.querySelector('#installButton');
+const floatingInstallButton = document.querySelector('#floatingInstallButton');
+const revealElements = document.querySelectorAll('.reveal');
+
 // --- Lógica de RESERVAR y WhatsApp ---
 const reservarBtns = document.querySelectorAll('.reservar-btn');
 const contactoSection = document.getElementById('contacto');
@@ -30,43 +39,6 @@ reservarBtns.forEach(btn => {
     });
 });
 
-if (form) {
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (!validateForm()) return;
-        submitButton.disabled = true;
-        setFormStatus('Enviando...', '');
-
-        // Armar mensaje para WhatsApp
-        const nombre = form.nombre.value;
-        const apellido = form.apellido.value;
-        const fecha = form.fechaNacimiento.value;
-        const edad = form.edad.value;
-        const signo = form.signo.value;
-        const email = form.email.value;
-        const telefono = form.telefono.value;
-        const asunto = form.asunto.value;
-        const servicio = servicioInput.value || '';
-        const mensaje =
-            `Hola Bren!%0AQuiero reservar el servicio: *${servicio}*%0A` +
-            `Nombre: ${nombre} ${apellido}%0A` +
-            `Fecha de nacimiento: ${fecha} (${edad} años)%0A` +
-            `Signo: ${signo}%0A` +
-            `Email: ${email}%0A` +
-            `Teléfono: ${telefono}%0A` +
-            `Motivo: ${asunto}`;
-        const numero = '5492215047962'; // Número real de Bren actualizado
-        const waUrl = `https://wa.me/${numero}?text=${mensaje}`;
-
-        setTimeout(() => {
-            window.open(waUrl, '_blank');
-            form.reset();
-            servicioInput.value = '';
-            submitButton.disabled = false;
-            setFormStatus('¡Mensaje enviado por WhatsApp!', 'success');
-        }, 1200);
-    });
-}
 // --- Tarot Service Modal ---
 const serviceCards = document.querySelectorAll('.tarot-card');
 const serviceModal = document.getElementById('service-modal');
@@ -143,13 +115,6 @@ if (serviceModal) {
         }
     });
 }
-const form = document.querySelector('#contactForm');
-const formStatus = document.querySelector('#formStatus');
-const submitButton = document.querySelector('#submitButton');
-const installButton = document.querySelector('#installButton');
-const floatingInstallButton = document.querySelector('#floatingInstallButton');
-const revealElements = document.querySelectorAll('.reveal');
-
 let deferredInstallPrompt = null;
 
 const installControls = [installButton, floatingInstallButton].filter(Boolean);
@@ -188,13 +153,35 @@ if (form) {
         submitButton.disabled = true;
         setFormStatus('Enviando...', '');
 
-        await new Promise((resolve) => {
-            window.setTimeout(resolve, 1800);
-        });
+        const nombre = form.nombre.value;
+        const apellido = form.apellido.value;
+        const fecha = form.fechaNacimiento.value;
+        const edad = form.edad.value;
+        const signo = form.signo.value;
+        const email = form.email.value;
+        const telefono = form.telefono.value;
+        const asunto = form.asunto.value;
+        const servicio = servicioInput?.value || '';
+        const mensaje =
+            `Hola Bren!%0AQuiero reservar el servicio: *${servicio}*%0A` +
+            `Nombre: ${nombre} ${apellido}%0A` +
+            `Fecha de nacimiento: ${fecha} (${edad} años)%0A` +
+            `Signo: ${signo}%0A` +
+            `Email: ${email}%0A` +
+            `Teléfono: ${telefono}%0A` +
+            `Motivo: ${asunto}`;
+        const numero = '5492215047962';
+        const waUrl = `https://wa.me/${numero}?text=${mensaje}`;
 
-        form.reset();
-        submitButton.disabled = false;
-        setFormStatus('Recibí tu mensaje. En breve te respondo para orientarte y reservar tu espacio.', 'success');
+        window.setTimeout(() => {
+            window.open(waUrl, '_blank');
+            form.reset();
+            if (servicioInput) {
+                servicioInput.value = '';
+            }
+            submitButton.disabled = false;
+            setFormStatus('¡Mensaje enviado por WhatsApp!', 'success');
+        }, 1200);
     });
 }
 
