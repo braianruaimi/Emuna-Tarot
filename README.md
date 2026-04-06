@@ -5,13 +5,14 @@
 ---
 
 ## Descripción
-Web app mística, responsive y PWA para reservar servicios de tarot evolutivo, acompañamiento mensual y rituales energéticos. Visual moderno, cartas tipo tarot con bordes dorados y efectos neón, integración con WhatsApp y experiencia mobile-first.
+Web app mística, responsive y PWA para reservar servicios de tarot evolutivo, acompañamiento mensual y rituales energéticos. Incluye además un oráculo premium integrado con lectura Sí o No y tirada de 3 cartas. Visual moderno, cartas tipo tarot con bordes dorados y efectos neón, integración con WhatsApp y experiencia mobile-first.
 
 ## Funcionalidades principales
 - **PWA**: Instalación como app, offline y manifest.json.
 - **UI/UX**: Fondo oscuro, cartas místicas, tipografía serif dorada, efectos neón y responsive.
 - **Servicios**: Cards de tarot para cada servicio, con precios y botón de reserva.
 - **Servicio destacado**: "Acompañamiento Evolutivo Mensual" con mayor impacto visual.
+- **Oráculo premium**: experiencia independiente en `tarotsiono/` con 22 arcanos mayores, lectura Sí o No y tirada de 3 cartas.
 - **Reserva vía WhatsApp**: Al reservar, el formulario autocompleta el servicio y genera un mensaje directo a WhatsApp con todos los datos.
 - **Scroll suave**: Al reservar, la página baja automáticamente al formulario.
 
@@ -19,6 +20,7 @@ Web app mística, responsive y PWA para reservar servicios de tarot evolutivo, a
 - `index.html`: Estructura principal y secciones.
 - `style.css`: Estilos globales, cartas, responsive y efectos visuales.
 - `app.js`: Lógica de interacción, scroll, WhatsApp y formulario.
+- `tarotsiono/index.html`: Oráculo premium integrado al sitio.
 - `assets/`: Imágenes y recursos visuales.
 - `manifest.json` y `sw.js`: Configuración PWA.
 
