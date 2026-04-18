@@ -6,6 +6,13 @@ const cerrarModalCartaAstral = document.getElementById('cerrarModalCartaAstral')
 
 if (abrirCartaAstralBtn && modalCartaAstral) {
     abrirCartaAstralBtn.addEventListener('click', () => {
+        const shouldOpenStandaloneAstral = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+
+        if (shouldOpenStandaloneAstral) {
+            window.location.href = 'cartaastral/index.html';
+            return;
+        }
+
         modalCartaAstral.classList.remove('hidden');
         modalCartaAstral.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
