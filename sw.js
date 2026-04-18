@@ -1,7 +1,8 @@
-const CACHE_NAME = 'emuna-tarot-v12';
+const CACHE_NAME = 'emuna-tarot-v13';
 const APP_SHELL = [
     './',
     'index.html',
+    'cartaastral/index.html',
     'tarotsiono/index.html',
     'css/style.css',
     'js/app.js',

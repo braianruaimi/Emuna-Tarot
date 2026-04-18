@@ -1,3 +1,30 @@
+// --- MODAL CARTA ASTRAL ---
+const abrirCartaAstralBtn = document.getElementById('abrirCartaAstralBtn');
+const modalCartaAstral = document.getElementById('modalCartaAstral');
+const cerrarBtnCartaAstral = document.getElementById('cerrarBtnCartaAstral');
+const cerrarModalCartaAstral = document.getElementById('cerrarModalCartaAstral');
+
+if (abrirCartaAstralBtn && modalCartaAstral) {
+    abrirCartaAstralBtn.addEventListener('click', () => {
+        modalCartaAstral.classList.remove('hidden');
+        modalCartaAstral.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    });
+}
+if (cerrarBtnCartaAstral && modalCartaAstral) {
+    cerrarBtnCartaAstral.addEventListener('click', () => {
+        modalCartaAstral.classList.add('hidden');
+        modalCartaAstral.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    });
+}
+if (cerrarModalCartaAstral && modalCartaAstral) {
+    cerrarModalCartaAstral.addEventListener('click', () => {
+        modalCartaAstral.classList.add('hidden');
+        modalCartaAstral.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    });
+}
 // --- MINI ORÁCULO DEMO ---
 const miniOraculoCarta = document.getElementById('miniOraculoCarta');
 const miniOraculoMensaje = document.getElementById('miniOraculoMensaje');
