@@ -1,14 +1,14 @@
-const CACHE_NAME = 'emuna-tarot-v8';
+const CACHE_NAME = 'emuna-tarot-v9';
 const APP_SHELL = [
     './',
     'index.html',
     'css/style.css',
     'js/app.js',
     'manifest.json',
-    'assets/services/lectura-esencial.jpg',
-    'assets/services/lectura-claridad.jpg',
-    'assets/services/inmersion-evolutiva.jpg',
-    'assets/services/acompanamiento-mensual.jpg',
+    'lunaroja.jfif',
+    'lunaagua.jfif',
+    'lunamano.jfif',
+    'lunahijo.jfif',
     'assets/chica luna.jpg',
     'assets/descarga.jpg',
     'assets/luna-after-hero.jpg',
