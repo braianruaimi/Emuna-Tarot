@@ -1736,6 +1736,10 @@ h3 {
 .services-carousel {
     padding: 0.95rem;
     overflow: hidden;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 22%),
+        linear-gradient(145deg, rgba(6, 10, 24, 0.98), rgba(23, 15, 41, 0.96));
+    border-color: rgba(255, 255, 255, 0.18);
 }
 
 .services-story {
@@ -1749,6 +1753,7 @@ h3 {
         linear-gradient(135deg, rgba(10, 14, 27, 0.98), rgba(32, 18, 49, 0.95));
     border: 1px solid rgba(177, 188, 209, 0.18);
     box-shadow: 0 22px 54px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    overflow: hidden;
 }
 
 .services-story-header {
@@ -1771,6 +1776,18 @@ h3 {
     overflow: hidden;
     background: linear-gradient(145deg, rgba(20, 25, 39, 0.96), rgba(47, 28, 67, 0.9));
     border: 1px solid rgba(205, 184, 134, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.services-story-stage::after {
+    content: "";
+    position: absolute;
+    inset: auto -10% -35% auto;
+    width: 13rem;
+    height: 13rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.13), transparent 65%);
+    pointer-events: none;
 }
 
 .services-story-slide {
@@ -1791,6 +1808,7 @@ h3 {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    z-index: 1;
 }
 
 .services-story-kicker {
@@ -1798,12 +1816,13 @@ h3 {
     width: fit-content;
     padding: 0.38rem 0.72rem;
     border-radius: 999px;
-    background: rgba(214, 190, 137, 0.1);
-    border: 1px solid rgba(214, 190, 137, 0.24);
-    color: #f3deaf;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #fff5d8;
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.1);
 }
 
 .services-story-slide h3 {
@@ -1842,8 +1861,8 @@ h3 {
 .services-story-dot:hover,
 .services-story-dot:focus-visible {
     transform: scale(1.12);
-    background: linear-gradient(135deg, #dbc07a, #9aa8c4);
-    box-shadow: 0 0 18px rgba(219, 192, 122, 0.24);
+    background: linear-gradient(135deg, #ffffff, #c3cede);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.32);
 }
 
 .services-carousel-shell {
@@ -1869,14 +1888,14 @@ h3 {
     width: 2.7rem;
     height: 2.7rem;
     border-radius: 999px;
-    border: 1px solid rgba(64, 224, 208, 0.34);
-    background: rgba(10, 2, 28, 0.82);
-    color: var(--gold-b);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: rgba(11, 9, 24, 0.9);
+    color: #fff8e6;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.16), 0 10px 28px rgba(0, 0, 0, 0.24);
     transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
@@ -1888,7 +1907,7 @@ h3 {
 .carousel-arrow:hover,
 .carousel-arrow:focus-visible {
     transform: translateY(-1px);
-    box-shadow: 0 0 18px rgba(64, 224, 208, 0.18), 0 10px 28px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.28), 0 10px 28px rgba(0, 0, 0, 0.24);
 }
 
 .carousel-arrow[disabled] {
@@ -2660,15 +2679,19 @@ h3 {
 
 .mystic-list li {
     position: relative;
-    padding-left: 1.4rem;
+    padding-left: 1.65rem;
 }
 
 .mystic-list li::before {
-    content: "ԣ�";
+    content: "";
     position: absolute;
-    left: 0;
-    color: var(--gold-b);
-    text-shadow: 0 0 12px rgba(249, 242, 149, 0.35);
+    left: 0.05rem;
+    top: 0.5rem;
+    width: 0.58rem;
+    height: 0.58rem;
+    border-radius: 999px;
+    background: radial-gradient(circle, #ffffff 0 42%, rgba(255, 255, 255, 0.28) 58%, transparent 72%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.34);
 }
 
 .service-card {
@@ -2764,6 +2787,9 @@ h3 {
 .modern-services .card-precio {
     text-align: center;
     font-size: 0.95rem;
+    color: #fff6db;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.18);
 }
 
 .modern-services .primary-button {
