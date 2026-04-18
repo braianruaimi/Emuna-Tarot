@@ -1598,6 +1598,23 @@ h1 {
     justify-content: center;
 }
 
+.astral-spotlight-main {
+    align-items: center;
+    text-align: center;
+}
+
+.astral-spotlight-main > p,
+.astral-spotlight-main > h2,
+.astral-spotlight-actions {
+    width: min(100%, 42rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.astral-spotlight-actions {
+    justify-content: center;
+}
+
 .astral-spotlight-main p:last-of-type {
     color: var(--muted);
     line-height: 1.85;
@@ -3408,6 +3425,11 @@ body.js-ready .reveal.is-visible {
     .astral-spotlight-main,
     .astral-spotlight-side {
         gap: 0.95rem;
+    }
+
+    .astral-spotlight-main {
+        align-items: stretch;
+        text-align: center;
     }
 
     .astral-spotlight-main h2 {
