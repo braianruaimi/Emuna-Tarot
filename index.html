@@ -60,7 +60,7 @@
                     <span>Espacios personalizados para manifestar con intención</span>
                 </div>
                 <div class="hero-actions">
-                    <a class="btn-emuna primary-button open-booking-btn" href="#contacto">Inicia tu Viaje</a>
+                    <a class="btn-emuna primary-button open-booking-btn" href="#contacto">Reserva tu lectura</a>
                     <a class="btn-emuna secondary-button" href="tarotsiono/">Consultar Oráculo</a>
                     <a class="btn-emuna secondary-button" href="#servicios">Explorar Servicios</a>
                 </div>
@@ -258,6 +258,40 @@
                 <p class="eyebrow">Servicios</p>
                 <h2>Elige tu experiencia de Tarot</h2>
             </div>
+            <div class="services-story framed-panel" aria-label="Guía para elegir tu experiencia">
+                <div class="services-story-header">
+                    <p class="eyebrow">Antes de elegir</p>
+                    <p class="services-story-lead">Cada experiencia responde a un momento distinto de tu proceso. Esta guía rápida te ayuda a sentir qué lectura acompaña mejor tu energía de hoy.</p>
+                </div>
+                <div class="services-story-stage" id="servicesStoryStage">
+                    <article class="services-story-slide is-active" data-story-slide>
+                        <span class="services-story-kicker">Claridad inmediata</span>
+                        <h3>Cuando necesitas una señal concreta para ordenar lo que sientes hoy</h3>
+                        <p>Ideal si estás entre opciones, si algo te inquieta o si buscas una lectura puntual para destrabar una decisión sin entrar todavía en un proceso largo.</p>
+                    </article>
+                    <article class="services-story-slide" data-story-slide>
+                        <span class="services-story-kicker">Profundidad emocional</span>
+                        <h3>Cuando ya sabes que hay un tema importante y necesitas mirarlo con más verdad</h3>
+                        <p>Sirve para vínculos, cierres, trabajo interno y preguntas que no se responden con una sola frase. Te devuelve más contexto, dirección y foco real.</p>
+                    </article>
+                    <article class="services-story-slide" data-story-slide>
+                        <span class="services-story-kicker">Proceso completo</span>
+                        <h3>Cuando tu energía pide una lectura más amplia y transformadora</h3>
+                        <p>Es la opción más inmersiva para ver patrones, bloqueos, posibilidades y mensaje del oráculo dentro de una misma experiencia.</p>
+                    </article>
+                    <article class="services-story-slide" data-story-slide>
+                        <span class="services-story-kicker">Acompañamiento</span>
+                        <h3>Cuando no buscas solo una respuesta sino sostener un cambio durante el mes</h3>
+                        <p>Recomendado si estás atravesando un ciclo intenso, un cierre, una manifestación importante o un momento donde necesitas continuidad y guía.</p>
+                    </article>
+                </div>
+                <div class="services-story-nav" aria-label="Navegación de guía de servicios">
+                    <button class="services-story-dot is-active" type="button" aria-label="Ver mensaje 1" aria-pressed="true" data-story-dot="0"></button>
+                    <button class="services-story-dot" type="button" aria-label="Ver mensaje 2" aria-pressed="false" data-story-dot="1"></button>
+                    <button class="services-story-dot" type="button" aria-label="Ver mensaje 3" aria-pressed="false" data-story-dot="2"></button>
+                    <button class="services-story-dot" type="button" aria-label="Ver mensaje 4" aria-pressed="false" data-story-dot="3"></button>
+                </div>
+            </div>
             <div class="services-carousel framed-panel" aria-label="Carrusel de servicios">
                 <div class="services-carousel-shell">
                     <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Ver servicio anterior" data-carousel-arrow="prev">
@@ -355,6 +389,20 @@
                 </div>
             </div>
         </section>
+        <footer class="site-footer reveal" id="footer">
+            <div class="site-footer-panel framed-panel">
+                <div class="site-footer-copy">
+                    <p class="eyebrow">Emuna</p>
+                    <p>Tarot evolutivo, guía energética y espacios para ordenar lo que hoy pide claridad, decisión y movimiento real.</p>
+                </div>
+                <div class="site-footer-links" aria-label="Accesos de contacto">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="https://www.instagram.com/bren.tarot_y_energias/" target="_blank" rel="noreferrer">Instagram</a>
+                    <a href="https://wa.me/2215566392" target="_blank" rel="noreferrer">WhatsApp</a>
+                </div>
+            </div>
+        </footer>
         </main>
         <script src="vanilla-tilt.min.js"></script>
         <script src="aos.min.js"></script>
@@ -438,6 +486,55 @@
             </form>
         </div>
     </div>
+
+    <div class="assistant-modal hidden" id="assistantModal" aria-hidden="true">
+        <div class="booking-modal-backdrop" data-close-assistant="true"></div>
+        <div class="assistant-modal-dialog framed-panel" role="dialog" aria-modal="true" aria-labelledby="assistantModalTitle">
+            <button class="booking-modal-close" id="assistantModalClose" type="button" aria-label="Cerrar asistente">×</button>
+            <div class="booking-modal-header assistant-modal-header">
+                <p class="eyebrow">IA Bren Asistente</p>
+                <h2 id="assistantModalTitle">Respuestas rápidas para orientarte antes de reservar</h2>
+                <p>Elige una pregunta frecuente. El asistente te responde con orientación breve, clara y enfocada en tu momento actual.</p>
+            </div>
+            <div class="assistant-shell">
+                <div class="assistant-questions" role="list" aria-label="Preguntas frecuentes">
+                    <button class="assistant-question is-active" type="button" data-assistant-question="elegir">No sé qué lectura elegir</button>
+                    <button class="assistant-question" type="button" data-assistant-question="bloqueo">Siento bloqueo y confusión</button>
+                    <button class="assistant-question" type="button" data-assistant-question="momento">No sé si este es mi momento</button>
+                    <button class="assistant-question" type="button" data-assistant-question="reserva">¿Cómo reservo y qué pasa después?</button>
+                </div>
+                <article class="assistant-answer" id="assistantAnswer" aria-live="polite">
+                    <span class="assistant-answer-kicker" id="assistantAnswerKicker">Orientación inicial</span>
+                    <h3 id="assistantAnswerTitle">Si hoy no sabes qué lectura elegir, puede que tu energía no esté pidiendo más ruido, sino un espacio claro para escuchar lo que ya intenta mostrarse.</h3>
+                    <p id="assistantAnswerBody">Cuando lo interno se mezcla, la intuición se apaga entre dudas, cansancio y sobrepensamiento. Una lectura bien elegida no fuerza respuestas: ordena, revela y te devuelve eje. La Lectura Esencial ayuda a abrir claridad puntual; si sientes un proceso más profundo, la Lectura de Claridad o la Inmersión Evolutiva pueden acompañarte con más amplitud.</p>
+                    <div class="assistant-answer-actions">
+                        <a class="btn-emuna secondary-button" id="assistantWhatsappLink" href="https://wa.me/2215566392" target="_blank" rel="noreferrer">Hablar por WhatsApp</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-socials" aria-label="Redes y contacto rápidos">
+        <a class="floating-social floating-social-instagram" href="https://www.instagram.com/bren.tarot_y_energias/" target="_blank" rel="noreferrer" aria-label="Instagram de Bren Tarot y Energías">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="4.5" y="4.5" width="15" height="15" rx="4.2"></rect>
+                <circle cx="12" cy="12" r="3.4"></circle>
+                <circle cx="17.2" cy="6.9" r="0.9" class="floating-social-fill"></circle>
+            </svg>
+        </a>
+        <a class="floating-social floating-social-whatsapp" href="https://wa.me/2215566392" target="_blank" rel="noreferrer" aria-label="WhatsApp 2215566392">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 4.8a6.9 6.9 0 0 0-5.86 10.55L5 19l3.8-1A6.9 6.9 0 1 0 12 4.8Z"></path>
+                <path d="M9.4 9.3c.18-.4.36-.41.54-.42h.46c.16 0 .37.06.48.31.12.25.45 1.08.49 1.16.04.08.07.18.01.29-.06.11-.09.18-.18.28-.08.09-.18.2-.26.27-.09.08-.18.17-.08.33.1.17.46.76.99 1.23.68.61 1.26.8 1.44.9.18.09.28.08.38-.05.1-.12.44-.51.56-.68.12-.17.24-.14.4-.08.16.06 1.03.49 1.2.58.17.08.28.12.32.19.04.07.04.42-.1.82-.14.41-.79.79-1.1.84-.28.05-.64.08-1.03-.05-.24-.08-.56-.18-.96-.36-1.69-.73-2.8-2.45-2.88-2.56-.08-.11-.69-.91-.69-1.73 0-.82.43-1.22.58-1.38Z"></path>
+            </svg>
+        </a>
+    </div>
+
+    <button class="btn-emuna floating-assistant" id="floatingAssistantButton" type="button" aria-label="Abrir IA Bren Asistente">
+        <span class="floating-assistant-badge">IA</span>
+        <span>IA Bren Asistente</span>
+    </button>
 
     <button class="btn-emuna floating-install hidden" id="floatingInstallButton" type="button" aria-label="Instalar app">Instalar App</button>
 
