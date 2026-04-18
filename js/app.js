@@ -482,7 +482,10 @@ document.querySelectorAll('.site-nav a[href^="#"]').forEach(link => {
             e.preventDefault();
             const header = document.querySelector('.site-header');
             const headerHeight = header ? header.offsetHeight : 0;
-            const y = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
+            const scrollAnchor = target.querySelector('[data-scroll-anchor]');
+            const scrollTarget = scrollAnchor || target;
+            const y = scrollTarget.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
+            window.history.replaceState(null, '', `#${targetId}`);
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
     });

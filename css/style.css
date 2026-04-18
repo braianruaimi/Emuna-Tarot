@@ -83,6 +83,26 @@
 }
 .mini-oraculo-carta-front {
     z-index: 2;
+    overflow: hidden;
+}
+
+.mini-oraculo-carta-front::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(9, 4, 20, 0.1), rgba(9, 4, 20, 0.2) 38%, rgba(8, 3, 18, 0.86) 100%);
+    pointer-events: none;
+}
+
+.mini-oraculo-front-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+    transform: scale(1.03);
+    filter: saturate(0.92) contrast(1.04) brightness(0.9);
 }
 .mini-oraculo-carta-back {
     transform: rotateY(180deg);
@@ -101,6 +121,22 @@
 .mini-oraculo-txt {
     font-size: 1.01rem;
     opacity: 0.82;
+}
+
+.mini-oraculo-txt-overlay {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    margin-bottom: 0.8rem;
+    padding: 0.38rem 0.72rem;
+    border-radius: 999px;
+    background: rgba(8, 6, 16, 0.74);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #fff5da;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 1;
 }
 .mini-oraculo-leyenda {
     margin-top: 1.1rem;
@@ -925,23 +961,23 @@ h1 {
 .install-button,
 .floating-install {
     background:
-        linear-gradient(135deg, #dbc07a 0%, #8d98b4 100%) border-box,
-        linear-gradient(135deg, #18233a 0%, #39204f 100%) padding-box;
+        linear-gradient(135deg, #f0d79a 0%, #c28a32 100%) border-box,
+        linear-gradient(135deg, #17233b 0%, #2d1b44 100%) padding-box;
     border: 2px solid transparent;
-    color: #fff6db;
-    box-shadow: 0 14px 30px rgba(4, 6, 12, 0.32), 0 0 18px rgba(207, 183, 122, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    text-shadow: 0 0 10px rgba(219, 192, 122, 0.18);
+    color: #fff8ea;
+    box-shadow: 0 14px 30px rgba(4, 6, 12, 0.34), 0 0 20px rgba(212, 154, 52, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 12px rgba(240, 215, 159, 0.18);
 }
 
 .btn-emuna.secondary-button,
 .secondary-button {
     background:
-        linear-gradient(135deg, rgba(187, 198, 222, 0.82), rgba(214, 190, 137, 0.9)) border-box,
-        linear-gradient(135deg, rgba(24, 31, 50, 0.92), rgba(47, 28, 65, 0.9)) padding-box;
+        linear-gradient(135deg, rgba(149, 181, 222, 0.96), rgba(97, 188, 199, 0.9)) border-box,
+        linear-gradient(135deg, rgba(12, 19, 35, 0.98), rgba(24, 19, 42, 0.95)) padding-box;
     border: 2px solid transparent;
-    color: #f4ecd6;
-    box-shadow: 0 10px 24px rgba(4, 6, 12, 0.22), 0 0 16px rgba(155, 170, 201, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    text-shadow: 0 0 8px rgba(214, 190, 137, 0.16);
+    color: #eef7ff;
+    box-shadow: 0 10px 24px rgba(4, 6, 12, 0.24), 0 0 16px rgba(121, 170, 201, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    text-shadow: 0 0 8px rgba(123, 197, 209, 0.18);
 }
 
 .btn-emuna.primary-button:hover,
@@ -957,10 +993,10 @@ h1 {
 .floating-install:hover,
 .floating-install:focus-visible {
     transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 18px 38px rgba(5, 7, 14, 0.36), 0 0 0 2px rgba(237, 215, 156, 0.92), 0 0 28px rgba(123, 136, 163, 0.28);
+    box-shadow: 0 18px 38px rgba(5, 7, 14, 0.38), 0 0 0 2px rgba(245, 219, 159, 0.96), 0 0 30px rgba(210, 156, 64, 0.3);
     background:
-        linear-gradient(135deg, #f0d79f 0%, #a8b5d0 100%) border-box,
-        linear-gradient(135deg, #223153 0%, #4b2c68 100%) padding-box;
+        linear-gradient(135deg, #f7dfa8 0%, #d39938 100%) border-box,
+        linear-gradient(135deg, #213153 0%, #41285f 100%) padding-box;
     color: #fffdf4;
     text-shadow: 0 0 16px rgba(240, 215, 159, 0.22);
 }
@@ -970,12 +1006,12 @@ h1 {
 .secondary-button:hover,
 .secondary-button:focus-visible {
     transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 16px 32px rgba(5, 7, 14, 0.3), 0 0 0 2px rgba(225, 206, 160, 0.86), 0 0 24px rgba(158, 172, 201, 0.24);
+    box-shadow: 0 16px 32px rgba(5, 7, 14, 0.32), 0 0 0 2px rgba(160, 213, 224, 0.82), 0 0 26px rgba(109, 186, 201, 0.24);
     background:
-        linear-gradient(135deg, #e7d099 0%, #a2b2cf 100%) border-box,
-        linear-gradient(135deg, rgba(30, 38, 58, 0.96), rgba(58, 34, 77, 0.94)) padding-box;
-    color: #fffaf0;
-    text-shadow: 0 0 14px rgba(225, 206, 160, 0.18);
+        linear-gradient(135deg, #b1d3eb 0%, #6fc3cd 100%) border-box,
+        linear-gradient(135deg, rgba(18, 28, 48, 0.98), rgba(34, 24, 55, 0.96)) padding-box;
+    color: #f7fcff;
+    text-shadow: 0 0 14px rgba(171, 224, 233, 0.18);
 }
 
 .site-footer {
@@ -1272,16 +1308,18 @@ h1 {
     padding-top: 1rem;
 }
 
-.oracle-spotlight-grid {
+.oracle-spotlight-grid,
+.oracle-spotlight-grid.framed-panel {
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.95fr);
     gap: 1.5rem;
     align-items: stretch;
     background:
-        radial-gradient(circle at top right, rgba(125, 135, 155, 0.18), transparent 32%),
-        linear-gradient(145deg, rgba(9, 11, 20, 0.96), rgba(20, 10, 34, 0.98));
-    border: 1px solid rgba(158, 166, 181, 0.28);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 24px 60px rgba(0, 0, 0, 0.34);
+        radial-gradient(circle at top right, rgba(88, 101, 128, 0.14), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(32, 44, 74, 0.2), transparent 32%),
+        linear-gradient(145deg, rgba(5, 8, 16, 0.985), rgba(12, 11, 26, 0.99) 52%, rgba(18, 10, 30, 0.98));
+    border: 1px solid rgba(100, 114, 141, 0.24);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 28px 68px rgba(0, 0, 0, 0.42);
 }
 
 .oracle-spotlight-main,
@@ -1428,9 +1466,9 @@ h1 {
 .oracle-kpi {
     padding: 1rem 1.1rem;
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(64, 224, 208, 0.18);
-    box-shadow: inset 0 1px 0 rgba(249, 242, 149, 0.08);
+    background: linear-gradient(145deg, rgba(10, 14, 24, 0.92), rgba(19, 14, 31, 0.88));
+    border: 1px solid rgba(93, 113, 150, 0.22);
+    box-shadow: inset 0 1px 0 rgba(249, 242, 149, 0.05);
 }
 
 .oracle-kpi strong {
@@ -1648,6 +1686,468 @@ h3 {
     border-radius: 999px;
 }
 
+.purpose-bridge {
+    padding-top: 0.4rem;
+}
+
+.purpose-bridge-panel {
+    background:
+        radial-gradient(circle at top right, rgba(214, 190, 137, 0.08), transparent 22%),
+        radial-gradient(circle at top left, rgba(176, 112, 255, 0.14), transparent 28%),
+        linear-gradient(145deg, rgba(10, 8, 19, 0.98), rgba(33, 17, 50, 0.95));
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.purpose-bridge-intro {
+    max-width: 40rem;
+    margin-bottom: 1.3rem;
+}
+
+.purpose-bridge-intro h2 {
+    line-height: 1.2;
+}
+
+.purpose-bridge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.purpose-card {
+    padding: 1.2rem 1.15rem;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(214, 190, 137, 0.14);
+    background: linear-gradient(145deg, rgba(22, 12, 39, 0.92), rgba(12, 8, 24, 0.92));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.purpose-card p {
+    margin: 0;
+    color: rgba(236, 228, 218, 0.84);
+    line-height: 1.88;
+}
+
+.purpose-card-pain {
+    border-color: rgba(172, 183, 207, 0.18);
+}
+
+.purpose-card-light {
+    border-color: rgba(214, 190, 137, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 0 20px rgba(214, 190, 137, 0.06);
+}
+
+.purpose-label {
+    display: inline-flex;
+    margin-bottom: 0.85rem;
+    padding: 0.36rem 0.68rem;
+    border-radius: 999px;
+    background: rgba(214, 190, 137, 0.08);
+    border: 1px solid rgba(214, 190, 137, 0.18);
+    color: #f4dfb3;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.purpose-bridge-actions {
+    margin-top: 1.2rem;
+}
+
+.love-bridge {
+    padding-top: 0.55rem;
+    padding-bottom: 1rem;
+}
+
+.love-bridge-panel {
+    padding: 2rem 1.9rem;
+    background:
+        radial-gradient(circle at top left, rgba(255, 223, 232, 0.08), transparent 24%),
+        radial-gradient(circle at 86% 18%, rgba(255, 189, 208, 0.14), transparent 18%),
+        linear-gradient(145deg, rgba(22, 7, 15, 0.985), rgba(58, 16, 31, 0.97) 55%, rgba(17, 7, 11, 0.99));
+    box-shadow: 0 28px 72px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.love-bridge-intro {
+    max-width: 43rem;
+    margin: 0 auto 1.6rem;
+    text-align: center;
+}
+
+.love-bridge-intro h2 {
+    line-height: 1.22;
+}
+
+.love-bridge-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(180px, 0.72fr);
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.love-bridge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.love-bridge-card {
+    padding: 1.35rem 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 219, 231, 0.16);
+    background: linear-gradient(145deg, rgba(39, 12, 24, 0.9), rgba(17, 7, 12, 0.92));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.love-bridge-label {
+    display: inline-flex;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(255, 228, 236, 0.08);
+    border: 1px solid rgba(255, 218, 230, 0.18);
+    color: #ffd6e2;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.love-bridge-card p {
+    margin: 0;
+    color: rgba(249, 232, 238, 0.86);
+    line-height: 1.92;
+}
+
+.love-bridge-whisper {
+    font-size: 0.96rem;
+    font-style: italic;
+    color: rgba(247, 223, 232, 0.76);
+}
+
+.love-bridge-pain {
+    border-color: rgba(255, 213, 225, 0.14);
+}
+
+.love-bridge-light {
+    border-color: rgba(236, 190, 154, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 0 24px rgba(220, 138, 158, 0.08);
+}
+
+.love-bridge-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 0;
+    min-height: 100%;
+    padding: 1.35rem 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(236, 190, 154, 0.22);
+    background: linear-gradient(145deg, rgba(39, 12, 24, 0.9), rgba(17, 7, 12, 0.92));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 0 24px rgba(220, 138, 158, 0.08);
+}
+
+.love-bridge-visual-copy {
+    margin-top: 0;
+    text-align: left;
+    max-width: 100%;
+    width: 100%;
+}
+
+.love-bridge-visual-copy p {
+    margin: 0;
+    color: rgba(249, 232, 238, 0.86);
+    font-size: 1rem;
+    line-height: 1.92;
+}
+
+.love-bridge-actions {
+    margin-top: 1.35rem;
+    display: flex;
+    justify-content: center;
+}
+
+.soul-bridge {
+    padding-top: 0.55rem;
+    padding-bottom: 1.1rem;
+}
+
+.soul-bridge-panel {
+    padding: 2rem 1.9rem;
+    background:
+        radial-gradient(circle at top right, rgba(214, 190, 137, 0.08), transparent 20%),
+        radial-gradient(circle at top left, rgba(145, 98, 212, 0.14), transparent 26%),
+        linear-gradient(145deg, rgba(10, 8, 18, 0.985), rgba(26, 14, 43, 0.95));
+    box-shadow: 0 28px 68px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+}
+
+.soul-bridge-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 70% 18%, rgba(255, 224, 182, 0.06), transparent 18%);
+    pointer-events: none;
+}
+
+.soul-bridge-present .soul-bridge-panel {
+    background-image:
+        linear-gradient(180deg, rgba(6, 4, 12, 0.22), rgba(16, 8, 27, 0.9)),
+        url('../assets/luna-after-hero.jpg'),
+        radial-gradient(circle at top left, rgba(145, 98, 212, 0.14), transparent 26%),
+        linear-gradient(145deg, rgba(10, 8, 18, 0.985), rgba(26, 14, 43, 0.95));
+    background-size: auto, cover, auto, auto;
+    background-position: center, center 28%, center, center;
+}
+
+.soul-bridge-healing .soul-bridge-panel {
+    background-image:
+        linear-gradient(180deg, rgba(6, 4, 12, 0.26), rgba(16, 8, 27, 0.92)),
+        url('../assets/chica luna.jpg'),
+        radial-gradient(circle at top left, rgba(145, 98, 212, 0.14), transparent 26%),
+        linear-gradient(145deg, rgba(10, 8, 18, 0.985), rgba(26, 14, 43, 0.95));
+    background-size: auto, cover, auto, auto;
+    background-position: center, center 34%, center, center;
+}
+
+.soul-bridge-intro {
+    position: relative;
+    z-index: 1;
+    max-width: 42rem;
+    margin: 0 auto 1.8rem;
+    text-align: center;
+}
+
+.soul-bridge-intro h2 {
+    line-height: 1.24;
+}
+
+.soul-bridge-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+    margin-bottom: 1.35rem;
+}
+
+.soul-bridge-card {
+    min-height: 100%;
+    padding: 1.45rem 1.35rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(214, 190, 137, 0.14);
+    background: linear-gradient(145deg, rgba(19, 12, 31, 0.9), rgba(9, 7, 18, 0.9));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.soul-bridge-label {
+    display: inline-flex;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(214, 190, 137, 0.08);
+    border: 1px solid rgba(214, 190, 137, 0.18);
+    color: #f4dfb3;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.soul-bridge-card p {
+    margin: 0;
+    color: rgba(236, 228, 218, 0.85);
+    line-height: 1.95;
+}
+
+.soul-bridge-whisper {
+    font-size: 0.96rem;
+    font-style: italic;
+    color: rgba(236, 228, 218, 0.74);
+    max-width: 31rem;
+}
+
+.soul-bridge-pain {
+    border-color: rgba(166, 177, 201, 0.16);
+}
+
+.soul-bridge-light {
+    border-color: rgba(214, 190, 137, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 0 20px rgba(214, 190, 137, 0.05);
+}
+
+.soul-bridge-actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.ritual-bridge {
+    padding-top: 0.3rem;
+    padding-bottom: 0.85rem;
+}
+
+.ritual-bridge-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1.9rem;
+    background:
+        linear-gradient(180deg, rgba(8, 6, 14, 0.28), rgba(8, 6, 14, 0.9)),
+        url('../assets/luna-after-hero.jpg'),
+        radial-gradient(circle at 14% 20%, rgba(214, 190, 137, 0.12), transparent 18%),
+        linear-gradient(145deg, rgba(11, 8, 19, 0.985), rgba(27, 18, 16, 0.96));
+    background-size: auto, cover, auto, auto;
+    background-position: center, center 68%, center, center;
+    box-shadow: 0 28px 72px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.ritual-bridge-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 18% 28%, rgba(238, 227, 198, 0.08), transparent 16%),
+        radial-gradient(circle at 82% 74%, rgba(255, 255, 255, 0.05), transparent 14%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent 34%);
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.ritual-bridge-intro,
+.ritual-bridge-grid,
+.ritual-bridge-actions {
+    position: relative;
+    z-index: 1;
+}
+
+.ritual-bridge-intro {
+    max-width: 42rem;
+    margin: 0 auto 1.55rem;
+    text-align: center;
+}
+
+.ritual-bridge-intro h2 {
+    line-height: 1.23;
+}
+
+.ritual-bridge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.ritual-bridge-card {
+    padding: 1.35rem 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(214, 190, 137, 0.14);
+    background: linear-gradient(145deg, rgba(20, 13, 25, 0.9), rgba(11, 8, 18, 0.92));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.ritual-bridge-label {
+    display: inline-flex;
+    margin-bottom: 0.9rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(214, 190, 137, 0.08);
+    border: 1px solid rgba(214, 190, 137, 0.18);
+    color: #f4dfb3;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.ritual-bridge-card p {
+    margin: 0;
+    color: rgba(236, 228, 218, 0.86);
+    line-height: 1.92;
+}
+
+.ritual-bridge-whisper {
+    font-size: 0.96rem;
+    font-style: italic;
+    color: rgba(236, 228, 218, 0.74);
+}
+
+.ritual-bridge-pain {
+    border-color: rgba(172, 183, 207, 0.16);
+}
+
+.ritual-bridge-light {
+    border-color: rgba(214, 190, 137, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 0 20px rgba(214, 190, 137, 0.05);
+}
+
+.ritual-bridge-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.35rem;
+}
+
+.ritual-pulse-button {
+    animation: ritualPulse 2.8s ease-in-out infinite;
+    box-shadow: 0 0 0 0 rgba(214, 190, 137, 0.4);
+}
+
+@keyframes ritualPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(214, 190, 137, 0.36), 0 0 0 rgba(214, 190, 137, 0);
+        border-color: rgba(214, 190, 137, 0.68);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(214, 190, 137, 0), 0 0 24px rgba(214, 190, 137, 0.18);
+        border-color: rgba(232, 210, 164, 0.92);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(214, 190, 137, 0), 0 0 0 rgba(214, 190, 137, 0);
+        border-color: rgba(214, 190, 137, 0.68);
+    }
+}
+
+.final-bridge {
+    padding-top: 0.2rem;
+    padding-bottom: 0.9rem;
+}
+
+.final-bridge-panel {
+    text-align: center;
+    padding: 2rem 1.8rem;
+    background:
+        radial-gradient(circle at top center, rgba(214, 190, 137, 0.08), transparent 24%),
+        radial-gradient(circle at 18% 22%, rgba(145, 98, 212, 0.12), transparent 20%),
+        linear-gradient(145deg, rgba(11, 8, 19, 0.985), rgba(24, 13, 39, 0.96));
+    box-shadow: 0 24px 58px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.final-bridge-panel h2 {
+    max-width: 41rem;
+    margin: 0 auto 1rem;
+    line-height: 1.25;
+}
+
+.final-bridge-whisper {
+    max-width: 39rem;
+    margin: 0 auto 1rem;
+    font-size: 0.98rem;
+    font-style: italic;
+    color: rgba(236, 228, 218, 0.74);
+    line-height: 1.9;
+}
+
+.final-bridge-copy {
+    max-width: 34rem;
+    margin: 0 auto;
+    color: rgba(236, 228, 218, 0.84);
+    line-height: 1.88;
+}
+
+.final-bridge-actions {
+    margin-top: 1.3rem;
+    display: flex;
+    justify-content: center;
+}
+
 #rituales {
     position: relative;
     overflow: hidden;
@@ -1747,6 +2247,24 @@ h3 {
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28), 0 0 22px rgba(160, 32, 240, 0.16);
 }
 
+.ritual-card-primary {
+    background:
+        radial-gradient(circle at 84% 16%, rgba(198, 218, 255, 0.16), transparent 18%),
+        radial-gradient(circle at 14% 22%, rgba(122, 157, 232, 0.14), transparent 22%),
+        linear-gradient(145deg, rgba(8, 15, 32, 0.96), rgba(17, 18, 42, 0.94) 55%, rgba(24, 12, 48, 0.95));
+    border: 1px solid rgba(157, 176, 214, 0.24);
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.3), 0 0 24px rgba(123, 157, 221, 0.16);
+}
+
+.ritual-card-secondary {
+    background:
+        radial-gradient(circle at 82% 18%, rgba(231, 190, 122, 0.16), transparent 18%),
+        radial-gradient(circle at 18% 80%, rgba(118, 84, 44, 0.18), transparent 24%),
+        linear-gradient(145deg, rgba(26, 15, 8, 0.96), rgba(38, 24, 14, 0.95) 54%, rgba(20, 21, 14, 0.94));
+    border: 1px solid rgba(198, 160, 102, 0.24);
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.3), 0 0 24px rgba(201, 153, 85, 0.14);
+}
+
 .ritual-card::before {
     content: "";
     position: absolute;
@@ -1757,6 +2275,14 @@ h3 {
     background: radial-gradient(circle, rgba(220, 162, 255, 0.28), transparent 68%);
     filter: blur(8px);
     pointer-events: none;
+}
+
+.ritual-card-primary::before {
+    background: radial-gradient(circle, rgba(185, 204, 255, 0.24), transparent 68%);
+}
+
+.ritual-card-secondary::before {
+    background: radial-gradient(circle, rgba(218, 176, 108, 0.2), transparent 68%);
 }
 
 .ritual-card-primary::after,
@@ -1773,6 +2299,18 @@ h3 {
     box-shadow: 0 0 80px rgba(160, 32, 240, 0.3);
     opacity: 0.72;
     pointer-events: none;
+}
+
+.ritual-card-primary::after {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(244, 247, 255, 0.8) 0, rgba(179, 197, 242, 0.42) 34%, rgba(90, 116, 186, 0.18) 62%, transparent 74%);
+    box-shadow: 0 0 84px rgba(118, 149, 233, 0.22);
+}
+
+.ritual-card-secondary::after {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255, 234, 200, 0.74) 0, rgba(214, 170, 106, 0.42) 36%, rgba(120, 88, 42, 0.18) 64%, transparent 74%);
+    box-shadow: 0 0 84px rgba(197, 144, 66, 0.2);
 }
 
 .ritual-card-header,
@@ -1813,6 +2351,12 @@ h3 {
     box-shadow: inset 0 0 28px rgba(160, 32, 240, 0.08);
 }
 
+.ritual-card-primary .ritual-point {
+    background: linear-gradient(145deg, rgba(14, 21, 42, 0.86), rgba(19, 17, 39, 0.82));
+    border-color: rgba(160, 179, 214, 0.18);
+    box-shadow: inset 0 0 28px rgba(111, 137, 212, 0.08);
+}
+
 .ritual-point strong {
     display: block;
     margin-bottom: 0.35rem;
@@ -1833,6 +2377,11 @@ h3 {
     border: 1px solid rgba(213, 175, 55, 0.18);
 }
 
+.ritual-card-secondary .ritual-step {
+    background: linear-gradient(145deg, rgba(44, 28, 16, 0.84), rgba(25, 24, 17, 0.8));
+    border-color: rgba(201, 159, 95, 0.2);
+}
+
 .step-index {
     display: inline-flex;
     align-items: center;
@@ -1845,6 +2394,11 @@ h3 {
     font-family: "Cinzel", serif;
     background: linear-gradient(45deg, rgba(160, 32, 240, 0.9), rgba(213, 175, 55, 0.8));
     box-shadow: 0 0 18px rgba(160, 32, 240, 0.35);
+}
+
+.ritual-card-secondary .step-index {
+    background: linear-gradient(45deg, rgba(124, 86, 41, 0.95), rgba(227, 192, 123, 0.88));
+    box-shadow: 0 0 18px rgba(205, 154, 77, 0.28);
 }
 
 .ritual-closing {
@@ -2334,6 +2888,14 @@ body.js-ready .reveal.is-visible {
         min-height: 14.2rem;
     }
 
+    .purpose-bridge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .soul-bridge-grid {
+        grid-template-columns: 1fr;
+    }
+
     .services-carousel-shell {
         grid-template-columns: 1fr;
     }
@@ -2395,6 +2957,44 @@ body.js-ready .reveal.is-visible {
 
     .services-story {
         padding: 1rem;
+    }
+
+    .soul-bridge-panel {
+        padding: 1.35rem 1.1rem;
+    }
+
+    .love-bridge-panel,
+    .ritual-bridge-panel,
+    .final-bridge-panel {
+        padding: 1.45rem 1.1rem;
+    }
+
+    .love-bridge-layout,
+    .love-bridge-grid,
+    .ritual-bridge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .love-bridge-visual {
+        min-height: auto;
+    }
+
+    .soul-bridge-intro {
+        margin-bottom: 1.35rem;
+    }
+
+    .love-bridge-card,
+    .soul-bridge-card,
+    .ritual-bridge-card {
+        padding: 1.15rem 1rem;
+    }
+
+    .love-bridge-whisper,
+    .soul-bridge-whisper,
+    .ritual-bridge-whisper,
+    .final-bridge-whisper {
+        font-size: 0.92rem;
+        line-height: 1.85;
     }
 
     .services-story-stage {
@@ -2503,8 +3103,18 @@ body.js-ready .reveal.is-visible {
     .floating-assistant {
         right: 0.75rem;
         bottom: 0.85rem;
-        padding: 0.74rem 0.9rem 0.74rem 0.74rem;
-        max-width: min(16rem, calc(100% - 5.8rem));
+        min-height: 2.95rem;
+        gap: 0.5rem;
+        padding: 0.62rem 0.78rem 0.62rem 0.62rem;
+        max-width: min(11.2rem, calc(100% - 6.15rem));
+        font-size: 0.83rem;
+        box-shadow: 0 14px 26px rgba(5, 7, 14, 0.28), 0 0 14px rgba(214, 190, 137, 0.14);
+    }
+
+    .floating-assistant-badge {
+        width: 1.55rem;
+        height: 1.55rem;
+        font-size: 0.68rem;
     }
 
     .floating-socials {

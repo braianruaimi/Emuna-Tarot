@@ -150,9 +150,10 @@
 			min-height: 42px;
 			padding: 0.7rem 1rem;
 			border-radius: 999px;
-			background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(160, 32, 240, 0.14));
-			border: 1px solid rgba(212, 175, 55, 0.34);
-			color: var(--text-main);
+			background: linear-gradient(135deg, rgba(18, 27, 46, 0.96), rgba(35, 22, 57, 0.94));
+			border: 1px solid rgba(239, 208, 143, 0.54);
+			color: #fff7e8;
+			box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), 0 0 18px rgba(212, 175, 55, 0.14);
 		}
 		}
 
@@ -226,6 +227,11 @@
 			gap: 18px;
 		}
 
+		.controls-intro {
+			display: grid;
+			gap: 0.9rem;
+		}
+
 		.mode-switch {
 			display: grid;
 			grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -258,30 +264,31 @@
 		}
 
 		.mode-button {
-			background: linear-gradient(135deg, rgba(24, 31, 50, 0.9), rgba(47, 28, 65, 0.88));
-			border-color: rgba(171, 182, 205, 0.28);
+			background: linear-gradient(135deg, rgba(14, 21, 37, 0.94), rgba(29, 20, 47, 0.92));
+			border-color: rgba(125, 156, 198, 0.32);
 			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 24px rgba(0, 0, 0, 0.16);
 		}
 
 		.mode-button.is-active {
-			background: linear-gradient(135deg, rgba(30, 43, 70, 0.98), rgba(71, 40, 99, 0.98));
-			border-color: rgba(226, 201, 144, 0.76);
-			box-shadow: 0 0 0 1px rgba(226, 201, 144, 0.12), 0 0 24px rgba(226, 201, 144, 0.2);
+			background: linear-gradient(135deg, rgba(24, 36, 61, 0.99), rgba(58, 34, 82, 0.98));
+			border-color: rgba(235, 204, 135, 0.82);
+			box-shadow: 0 0 0 1px rgba(226, 201, 144, 0.14), 0 0 24px rgba(226, 201, 144, 0.22);
 		}
 
 		.action-button {
-			background: linear-gradient(135deg, #1b2844 0%, #41255d 100%);
-			border-color: rgba(219, 192, 122, 0.72);
-			box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 24px rgba(219, 192, 122, 0.16);
+			background: linear-gradient(135deg, #1a2640 0%, #2d1b44 100%);
+			border-color: rgba(240, 207, 135, 0.78);
+			box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 24px rgba(219, 168, 88, 0.18);
 			font-weight: 700;
 			letter-spacing: 0.04em;
-			color: #fff6dc;
+			color: #fff8ea;
 		}
 
 		.ghost-button,
 		.modal-close {
-			background: linear-gradient(135deg, rgba(26, 33, 52, 0.76), rgba(43, 26, 61, 0.7));
-			border-color: rgba(172, 183, 207, 0.24);
+			background: linear-gradient(135deg, rgba(12, 19, 35, 0.9), rgba(24, 19, 42, 0.84));
+			border-color: rgba(128, 175, 196, 0.32);
+			color: #edf8ff;
 		}
 
 		.mode-button:hover,
@@ -308,6 +315,119 @@
 		.status {
 			min-height: 1.7em;
 			font-style: italic;
+		}
+
+		.reading-console {
+			display: grid;
+			grid-template-columns: minmax(0, 1.08fr) auto minmax(280px, 0.95fr);
+			gap: 18px;
+			align-items: center;
+			padding: 20px 22px;
+			margin-bottom: 18px;
+			border-radius: 24px;
+			background:
+				radial-gradient(circle at top left, rgba(168, 197, 233, 0.08), transparent 22%),
+				radial-gradient(circle at bottom right, rgba(224, 190, 129, 0.08), transparent 20%),
+				linear-gradient(145deg, rgba(14, 22, 39, 0.94), rgba(26, 17, 43, 0.92));
+			border: 1px solid rgba(160, 185, 218, 0.22);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 38px rgba(0, 0, 0, 0.22);
+		}
+
+		.reading-console-copy {
+			display: grid;
+			gap: 0.65rem;
+		}
+
+		.reading-console-step {
+			margin: 0;
+			font-size: 0.76rem;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: var(--gold-soft);
+		}
+
+		.reading-console-title {
+			margin: 0;
+			font-family: "Cinzel", serif;
+			font-size: clamp(1rem, 1.4vw, 1.18rem);
+			line-height: 1.3;
+			color: var(--text-main);
+		}
+
+		.reading-console .status {
+			margin: 0;
+			min-height: 0;
+			font-size: 0.98rem;
+			color: rgba(229, 220, 245, 0.84);
+		}
+
+		.reading-console-progress {
+			display: grid;
+			justify-items: center;
+			gap: 0.45rem;
+			padding: 0.95rem 1rem;
+			border-radius: 20px;
+			background: linear-gradient(145deg, rgba(10, 17, 31, 0.82), rgba(19, 15, 34, 0.82));
+			border: 1px solid rgba(154, 179, 216, 0.18);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		}
+
+		.reading-console-progress-label {
+			margin: 0;
+			font-size: 0.68rem;
+			text-transform: uppercase;
+			letter-spacing: 0.18em;
+			color: rgba(176, 205, 232, 0.82);
+		}
+
+		.reading-console .selected-hint {
+			margin: 0;
+			font-size: 1rem;
+			text-align: center;
+		}
+
+		.reading-console .selected-hint strong {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 5.2rem;
+			padding: 0.38rem 0.72rem;
+			border-radius: 999px;
+			background: rgba(214, 190, 137, 0.12);
+			border: 1px solid rgba(214, 190, 137, 0.28);
+		}
+
+		.reading-console-actions {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 12px;
+		}
+
+		.reading-console-actions .action-button,
+		.reading-console-actions .ghost-button {
+			width: 100%;
+			min-height: 54px;
+		}
+
+		.reading-console-actions .ghost-button:disabled {
+			opacity: 0.52;
+			filter: saturate(0.72);
+			cursor: not-allowed;
+		}
+
+		.reading-console-actions .action-button {
+			order: 2;
+		}
+
+		.reading-console-actions .ghost-button {
+			order: 1;
+		}
+
+		.reading-console-actions-note {
+			margin: -0.1rem 0 0;
+			font-size: 0.82rem;
+			line-height: 1.65;
+			color: rgba(198, 211, 230, 0.72);
 		}
 
 		.board-shell {
@@ -340,6 +460,35 @@
 			justify-content: center;
 			overflow: hidden;
 			padding: 26px 12px 12px;
+			border-radius: 26px;
+			background:
+				radial-gradient(circle at 50% 82%, rgba(212, 175, 55, 0.08), transparent 20%),
+				radial-gradient(circle at 50% 18%, rgba(130, 176, 219, 0.08), transparent 18%),
+				linear-gradient(180deg, rgba(8, 14, 25, 0.38), rgba(8, 11, 20, 0.12));
+		}
+
+		.spread-board::before {
+			content: "";
+			position: absolute;
+			left: 50%;
+			bottom: 1.6rem;
+			width: min(92%, 52rem);
+			height: 15rem;
+			transform: translateX(-50%);
+			border-radius: 50%;
+			border: 1px solid rgba(214, 190, 137, 0.12);
+			box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.03) inset;
+			pointer-events: none;
+		}
+
+		.spread-board::after {
+			content: "";
+			position: absolute;
+			inset: auto 18% 0;
+			height: 42%;
+			background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(7, 10, 18, 0.42));
+			filter: blur(12px);
+			pointer-events: none;
 		}
 
 		.flip-card {
@@ -354,8 +503,18 @@
 			will-change: transform;
 		}
 
+		.flip-card:focus-visible {
+			outline: none;
+			filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.4));
+		}
+
 		.flip-card.is-visible {
 			opacity: 1;
+		}
+
+		.flip-card:hover .flip-card-inner,
+		.flip-card:focus-visible .flip-card-inner {
+			box-shadow: 0 18px 36px rgba(0, 0, 0, 0.42), 0 0 24px rgba(124, 170, 214, 0.12);
 		}
 
 		.flip-card-inner {
@@ -373,7 +532,7 @@
 		}
 
 		.flip-card.is-selected {
-			filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.5));
+			filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.58));
 			z-index: 35;
 		}
 
@@ -409,7 +568,9 @@
 		}
 
 		.flip-card-back {
-			background: var(--card-back);
+			background:
+				radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.08), transparent 18%),
+				var(--card-back);
 		}
 
 		.flip-card-back::before,
@@ -442,6 +603,23 @@
 			color: rgba(255, 248, 216, 0.9);
 			font-size: 2.8rem;
 			text-shadow: 0 0 18px rgba(212, 175, 55, 0.24);
+		}
+
+		.card-back-invite {
+			position: absolute;
+			left: 50%;
+			bottom: 0.9rem;
+			transform: translateX(-50%);
+			padding: 0.42rem 0.72rem;
+			border-radius: 999px;
+			background: rgba(9, 12, 22, 0.78);
+			border: 1px solid rgba(212, 175, 55, 0.24);
+			color: rgba(255, 244, 220, 0.9);
+			font-size: 0.64rem;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+			white-space: nowrap;
+			box-shadow: 0 0 18px rgba(212, 175, 55, 0.08);
 		}
 
 		.flip-card-front {
@@ -688,6 +866,14 @@
 				min-height: 420px;
 			}
 
+			.reading-console {
+				grid-template-columns: 1fr;
+			}
+
+			.reading-console-progress {
+				justify-items: stretch;
+			}
+
 			.flip-card {
 				width: 122px;
 				height: 208px;
@@ -723,6 +909,14 @@
 
 			.board-header {
 				flex-direction: column;
+			}
+
+			.reading-console {
+				padding: 16px;
+			}
+
+			.reading-console-actions {
+				grid-template-columns: 1fr;
 			}
 
 			.mode-switch {
@@ -781,7 +975,7 @@
 			</article>
 
 			<aside class="glass-panel controls" aria-label="Controles de lectura">
-				<div>
+				<div class="controls-intro">
 					<p class="eyebrow">Tu lectura</p>
 					<div class="mode-switch" role="tablist" aria-label="Modo de tirada">
 						<button class="btn-emuna mode-button is-active" id="modeYesNo" type="button" data-mode="yesno" aria-pressed="true">Sí / No</button>
@@ -789,9 +983,7 @@
 					</div>
 				</div>
 				<p class="mode-meta" id="modeMeta">En Sí o No elegís una sola carta y recibís una respuesta concreta para entender qué energía acompaña hoy tu pregunta.</p>
-				<button class="btn-emuna action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
-				<button class="btn-emuna ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
-				<p class="status" id="statusText">Elegí la carta que más te llama y dejá que la lectura acomode el mensaje.</p>
+				<p class="mode-meta">Elegí el tipo de consulta y seguí el flujo dentro del abanico para mezclar, seleccionar y abrir tu mensaje.</p>
 			</aside>
 		</section>
 
@@ -801,7 +993,23 @@
 					<p class="eyebrow">Portal de lectura</p>
 					<h2>Abanico de arcanos para tu consulta</h2>
 				</div>
-				<p class="selected-hint" id="selectionHint">Seleccionadas: <strong>0 / 1</strong></p>
+			</div>
+
+			<div class="reading-console" aria-label="Acciones de lectura">
+				<div class="reading-console-copy">
+					<p class="reading-console-step">1. Elegí tus cartas. 2. Revelá el mensaje.</p>
+					<h3 class="reading-console-title">Tu consulta se abre dentro del abanico, paso a paso y sin salir del flujo.</h3>
+					<p class="status" id="statusText">Elegí la carta que más te llama y dejá que la lectura acomode el mensaje.</p>
+				</div>
+				<div class="reading-console-progress">
+					<p class="reading-console-progress-label">Progreso</p>
+					<p class="selected-hint" id="selectionHint">Seleccionadas: <strong>0 / 1</strong></p>
+				</div>
+				<div class="reading-console-actions">
+					<button class="btn-emuna ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
+					<button class="btn-emuna action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
+					<p class="reading-console-actions-note">Primero elegí tu carta o tu tirada completa. Cuando la selección esté lista, el mensaje se habilita.</p>
+				</div>
 			</div>
 
 			<div class="spread-board" id="tablero" aria-live="polite"></div>
@@ -1157,6 +1365,7 @@
 				<div class="flip-card-inner">
 					<div class="flip-card-back">
 						<div class="card-back-emblem">✦</div>
+						<div class="card-back-invite">Tocá para elegir</div>
 					</div>
 					<div class="flip-card-front">
 						<div>
