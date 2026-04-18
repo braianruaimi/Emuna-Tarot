@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#05000a">
+    <meta name="description" content="Emuna Carta Astral. Solicita tu mapa natal y descubre propósito, emociones y camino evolutivo desde tu cielo de nacimiento.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../assets/icon-192.svg" type="image/svg+xml">
+    <title>Emuna | Carta Astral</title>
+    <style>
+        :root {
+            --bg-main: radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.08), transparent 14%), radial-gradient(circle at 18% 22%, rgba(73, 117, 209, 0.16), transparent 22%), radial-gradient(circle at 82% 18%, rgba(117, 143, 206, 0.12), transparent 18%), linear-gradient(180deg, #05000a 0%, #081023 40%, #140a28 100%);
+            --panel-bg: linear-gradient(180deg, rgba(10, 15, 30, 0.84), rgba(10, 8, 22, 0.92));
+            --panel-border: rgba(212, 175, 55, 0.16);
+            --panel-shadow: 0 24px 70px rgba(0, 0, 0, 0.42), 0 0 40px rgba(73, 117, 209, 0.12);
+            --text-main: #f4ebff;
+            --text-soft: #c5cfea;
+            --gold-soft: #f2dfab;
+            --gold-electric: #d4af37;
+            --blue-soft: #a7c2ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Manrope", sans-serif;
+            color: var(--text-main);
+            background: var(--bg-main);
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        body::before {
+            background:
+                radial-gradient(circle at 22% 20%, rgba(103, 140, 222, 0.1), transparent 20%),
+                radial-gradient(circle at 80% 18%, rgba(212, 175, 55, 0.1), transparent 16%),
+                radial-gradient(circle at 50% 65%, rgba(98, 126, 191, 0.14), transparent 26%);
+        }
+
+        body::after {
+            background-image:
+                radial-gradient(circle at 24% 12%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+                radial-gradient(circle at 72% 20%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+                radial-gradient(circle at 58% 70%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+            background-size: 220px 220px, 280px 280px, 320px 320px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .page {
+            width: min(1220px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 18px 0 48px;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            width: min(1220px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 18px 0 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            backdrop-filter: blur(18px);
+        }
+
+        .site-header::before {
+            content: "";
+            position: absolute;
+            inset: 8px 0 0;
+            border-radius: 999px;
+            background: rgba(7, 10, 22, 0.72);
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            z-index: -1;
+        }
+
+        .brand,
+        h1,
+        h2,
+        h3 {
+            font-family: "Cinzel", serif;
+        }
+
+        .brand {
+            padding-left: 18px;
+            font-size: 1.2rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-right: 10px;
+        }
+
+        .site-nav a {
+            color: var(--text-soft);
+            text-decoration: none;
+            transition: color 0.18s ease, text-shadow 0.18s ease;
+        }
+
+        .site-nav a:hover,
+        .site-nav a:focus-visible {
+            color: var(--gold-soft);
+            text-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+        }
+
+        .site-nav a[aria-current="page"] {
+            color: var(--gold-soft);
+            text-shadow: 0 0 14px rgba(212, 175, 55, 0.28);
+        }
+
+        .site-nav .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(17, 26, 46, 0.96), rgba(33, 20, 56, 0.94));
+            border: 1px solid rgba(239, 208, 143, 0.54);
+            color: #fff7e8;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), 0 0 18px rgba(212, 175, 55, 0.14);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(280px, 1.08fr) minmax(320px, 0.92fr);
+            gap: 28px;
+            align-items: stretch;
+            margin-bottom: 28px;
+        }
+
+        .glass-panel {
+            position: relative;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 30px;
+            box-shadow: var(--panel-shadow);
+            backdrop-filter: blur(18px);
+        }
+
+        .hero-copy,
+        .astral-shell,
+        .benefits-shell,
+        .astral-form-shell {
+            padding: 30px;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.24em;
+            color: var(--blue-soft);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 4vw, 4.2rem);
+            line-height: 0.98;
+            color: var(--gold-soft);
+            text-wrap: balance;
+        }
+
+        .lead,
+        .astral-body,
+        .form-intro,
+        .benefit-card p,
+        .astro-pillars p,
+        .input-note,
+        .field-note {
+            color: var(--text-soft);
+            line-height: 1.82;
+        }
+
+        .lead {
+            margin: 18px 0 0;
+            font-size: 1.05rem;
+            max-width: 44ch;
+        }
+
+        .astral-pain {
+            margin-top: 1.2rem;
+            color: #efe7d5;
+        }
+
+        .astro-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .astro-pillars article {
+            padding: 14px 14px 16px;
+            border-radius: 22px;
+            background: linear-gradient(145deg, rgba(13, 18, 34, 0.88), rgba(19, 14, 32, 0.82));
+            border: 1px solid rgba(148, 170, 214, 0.16);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .astro-pillars strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-soft);
+            font-family: "Cinzel", serif;
+        }
+
+        .astral-shell {
+            display: grid;
+            gap: 24px;
+        }
+
+        .astral-wheel-panel {
+            min-height: 360px;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            gap: 18px;
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(72, 105, 176, 0.14), transparent 58%),
+                linear-gradient(180deg, rgba(8, 13, 25, 0.6), rgba(8, 10, 20, 0.18));
+        }
+
+        .astral-wheel {
+            position: relative;
+            width: min(100%, 21rem);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 1px solid rgba(176, 193, 229, 0.22);
+            background:
+                radial-gradient(circle at center, rgba(22, 31, 55, 0.9) 0 22%, rgba(8, 12, 24, 0.82) 22% 58%, rgba(8, 12, 24, 0.28) 58% 60%, transparent 60%),
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.12), transparent 68%);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03), 0 0 32px rgba(82, 117, 201, 0.14);
+        }
+
+        .astral-wheel::before,
+        .astral-wheel::after {
+            content: "";
+            position: absolute;
+            inset: 10%;
+            border-radius: 50%;
+            border: 1px solid rgba(164, 182, 217, 0.16);
+        }
+
+        .astral-wheel::after {
+            inset: 27%;
+            border-color: rgba(214, 190, 137, 0.18);
+        }
+
+        .astral-wheel-core {
+            position: absolute;
+            inset: 50% auto auto 50%;
+            transform: translate(-50%, -50%);
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            background: linear-gradient(145deg, rgba(13, 18, 35, 0.98), rgba(29, 18, 49, 0.96));
+            border: 1px solid rgba(214, 190, 137, 0.26);
+            color: #f7ecc8;
+            font-family: "Cinzel", serif;
+            font-size: 0.86rem;
+            letter-spacing: 0.06em;
+            line-height: 1.4;
+            box-shadow: 0 0 28px rgba(214, 190, 137, 0.12);
+        }
+
+        .astral-node {
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 5.8rem;
+            padding: 0.55rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(7, 11, 22, 0.9);
+            border: 1px solid rgba(176, 193, 229, 0.24);
+            color: #eef5ff;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(109, 144, 222, 0.08);
+            cursor: pointer;
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        }
+
+        .astral-node:hover,
+        .astral-node:focus-visible,
+        .astral-node.is-active {
+            transform: translateY(-2px);
+            border-color: rgba(240, 214, 154, 0.72);
+            background: rgba(20, 25, 42, 0.96);
+            box-shadow: 0 0 0 3px rgba(103, 140, 222, 0.12), 0 0 26px rgba(212, 175, 55, 0.16);
+            outline: none;
+        }
+
+        .astral-node-sol {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .astral-node-luna {
+            bottom: 20%;
+            left: 7%;
+        }
+
+        .astral-node-asc {
+            bottom: 20%;
+            right: 7%;
+        }
+
+        .astral-node-sol:hover,
+        .astral-node-sol:focus-visible,
+        .astral-node-sol.is-active {
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .astral-insight {
+            width: min(100%, 26rem);
+            padding: 1rem 1.05rem;
+            border-radius: 22px;
+            background: linear-gradient(145deg, rgba(10, 15, 30, 0.94), rgba(24, 17, 40, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 16px 34px rgba(0, 0, 0, 0.28);
+        }
+
+        .astral-insight-label {
+            margin: 0 0 0.45rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue-soft);
+        }
+
+        .astral-insight-title {
+            margin: 0;
+            color: var(--gold-soft);
+            font-size: 1.2rem;
+        }
+
+        .astral-insight-copy {
+            margin: 0.55rem 0 0;
+            color: var(--text-soft);
+            line-height: 1.75;
+        }
+
+        .astral-insight-hint {
+            margin: 0.7rem 0 0;
+            color: rgba(234, 240, 255, 0.64);
+            font-size: 0.82rem;
+            letter-spacing: 0.03em;
+        }
+
+        .benefits-shell {
+            display: grid;
+            gap: 14px;
+        }
+
+        .benefits-shell h2,
+        .astral-form-shell h2 {
+            margin: 0;
+            color: var(--gold-soft);
+        }
+
+        .benefit-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .benefit-card {
+            padding: 18px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(12, 18, 33, 0.92), rgba(19, 14, 31, 0.88));
+            border: 1px solid rgba(104, 132, 182, 0.18);
+        }
+
+        .benefit-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-soft);
+            font-family: "Cinzel", serif;
+        }
+
+        .astral-form-shell {
+            margin-top: 28px;
+        }
+
+        .form-intro {
+            margin: 14px 0 0;
+        }
+
+        .astral-form {
+            display: grid;
+            max-width: 540px;
+            margin-top: 26px;
+            gap: 16px;
+        }
+
+        .field-group {
+            display: grid;
+            gap: 8px;
+        }
+
+        .astral-form input {
+            width: 100%;
+            min-height: 3.2rem;
+            padding: 0.95rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #d4af37;
+            color: white;
+            border-radius: 14px;
+            outline: none;
+            transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+        }
+
+        .astral-form input::placeholder {
+            color: rgba(255, 253, 208, 0.5);
+        }
+
+        .astral-form input:focus {
+            border-color: rgba(164, 203, 255, 0.84);
+            box-shadow: 0 0 0 4px rgba(86, 130, 214, 0.14), 0 0 18px rgba(212, 175, 55, 0.12);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .field-note,
+        .input-note {
+            margin: 0;
+            font-size: 0.88rem;
+        }
+
+        .btn-emuna {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 3rem;
+            padding: 0.8rem 1.15rem;
+            border: 2.5px solid #fff;
+            border-radius: 999px;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            transition: background 0.3s, box-shadow 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+            color: #fffbe7;
+            background: linear-gradient(135deg, #120c1a 60%, #221a33 100%);
+            box-shadow: 0 0 8px 2px #fff, 0 0 24px 2px rgba(255, 255, 255, 0.53), 0 2px 18px rgba(0, 0, 0, 0.28);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.92), 0 0 2px rgba(255, 255, 255, 0.13);
+            text-decoration: none;
+        }
+
+        .btn-emuna:hover,
+        .btn-emuna:focus-visible {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 16px 4px #fff, 0 0 32px 4px rgba(255, 255, 255, 0.53), 0 4px 24px rgba(0, 0, 0, 0.38);
+            background: linear-gradient(135deg, #0a0711 60%, #18122b 100%);
+        }
+
+        .astral-feedback {
+            min-height: 1.5rem;
+            margin: 0.2rem 0 0;
+            color: var(--blue-soft);
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .astro-pillars {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .site-header {
+                width: min(100%, calc(100% - 20px));
+                padding-top: 12px;
+            }
+
+            .site-header::before {
+                inset: 6px 0 0;
+            }
+
+            .page {
+                width: min(100%, calc(100% - 20px));
+                padding-top: 18px;
+            }
+
+            .hero-copy,
+            .astral-shell,
+            .benefits-shell,
+            .astral-form-shell {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .site-header {
+                width: calc(100% - 12px);
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .site-header::before {
+                border-radius: 24px;
+            }
+
+            .brand {
+                padding-left: 14px;
+            }
+
+            .site-nav {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 0 12px 12px;
+            }
+
+            .page {
+                width: calc(100% - 12px);
+            }
+
+            .astral-wheel {
+                width: min(100%, 17rem);
+            }
+
+            .astral-node {
+                min-width: 5rem;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="../index.html#inicio">Emuna</a>
+        <nav class="site-nav" aria-label="Principal de carta astral">
+            <a href="../index.html#servicios">Servicios</a>
+            <a href="index.html" aria-current="page">Carta Astral</a>
+            <a href="../index.html#contacto">Contacto</a>
+            <a class="nav-cta" href="../index.html#contacto">Reservar sesión</a>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <article class="glass-panel hero-copy">
+                <p class="eyebrow">El mapa de tu destino</p>
+                <h1>Tu Carta Astral: El Código Sagrado de tu Nacimiento</h1>
+                <p class="lead">La Carta Astral es una fotografía del cielo en el instante exacto en que diste tu primer respiro. Es un contrato cósmico que revela tu propósito, tus sombras y tus dones más profundos.</p>
+                <p class="astral-pain">¿Alguna vez has sentido que repites ciclos sin entender por qué, o que guardas talentos que aún no te atreves a despertar? Caminar por la vida sin conocer tu mapa natal es como navegar un océano inmenso sin brújula.</p>
+                <div class="astro-pillars">
+                    <article>
+                        <strong>Sol</strong>
+                        <p>Tu identidad, la fuerza que te anima y el brillo que viniste a encarnar.</p>
+                    </article>
+                    <article>
+                        <strong>Luna</strong>
+                        <p>Tu mundo emocional, tus necesidades profundas y la raíz sensible de tus vínculos.</p>
+                    </article>
+                    <article>
+                        <strong>Ascendente</strong>
+                        <p>Tu camino de evolución, la forma en que abres tu destino y te muestras al mundo.</p>
+                    </article>
+                </div>
+            </article>
+
+            <aside class="glass-panel astral-shell" aria-label="Mapa astral visual y beneficios">
+                <div class="astral-wheel-panel">
+                    <div class="astral-wheel" role="group" aria-label="Mapa natal interactivo con Sol, Luna y Ascendente">
+                        <div class="astral-wheel-core">Mapa<br>Natal</div>
+                        <button class="astral-node astral-node-sol is-active" type="button" data-astral-key="sol" aria-pressed="true">Sol</button>
+                        <button class="astral-node astral-node-luna" type="button" data-astral-key="luna" aria-pressed="false">Luna</button>
+                        <button class="astral-node astral-node-asc" type="button" data-astral-key="ascendente" aria-pressed="false">Asc</button>
+                    </div>
+                    <div class="astral-insight" id="astralInsight" aria-live="polite">
+                        <p class="astral-insight-label">Lectura breve</p>
+                        <h3 class="astral-insight-title" id="astralInsightTitle">Sol</h3>
+                        <p class="astral-insight-copy" id="astralInsightCopy">Tu Sol habla de tu identidad esencial, la fuerza que te anima y la conciencia que viniste a desarrollar.</p>
+                        <p class="astral-insight-hint">Pasa por encima o toca Luna y Ascendente para ver otra clave.</p>
+                    </div>
+                </div>
+                <div class="benefits-shell">
+                    <h2>Beneficios de conocer tu mapa</h2>
+                    <div class="benefit-grid">
+                        <article class="benefit-card">
+                            <strong>Claridad de Propósito</strong>
+                            <p>Entiende para qué estás aquí y cuál es tu verdadera misión.</p>
+                        </article>
+                        <article class="benefit-card">
+                            <strong>Sanación Emocional</strong>
+                            <p>Descubre cómo procesas tus sentimientos y cómo mejorar tus vínculos.</p>
+                        </article>
+                        <article class="benefit-card">
+                            <strong>Gestión del Tiempo</strong>
+                            <p>Aprende a fluir con tus propios ciclos naturales en lugar de luchar contra ellos.</p>
+                        </article>
+                        <article class="benefit-card">
+                            <strong>Empoderamiento</strong>
+                            <p>Deja de culpar al destino y empieza a co-crear tu realidad con consciencia.</p>
+                        </article>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="glass-panel astral-form-shell seccion-astral">
+            <p class="eyebrow">Solicita tu mapa natal</p>
+            <h2>Solicita tu Mapa Natal</h2>
+            <p class="form-intro">Completa tus datos con precisión para que los astros revelen su mensaje. Integramos cada planeta para que deje de sentirse como fuerza externa y se convierta en aliado de tu evolución.</p>
+
+            <form id="astralForm" class="astral-form">
+                <div class="field-group">
+                    <input type="text" id="astralNombre" placeholder="Nombre y Apellido" required>
+                </div>
+
+                <div class="field-group">
+                    <input type="date" id="fechaNacimiento" required title="Fecha de Nacimiento">
+                </div>
+
+                <div class="field-group">
+                    <input type="text" id="lugarNacimiento" placeholder="Ciudad y País de Nacimiento" required>
+                    <p class="field-note">Sé lo más específico posible (Ciudad/Provincia).</p>
+                </div>
+
+                <div class="field-group">
+                    <input type="time" id="horaNacimiento" required title="Hora de Nacimiento">
+                    <p class="field-note">Si no la conoces exactamente, puedes buscarla en tu partida de nacimiento. La precisión es clave en astrología.</p>
+                </div>
+
+                <button type="submit" class="btn-emuna">Enviar al Oráculo</button>
+                <p class="astral-feedback" id="astralFeedback"></p>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const astralForm = document.getElementById('astralForm');
+        const astralFeedback = document.getElementById('astralFeedback');
+        const astralInsightTitle = document.getElementById('astralInsightTitle');
+        const astralInsightCopy = document.getElementById('astralInsightCopy');
+        const astralNodes = Array.from(document.querySelectorAll('[data-astral-key]'));
+
+        const astralMessages = {
+            sol: {
+                title: 'Sol',
+                copy: 'Tu Sol habla de tu identidad esencial, la fuerza que te anima y la conciencia que viniste a desarrollar.'
+            },
+            luna: {
+                title: 'Luna',
+                copy: 'Tu Luna muestra cómo sientes, qué necesitas para sentirte contenida y dónde se aloja tu memoria emocional.'
+            },
+            ascendente: {
+                title: 'Ascendente',
+                copy: 'Tu Ascendente revela cómo entras en la vida, qué camino de evolución se abre frente a ti y cómo te percibe el mundo.'
+            }
+        };
+
+        function setAstralInsight(key) {
+            const nextInsight = astralMessages[key];
+            if (!nextInsight) {
+                return;
+            }
+
+            astralInsightTitle.textContent = nextInsight.title;
+            astralInsightCopy.textContent = nextInsight.copy;
+
+            astralNodes.forEach((node) => {
+                const isActive = node.dataset.astralKey === key;
+                node.classList.toggle('is-active', isActive);
+                node.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        }
+
+        astralNodes.forEach((node) => {
+            const activateInsight = function () {
+                setAstralInsight(node.dataset.astralKey);
+            };
+
+            node.addEventListener('mouseenter', activateInsight);
+            node.addEventListener('focus', activateInsight);
+            node.addEventListener('click', activateInsight);
+        });
+
+        astralForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const telefono = '2215566392';
+            const nombre = document.getElementById('astralNombre').value.trim();
+            const fecha = document.getElementById('fechaNacimiento').value;
+            const lugar = document.getElementById('lugarNacimiento').value.trim();
+            const hora = document.getElementById('horaNacimiento').value;
+
+            const mensaje = `Hola Emuna! ✨ Deseo mi Carta Astral:\n*Nombre:* ${nombre}\n*Fecha:* ${fecha}\n*Lugar:* ${lugar}\n*Hora:* ${hora}`;
+            astralFeedback.textContent = 'Abriendo WhatsApp con tus datos astrales...';
+            window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+        });
+    </script>
+</body>
+</html>
