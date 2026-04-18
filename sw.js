@@ -1,15 +1,15 @@
-const CACHE_NAME = 'emuna-tarot-v6';
+const CACHE_NAME = 'emuna-tarot-v7';
 const APP_SHELL = [
-    '../',
-    '../index.html',
-    '../css/style.css',
-    'app.js',
-    '../manifest.json',
-    '../assets/img/chica-luna.jpg',
-    '../assets/img/descarga.jpg',
-    '../assets/img/luna-after-hero.jpg',
-    '../assets/icons/icon-192.svg',
-    '../assets/icons/icon-512.svg'
+    './',
+    'index.html',
+    'css/style.css',
+    'js/app.js',
+    'manifest.json',
+    'assets/chica luna.jpg',
+    'assets/descarga.jpg',
+    'assets/luna-after-hero.jpg',
+    'assets/icon-192.svg',
+    'assets/icon-512.svg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -51,7 +51,7 @@ self.addEventListener('fetch', (event) => {
                     caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
                     return networkResponse;
                 })
-                .catch(() => caches.match('index.html'));
+                .catch(() => caches.match('./') || caches.match('index.html'));
         })
     );
 });

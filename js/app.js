@@ -327,7 +327,7 @@ document.querySelectorAll('.site-nav a[href^="#"]').forEach(link => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
-            await navigator.serviceWorker.register('js/sw.js');
+            await navigator.serviceWorker.register('sw.js');
         } catch (error) {
             console.error('No se pudo registrar el service worker.', error);
         }
