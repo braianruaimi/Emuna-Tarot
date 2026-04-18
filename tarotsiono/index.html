@@ -239,8 +239,13 @@
 			appearance: none;
 			border: 1px solid transparent;
 			cursor: pointer;
-			transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background-color 0.24s ease;
+			transition: 0.3s;
 			font: inherit;
+		}
+
+		.btn-emuna {
+			font-weight: 700;
+			letter-spacing: 0.03em;
 		}
 
 		.mode-button,
@@ -253,28 +258,30 @@
 		}
 
 		.mode-button {
-			background: rgba(255, 255, 255, 0.05);
-			border-color: rgba(255, 255, 255, 0.08);
+			background: linear-gradient(135deg, rgba(24, 31, 50, 0.9), rgba(47, 28, 65, 0.88));
+			border-color: rgba(171, 182, 205, 0.28);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 24px rgba(0, 0, 0, 0.16);
 		}
 
 		.mode-button.is-active {
-			background: linear-gradient(135deg, rgba(212, 175, 55, 0.22), rgba(64, 224, 208, 0.14));
-			border-color: rgba(212, 175, 55, 0.48);
-			box-shadow: 0 0 26px rgba(212, 175, 55, 0.16);
+			background: linear-gradient(135deg, rgba(30, 43, 70, 0.98), rgba(71, 40, 99, 0.98));
+			border-color: rgba(226, 201, 144, 0.76);
+			box-shadow: 0 0 0 1px rgba(226, 201, 144, 0.12), 0 0 24px rgba(226, 201, 144, 0.2);
 		}
 
 		.action-button {
-			background: linear-gradient(135deg, rgba(212, 175, 55, 0.24), rgba(160, 32, 240, 0.2));
-			border-color: rgba(212, 175, 55, 0.5);
-			box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 24px rgba(212, 175, 55, 0.14);
+			background: linear-gradient(135deg, #1b2844 0%, #41255d 100%);
+			border-color: rgba(219, 192, 122, 0.72);
+			box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 24px rgba(219, 192, 122, 0.16);
 			font-weight: 700;
 			letter-spacing: 0.04em;
+			color: #fff6dc;
 		}
 
 		.ghost-button,
 		.modal-close {
-			background: rgba(255, 255, 255, 0.04);
-			border-color: rgba(255, 255, 255, 0.08);
+			background: linear-gradient(135deg, rgba(26, 33, 52, 0.76), rgba(43, 26, 61, 0.7));
+			border-color: rgba(172, 183, 207, 0.24);
 		}
 
 		.mode-button:hover,
@@ -286,6 +293,7 @@
 		.ghost-button:focus-visible,
 		.modal-close:focus-visible {
 			transform: translateY(-2px);
+			box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22), 0 0 0 2px rgba(226, 201, 144, 0.58);
 		}
 
 		.mode-meta,
@@ -776,13 +784,13 @@
 				<div>
 					<p class="eyebrow">Tu lectura</p>
 					<div class="mode-switch" role="tablist" aria-label="Modo de tirada">
-						<button class="mode-button is-active" id="modeYesNo" type="button" data-mode="yesno" aria-pressed="true">Sí / No</button>
-						<button class="mode-button" id="modeThree" type="button" data-mode="three" aria-pressed="false">3 Cartas</button>
+						<button class="btn-emuna mode-button is-active" id="modeYesNo" type="button" data-mode="yesno" aria-pressed="true">Sí / No</button>
+						<button class="btn-emuna mode-button" id="modeThree" type="button" data-mode="three" aria-pressed="false">3 Cartas</button>
 					</div>
 				</div>
 				<p class="mode-meta" id="modeMeta">En Sí o No elegís una sola carta y recibís una respuesta concreta para entender qué energía acompaña hoy tu pregunta.</p>
-				<button class="action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
-				<button class="ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
+				<button class="btn-emuna action-button" id="resetButton" type="button">Volver a mezclar el mazo</button>
+				<button class="btn-emuna ghost-button" id="revealButton" type="button" disabled>Ver mi resultado</button>
 				<p class="status" id="statusText">Elegí la carta que más te llama y dejá que la lectura acomode el mensaje.</p>
 			</aside>
 		</section>
