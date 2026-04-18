@@ -3102,32 +3102,37 @@ body.js-ready .reveal.is-visible {
 @media (max-width: 900px) {
     .site-header {
         width: calc(100% - 1rem);
-        padding: 0.72rem 0.78rem;
-        border-radius: 1.1rem;
+        padding: 0.52rem 0.62rem;
+        border-radius: 0.98rem;
         margin-top: 0.45rem;
-        flex-wrap: wrap;
-        gap: 0.6rem;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        align-items: center;
+        overflow: hidden;
     }
 
     .site-header::before {
-        border-radius: 1.1rem;
+        border-radius: 0.98rem;
     }
 
     .brand {
         padding-left: 0;
-        font-size: 1.06rem;
-        letter-spacing: 0.12em;
+        flex: 0 0 auto;
+        font-size: 0.98rem;
+        letter-spacing: 0.1em;
     }
 
     .site-nav {
-        order: 3;
-        width: 100%;
+        order: 0;
+        width: auto;
+        flex: 1 1 auto;
+        min-width: 0;
         justify-content: flex-start;
         flex-wrap: nowrap;
-        gap: 0.55rem;
+        gap: 0.4rem;
         overflow-x: auto;
-        padding: 0.1rem 0 0.2rem;
-        font-size: 0.86rem;
+        padding: 0;
+        font-size: 0.78rem;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
     }
@@ -3138,57 +3143,68 @@ body.js-ready .reveal.is-visible {
 
     .site-nav a {
         flex: 0 0 auto;
-        padding: 0.55rem 0.8rem;
+        padding: 0.42rem 0.6rem;
         border-radius: 999px;
         white-space: nowrap;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .hero {
-        min-height: 36rem;
+        min-height: 31rem;
         align-items: start;
-        padding: 1rem 0 1.4rem;
-        background-position: center 16%, center, 56% center;
+        padding: 0.55rem 0 1rem;
+        background-position: center 13%, center, 58% center;
     }
 
     .hero::before {
-        width: min(24vw, 10rem);
-        top: 4.1rem;
+        width: min(20vw, 7.4rem);
+        top: 3rem;
     }
 
     .hero-content {
         max-width: min(100%, 35rem);
-        padding: 10.5rem 0 0;
+        padding: 7.8rem 0 0;
     }
 
     .hero-badge {
-        margin-bottom: 0.75rem;
-        font-size: 0.78rem;
+        margin-bottom: 0.55rem;
+        padding: 0.3rem 0.58rem;
+        font-size: 0.7rem;
     }
 
     .hero-text {
         max-width: 100%;
-        font-size: 0.95rem;
-        line-height: 1.7;
+        font-size: 0.9rem;
+        line-height: 1.62;
+        display: -webkit-box;
+        line-clamp: 4;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
     }
 
     .hero-proof {
         gap: 0.45rem;
-        margin-top: 0.95rem;
+        margin-top: 0.72rem;
     }
 
     .hero-proof span {
-        font-size: 0.8rem;
-        padding: 0.52rem 0.7rem;
+        font-size: 0.74rem;
+        padding: 0.46rem 0.62rem;
+    }
+
+    .hero-proof span:nth-child(n + 3) {
+        display: none;
     }
 
     .hero-actions {
-        gap: 0.62rem;
+        gap: 0.5rem;
     }
 
     .hero-actions .btn-emuna {
-        min-height: 2.9rem;
+        min-height: 2.7rem;
+        font-size: 0.84rem;
     }
 
     .services-track {
@@ -3220,49 +3236,63 @@ body.js-ready .reveal.is-visible {
     }
 
     .floating-assistant {
-        right: 0.8rem;
-        bottom: 0.8rem;
-        min-height: 2.85rem;
-        padding: 0.58rem 0.84rem 0.58rem 0.62rem;
-        max-width: 10rem;
-        font-size: 0.78rem;
+        right: 0.6rem;
+        bottom: 0.62rem;
+        width: 2.55rem;
+        min-width: 2.55rem;
+        min-height: 2.55rem;
+        padding: 0;
+        justify-content: center;
+        border-radius: 999px;
+        max-width: none;
+        font-size: 0.72rem;
+        gap: 0;
     }
 
     .floating-assistant-badge {
-        width: 1.45rem;
-        height: 1.45rem;
-        font-size: 0.62rem;
+        width: auto;
+        height: auto;
+        padding: 0;
+        border: none;
+        background: transparent;
+        font-size: 0.72rem;
+        letter-spacing: 0.02em;
+    }
+
+    .floating-assistant span:last-child {
+        display: none;
     }
 
     .floating-socials {
-        left: 0.8rem;
-        bottom: 0.8rem;
-        gap: 0.4rem;
-        padding: 0.26rem;
+        left: 0.6rem;
+        bottom: 0.62rem;
+        flex-direction: row;
+        gap: 0.3rem;
+        padding: 0.18rem;
     }
 
     .floating-social {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.18rem;
+        height: 2.18rem;
     }
 
     .floating-social svg {
-        width: 1rem;
-        height: 1rem;
+        width: 0.92rem;
+        height: 0.92rem;
     }
 }
 
 @media (max-width: 767px) {
     .hero {
-        min-height: 34rem;
+        min-height: 28.6rem;
         align-items: start;
-        padding: 1rem 0 1.35rem;
+        padding: 0.4rem 0 0.9rem;
         background-position: center 14%, center, 58% center;
     }
 
     .hero::before {
-        width: min(42vw, 10rem);
-        top: 3.6rem;
+        width: min(38vw, 7rem);
+        top: 2.7rem;
     }
 
     .section,
@@ -3304,13 +3334,17 @@ body.js-ready .reveal.is-visible {
 
     .hero-content {
         max-width: 100%;
-        padding: 12.2rem 0 0;
+        padding: 7.2rem 0 0;
+    }
+
+    .hero .eyebrow {
+        display: none;
     }
 
     .hero-badge {
-        margin-bottom: 0.7rem;
-        padding: 0.34rem 0.68rem;
-        font-size: 0.73rem;
+        margin-bottom: 0.5rem;
+        padding: 0.28rem 0.56rem;
+        font-size: 0.67rem;
     }
 
     .eyebrow {
@@ -3320,14 +3354,16 @@ body.js-ready .reveal.is-visible {
     }
 
     .hero-text {
-        font-size: 0.92rem;
-        line-height: 1.68;
+        font-size: 0.88rem;
+        line-height: 1.58;
         max-width: 100%;
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
     }
 
     .hero-actions {
-        gap: 0.62rem;
-        margin-top: 1rem;
+        gap: 0.46rem;
+        margin-top: 0.82rem;
     }
 
     .hero-actions .btn-emuna,
@@ -3335,20 +3371,25 @@ body.js-ready .reveal.is-visible {
     .contact-actions .btn-emuna,
     .form-actions .btn-emuna {
         width: 100%;
-        min-height: 3rem;
+        min-height: 2.75rem;
+        font-size: 0.83rem;
     }
 
     .hero-proof {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 0.45rem;
-        margin-top: 0.95rem;
+        gap: 0.35rem;
+        margin-top: 0.62rem;
     }
 
     .hero-proof span {
-        font-size: 0.78rem;
-        padding: 0.52rem 0.74rem;
+        font-size: 0.72rem;
+        padding: 0.42rem 0.58rem;
         text-align: center;
+    }
+
+    .hero-proof span:nth-child(n + 2) {
+        display: none;
     }
 
     .oracle-spotlight-grid {
@@ -3561,44 +3602,39 @@ body.js-ready .reveal.is-visible {
     .floating-install {
         left: auto;
         right: 0.75rem;
-        bottom: 4.5rem;
+        bottom: 3.8rem;
         width: auto;
         max-width: calc(100% - 5.8rem);
     }
 
     .floating-assistant {
-        right: 0.7rem;
-        bottom: 0.72rem;
-        min-height: 2.65rem;
-        gap: 0.42rem;
-        padding: 0.52rem 0.74rem 0.52rem 0.54rem;
-        max-width: min(9.6rem, calc(100% - 5.9rem));
-        font-size: 0.76rem;
-        border-width: 1.5px;
+        right: 0.55rem;
+        bottom: 0.55rem;
+        width: 2.42rem;
+        min-width: 2.42rem;
+        min-height: 2.42rem;
         box-shadow: 0 10px 20px rgba(5, 7, 14, 0.26), 0 0 10px rgba(214, 190, 137, 0.12);
     }
 
     .floating-assistant-badge {
-        width: 1.38rem;
-        height: 1.38rem;
-        font-size: 0.58rem;
+        font-size: 0.68rem;
     }
 
     .floating-socials {
-        left: 0.7rem;
-        bottom: 0.72rem;
-        gap: 0.38rem;
-        padding: 0.24rem;
+        left: 0.55rem;
+        bottom: 0.55rem;
+        gap: 0.26rem;
+        padding: 0.16rem;
     }
 
     .floating-social {
-        width: 2.45rem;
-        height: 2.45rem;
+        width: 2.02rem;
+        height: 2.02rem;
     }
 
     .floating-social svg {
-        width: 1rem;
-        height: 1rem;
+        width: 0.84rem;
+        height: 0.84rem;
     }
 
     .tarot-card,
@@ -3634,36 +3670,51 @@ body.js-ready .reveal.is-visible {
 @media (max-width: 480px) {
     .site-header {
         width: calc(100% - 0.7rem);
-        padding: 0.58rem 0.62rem;
+        padding: 0.44rem 0.5rem;
         margin-top: 0.32rem;
-        gap: 0.45rem;
+        gap: 0.38rem;
     }
 
     .brand {
-        font-size: 0.98rem;
-        letter-spacing: 0.1em;
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
     }
 
     .site-nav {
-        gap: 0.45rem;
-        font-size: 0.8rem;
+        gap: 0.3rem;
+        font-size: 0.72rem;
     }
 
     .site-nav a {
-        padding: 0.48rem 0.66rem;
+        padding: 0.38rem 0.5rem;
     }
 
     .hero {
-        min-height: 31.5rem;
-        padding-bottom: 1rem;
+        min-height: 26.8rem;
+        padding-bottom: 0.8rem;
     }
 
     .hero-content {
-        padding-top: 11rem;
+        padding-top: 6.5rem;
     }
 
     .hero-badge {
         max-width: 100%;
+    }
+
+    h1 {
+        font-size: clamp(1.52rem, 7.2vw, 1.94rem);
+    }
+
+    .hero-text {
+        font-size: 0.84rem;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+    }
+
+    .hero-actions .btn-emuna {
+        min-height: 2.58rem;
+        font-size: 0.79rem;
     }
 
     .astral-spotlight-grid.framed-panel {
@@ -3737,8 +3788,9 @@ body.js-ready .reveal.is-visible {
     }
 
     .floating-assistant {
-        max-width: 8.4rem;
-        font-size: 0.72rem;
+        width: 2.26rem;
+        min-width: 2.26rem;
+        min-height: 2.26rem;
     }
 
     .floating-socials {
@@ -3746,8 +3798,8 @@ body.js-ready .reveal.is-visible {
     }
 
     .floating-social {
-        width: 2.28rem;
-        height: 2.28rem;
+        width: 1.92rem;
+        height: 1.92rem;
     }
 }
 
