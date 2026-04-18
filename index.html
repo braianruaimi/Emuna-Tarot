@@ -10,10 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="assets/icon-192.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Emuna - Tarot Evolutivo</title>
 </head>
 <body>
+    <!-- SKELETON SCREEN -->
+    <div id="app-skeleton" aria-hidden="true">
+        <div class="sk-header"></div>
+        <div class="sk-container">
+            <div class="sk-hero-box">
+                <div class="sk-line large"></div>
+                <div class="sk-line medium"></div>
+            </div>
+            <div class="sk-grid">
+                <div class="sk-card"></div>
+                <div class="sk-card"></div>
+                <div class="sk-card"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="aurora aurora-left"></div>
     <div class="aurora aurora-right"></div>
 
@@ -95,7 +111,7 @@
                     </div>
                 </div>
                 <div class="oracle-spotlight-side">
-                    <div class="oracle-preview" aria-hidden="true">
+                    <div class="oracle-preview" aria-hidden="true" role="img" aria-label="Visualización de cartas de Tarot">
                         <div class="oracle-preview-fan">
                             <div class="oracle-mini-card oracle-mini-card-left">
                                 <span class="oracle-mini-top">Pasado</span>
@@ -251,7 +267,7 @@
                         <span aria-hidden="true">&#10094;</span>
                     </button>
                     <div class="services-track modern-services" id="servicesTrack">
-                        <article class="service-card tarot-card mystic-card" data-service="Lectura Esencial" tabindex="0" data-aos="zoom-in" data-aos-delay="100">
+                        <article class="service-card mystic-card" data-service="Lectura Esencial" tabindex="0" data-aos="zoom-in" data-aos-delay="100">
                             <div class="card-header-icon">
                                 <span class="icon-tarot">&#9733;</span>
                             </div>
@@ -428,6 +444,6 @@
 
     <button class="floating-install hidden" id="floatingInstallButton" type="button" aria-label="Instalar app">Instalar App</button>
 
-    <script src="app.js"></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>

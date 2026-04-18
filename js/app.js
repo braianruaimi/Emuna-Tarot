@@ -15,18 +15,29 @@ const mensajesOraculo = [
 ];
 if (miniOraculoCarta && miniOraculoMensaje) {
     let revelada = false;
-    function revelarCarta() {
+    const revelarCarta = () => {
         if (revelada) return;
         revelada = true;
         const idx = Math.floor(Math.random() * mensajesOraculo.length);
         miniOraculoMensaje.textContent = mensajesOraculo[idx];
         miniOraculoCarta.classList.add('revelada');
-    }
+    };
     miniOraculoCarta.addEventListener('click', revelarCarta);
     miniOraculoCarta.addEventListener('keypress', e => {
         if (e.key === 'Enter' || e.key === ' ') revelarCarta();
     });
 }
+
+// --- REMOCIÓN DEL SKELETON ---
+window.addEventListener('load', () => {
+    const skeleton = document.getElementById('app-skeleton');
+    if (skeleton) {
+        skeleton.style.opacity = '0';
+        skeleton.style.visibility = 'hidden';
+        setTimeout(() => skeleton.remove(), 500);
+    }
+});
+
 document.body.classList.add('js-ready');
 
 const WHATSAPP_NUMBER = '2215566392';
@@ -115,42 +126,30 @@ openBookingButtons.forEach((button) => {
     });
 });
 
-const updateCarouselArrows = () => {
-    if (!servicesTrack || !carouselArrows.length) {
-        return;
-    }
-
-    const maxScrollLeft = servicesTrack.scrollWidth - servicesTrack.clientWidth;
-
-    carouselArrows.forEach((arrow) => {
-        const direction = arrow.dataset.carouselArrow;
-
-        if (direction === 'prev') {
-            arrow.disabled = servicesTrack.scrollLeft <= 8;
-        }
-
-        if (direction === 'next') {
-            arrow.disabled = servicesTrack.scrollLeft >= maxScrollLeft - 8;
-        }
-    });
-};
-
 if (servicesTrack && carouselArrows.length) {
     carouselArrows.forEach((arrow) => {
         arrow.addEventListener('click', () => {
-            const direction = arrow.dataset.carouselArrow === 'next' ? 1 : -1;
+            const direction = arrow.dataset.carouselArrow;
+            const maxScrollLeft = servicesTrack.scrollWidth - servicesTrack.clientWidth;
             const travel = Math.max(servicesTrack.clientWidth * 0.78, 260);
 
-            servicesTrack.scrollBy({
-                left: travel * direction,
-                behavior: 'smooth'
-            });
+            if (direction === 'next') {
+                // Si estamos cerca del final, volvemos al principio
+                if (servicesTrack.scrollLeft >= maxScrollLeft - 10) {
+                    servicesTrack.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    servicesTrack.scrollBy({ left: travel, behavior: 'smooth' });
+                }
+            } else {
+                // Si estamos cerca del inicio, saltamos al final
+                if (servicesTrack.scrollLeft <= 10) {
+                    servicesTrack.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+                } else {
+                    servicesTrack.scrollBy({ left: -travel, behavior: 'smooth' });
+                }
+            }
         });
     });
-
-    servicesTrack.addEventListener('scroll', updateCarouselArrows, { passive: true });
-    window.addEventListener('resize', updateCarouselArrows);
-    updateCarouselArrows();
 }
 
 if (bookingModalClose) {
@@ -204,8 +203,11 @@ if (form) {
             return;
         }
 
+        // Feedback visual de carga
+        const originalBtnText = submitButton.textContent;
         submitButton.disabled = true;
-        setFormStatus('Enviando...', '');
+        submitButton.innerHTML = `<span class="spinner"></span> Conectando...`;
+        setFormStatus('Preparando tu conexión con Bren...', 'info');
 
         const nombre = form.nombre.value;
         const apellido = form.apellido.value;
@@ -233,6 +235,7 @@ if (form) {
                 servicioInput.value = '';
             }
             submitButton.disabled = false;
+            submitButton.textContent = originalBtnText;
             setFormStatus('¡Mensaje enviado por WhatsApp!', 'success');
             closeBookingModal();
         }, 1200);
@@ -324,7 +327,7 @@ document.querySelectorAll('.site-nav a[href^="#"]').forEach(link => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
-            await navigator.serviceWorker.register('sw.js');
+            await navigator.serviceWorker.register('js/sw.js');
         } catch (error) {
             console.error('No se pudo registrar el service worker.', error);
         }

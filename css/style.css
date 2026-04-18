@@ -1,0 +1,57 @@
+/* --- DESIGN TOKENS --- */
+:root {
+	--bg: #0b021d;
+	--bg-soft: #16052f;
+	--bg-deep: #05000f;
+	--surface: rgba(20, 8, 44, 0.78);
+	--surface-strong: rgba(11, 2, 29, 0.92);
+	--text: #f4ebff;
+	--muted: #cab7e8;
+	--violet: #a020f0;
+	--violet-soft: #d598ff;
+	--cyan: #40e0d0;
+	--gold-a: #d4af37;
+	--gold-b: #f9f295;
+	--danger: #ff8db5;
+	--shadow-violet: 0 0 15px rgba(160, 32, 240, 0.75);
+	--shadow-cyan: 0 0 24px rgba(64, 224, 208, 0.18);
+	--radius-lg: 28px;
+	--radius-md: 20px;
+	--radius-sm: 14px;
+	--container: min(1140px, calc(100% - 2rem));
+	--glass: rgba(255, 255, 255, 0.03);
+}
+
+.card-header-icon .icon-tarot {
+	animation: tarotSparkle 2.2s infinite alternate cubic-bezier(.4,1.6,.4,1);
+	filter: drop-shadow(0 0 6px #a020f0) drop-shadow(0 0 10px #40e0d0);
+}
+
+@keyframes tarotSparkle {
+	0% { filter: drop-shadow(0 0 6px #a020f0) drop-shadow(0 0 10px #40e0d0) brightness(1); }
+	40% { filter: drop-shadow(0 0 12px #a020f0) drop-shadow(0 0 18px #40e0d0) brightness(1.18); }
+	60% { filter: drop-shadow(0 0 18px #d4af37) drop-shadow(0 0 24px #f9f295) brightness(1.25); }
+	100% { filter: drop-shadow(0 0 6px #a020f0) drop-shadow(0 0 10px #40e0d0) brightness(1); }
+}
+/* --- MINI ORÁCULO DEMO --- */
+.mini-oraculo-demo {
+	margin-bottom: 2.2rem;
+}
+.mini-oraculo-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 2.1rem 1.2rem 1.5rem;
+	background:
+		linear-gradient(120deg, rgba(30,0,60,0.82) 60%, rgba(160,32,240,0.18) 100%) padding-box,
+		linear-gradient(45deg, #a020f0 10%, #40e0d0 90%) border-box;
+	border-radius: 1.5rem;
+	border: 2.5px solid rgba(160,32,240,0.35);
+	box-shadow: 0 2px 32px 0 #a020f0, 0 0 44px #40e0d0, 0 8px 32px rgba(0,0,0,0.28), 0 0 0 1.5px rgba(255,255,255,0.08) inset;
+	backdrop-filter: blur(12px) saturate(1.25);
+	-webkit-backdrop-filter: blur(12px) saturate(1.25);
+	margin-bottom: 1.2rem;
+	text-align: center;
+}
+...existing code...

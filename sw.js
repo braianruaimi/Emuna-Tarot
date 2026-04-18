@@ -1,15 +1,15 @@
-const CACHE_NAME = 'emuna-tarot-v5';
+const CACHE_NAME = 'emuna-tarot-v6';
 const APP_SHELL = [
-    './',
-    'index.html',
-    'style.css',
+    '../',
+    '../index.html',
+    '../css/style.css',
     'app.js',
-    'manifest.json',
-    'assets/chica luna.jpg',
-    'assets/descarga.jpg',
-    'assets/luna-after-hero.jpg',
-    'assets/icon-192.svg',
-    'assets/icon-512.svg'
+    '../manifest.json',
+    '../assets/img/chica-luna.jpg',
+    '../assets/img/descarga.jpg',
+    '../assets/img/luna-after-hero.jpg',
+    '../assets/icons/icon-192.svg',
+    '../assets/icons/icon-512.svg'
 ];
 
 self.addEventListener('install', (event) => {
