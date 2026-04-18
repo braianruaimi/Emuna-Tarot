@@ -1,4 +1,4 @@
-const CACHE_NAME = 'emuna-tarot-v10';
+const CACHE_NAME = 'emuna-tarot-v11';
 const APP_SHELL = [
     './',
     'index.html',
@@ -9,6 +9,9 @@ const APP_SHELL = [
     'lunaagua.jfif',
     'lunamano.jfif',
     'lunahijo.jfif',
+    'pasado.jfif',
+    'presente.jfif',
+    'futuro.jfif',
     'assets/chica luna.jpg',
     'assets/descarga.jpg',
     'assets/luna-after-hero.jpg',
