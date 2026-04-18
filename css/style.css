@@ -3206,8 +3206,57 @@ body.js-ready .reveal.is-visible {
         grid-template-columns: 1fr;
     }
 
+    .astral-spotlight-grid.framed-panel {
+        gap: 1.1rem;
+        padding: 1.15rem;
+    }
+
+    .astral-spotlight-main,
+    .astral-spotlight-side {
+        gap: 0.95rem;
+    }
+
+    .astral-spotlight-main h2 {
+        font-size: clamp(1.45rem, 6.2vw, 2rem);
+        line-height: 1.16;
+    }
+
+    .astral-spotlight-pain,
+    .astral-spotlight-main p:last-of-type {
+        font-size: 0.95rem;
+        line-height: 1.72;
+    }
+
+    .astral-preview {
+        min-height: 14.25rem;
+        margin-bottom: 0.4rem;
+        padding: 0.6rem;
+    }
+
+    .astral-kpis {
+        gap: 0.8rem;
+    }
+
+    .astral-kpi {
+        padding: 0.95rem 0.9rem;
+    }
+
+    .astral-kpi strong {
+        display: block;
+        margin-bottom: 0.28rem;
+    }
+
     .services-story {
         padding: 1rem;
+    }
+
+    .services-story-header {
+        gap: 0.6rem;
+    }
+
+    .services-story-lead {
+        font-size: 0.93rem;
+        line-height: 1.7;
     }
 
     .soul-bridge-panel {
@@ -3267,6 +3316,21 @@ body.js-ready .reveal.is-visible {
     .services-story-slide p {
         font-size: 0.93rem;
         line-height: 1.7;
+    }
+
+    .services-story-nav {
+        gap: 0.7rem;
+        padding-top: 0.1rem;
+    }
+
+    .services-carousel {
+        padding: 0.78rem;
+    }
+
+    .services-track {
+        gap: 0.72rem;
+        padding: 0.1rem 0.05rem 0.75rem;
+        scroll-padding-inline: 0.05rem;
     }
 
     .oracle-preview {
@@ -3392,14 +3456,103 @@ body.js-ready .reveal.is-visible {
 
     .tarot-card,
     .modern-services .service-card {
-        width: 10.7rem;
-        min-width: 10.7rem;
-        max-width: 10.7rem;
-        min-height: 17rem;
+        width: clamp(15.2rem, 78vw, 18.6rem);
+        min-width: clamp(15.2rem, 78vw, 18.6rem);
+        max-width: clamp(15.2rem, 78vw, 18.6rem);
+        min-height: 18rem;
+    }
+
+    .modern-services .service-card {
+        flex-basis: clamp(15.2rem, 78vw, 18.6rem);
+    }
+
+    .modern-services .card-title {
+        font-size: 1rem;
+    }
+
+    .modern-services .card-detail {
+        font-size: 0.88rem;
+    }
+
+    .modern-services .primary-button {
+        min-height: 2.8rem;
+        font-size: 0.88rem;
     }
 
     .mystic-card .card-media {
         margin-bottom: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .astral-spotlight-grid.framed-panel {
+        padding: 1rem;
+    }
+
+    .oracle-spotlight-actions.astral-spotlight-actions {
+        gap: 0.7rem;
+    }
+
+    .oracle-spotlight-actions.astral-spotlight-actions .btn-emuna {
+        width: 100%;
+    }
+
+    .astral-wheel {
+        width: min(100%, 15.6rem);
+    }
+
+    .astral-wheel-core {
+        width: 4.7rem;
+        height: 4.7rem;
+        font-size: 0.72rem;
+    }
+
+    .astral-node {
+        min-width: 4.55rem;
+        padding: 0.46rem 0.62rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+    }
+
+    .services-story {
+        padding: 0.9rem;
+        border-radius: 1.1rem;
+    }
+
+    .services-story-stage {
+        min-height: 16rem;
+    }
+
+    .services-story-slide {
+        padding: 1rem 0.9rem;
+    }
+
+    .services-story-slide h3 {
+        font-size: 0.95rem;
+    }
+
+    .services-story-slide p {
+        font-size: 0.9rem;
+    }
+
+    .services-track {
+        gap: 0.65rem;
+    }
+
+    .tarot-card,
+    .modern-services .service-card {
+        width: min(84vw, 17rem);
+        min-width: min(84vw, 17rem);
+        max-width: min(84vw, 17rem);
+        min-height: 17.4rem;
+    }
+
+    .modern-services .card-footer {
+        gap: 0.45rem;
+    }
+
+    .modern-services .card-precio {
+        font-size: 0.9rem;
     }
 }
 
