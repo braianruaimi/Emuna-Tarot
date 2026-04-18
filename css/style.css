@@ -380,6 +380,22 @@ main > section,
     filter: saturate(1.05) contrast(1.02);
 }
 
+.service-card-esencial .tarot-photo-frame img {
+    object-position: center 24%;
+}
+
+.service-card-claridad .tarot-photo-frame img {
+    object-position: center 42%;
+}
+
+.service-card-inmersion .tarot-photo-frame img {
+    object-position: center 20%;
+}
+
+.service-card-acompanamiento .tarot-photo-frame img {
+    object-position: center 30%;
+}
+
 .mystic-card .card-title {
     font-size: 1.18rem;
     font-weight: 700;
