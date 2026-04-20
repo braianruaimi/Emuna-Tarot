@@ -80,6 +80,9 @@ const formStatus = document.querySelector('#formStatus');
 const submitButton = document.querySelector('#submitButton');
 const installButton = document.querySelector('#installButton');
 const floatingInstallButton = document.querySelector('#floatingInstallButton');
+const updateToast = document.querySelector('#updateToast');
+const updateAppButton = document.querySelector('#updateAppButton');
+const dismissUpdateToastButton = document.querySelector('#dismissUpdateToast');
 const floatingAssistantButton = document.querySelector('#floatingAssistantButton');
 const revealElements = document.querySelectorAll('.reveal');
 const bookingModal = document.querySelector('#bookingModal');
@@ -352,8 +355,18 @@ assistantQuestionButtons.forEach((button) => {
 });
 
 let deferredInstallPrompt = null;
+let waitingServiceWorker = null;
+let shouldRefreshForUpdate = false;
 
 const installControls = [installButton, floatingInstallButton].filter(Boolean);
+
+const toggleUpdateToast = (shouldShow) => {
+    if (!updateToast) {
+        return;
+    }
+
+    updateToast.classList.toggle('hidden', !shouldShow);
+};
 
 const setFormStatus = (message, tone = '') => {
     if (!formStatus) {
@@ -498,6 +511,24 @@ window.addEventListener('appinstalled', () => {
     toggleInstallButtons(false);
 });
 
+if (dismissUpdateToastButton) {
+    dismissUpdateToastButton.addEventListener('click', () => {
+        toggleUpdateToast(false);
+    });
+}
+
+if (updateAppButton) {
+    updateAppButton.addEventListener('click', () => {
+        if (!waitingServiceWorker) {
+            toggleUpdateToast(false);
+            return;
+        }
+
+        shouldRefreshForUpdate = true;
+        waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
+    });
+}
+
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         closeBookingModal();
@@ -528,9 +559,46 @@ document.querySelectorAll('.site-nav a[href^="#"]').forEach(link => {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
+            const showUpdateReady = (serviceWorker) => {
+                if (!serviceWorker) {
+                    return;
+                }
+
+                waitingServiceWorker = serviceWorker;
+                toggleUpdateToast(true);
+            };
+
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!shouldRefreshForUpdate) {
+                    return;
+                }
+
+                shouldRefreshForUpdate = false;
+                window.location.reload();
+            });
+
             const registration = await navigator.serviceWorker.register('sw.js', {
                 updateViaCache: 'none'
             });
+
+            if (registration.waiting) {
+                showUpdateReady(registration.waiting);
+            }
+
+            registration.addEventListener('updatefound', () => {
+                const installingWorker = registration.installing;
+
+                if (!installingWorker) {
+                    return;
+                }
+
+                installingWorker.addEventListener('statechange', () => {
+                    if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        showUpdateReady(installingWorker);
+                    }
+                });
+            });
+
             registration.update();
         } catch (error) {
             console.error('No se pudo registrar el service worker.', error);
