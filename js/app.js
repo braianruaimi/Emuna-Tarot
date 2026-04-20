@@ -53,7 +53,10 @@ if (miniOraculoCarta && miniOraculoMensaje) {
         if (revelada) return;
         revelada = true;
         const idx = Math.floor(Math.random() * mensajesOraculo.length);
-        miniOraculoMensaje.textContent = mensajesOraculo[idx];
+        miniOraculoMensaje.innerHTML = `
+            <span class="mini-oraculo-symbol" aria-hidden="true">✦</span>
+            <span class="mini-oraculo-back-copy">${mensajesOraculo[idx]}</span>
+        `;
         miniOraculoCarta.classList.add('revelada');
     };
     miniOraculoCarta.addEventListener('click', revelarCarta);
