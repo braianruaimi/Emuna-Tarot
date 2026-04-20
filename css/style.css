@@ -3672,6 +3672,27 @@ body.js-ready .reveal.is-visible {
         text-align: center;
     }
 
+    .astral-spotlight-side {
+        align-items: center;
+        text-align: center;
+    }
+
+    .astral-preview,
+    .astral-kpis,
+    .astral-spotlight-actions {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .astral-kpis {
+        max-width: 24rem;
+    }
+
+    .astral-kpi {
+        text-align: center;
+    }
+
     .astral-spotlight-main h2 {
         font-size: clamp(1.45rem, 6.2vw, 2rem);
         line-height: 1.16;
@@ -3687,6 +3708,8 @@ body.js-ready .reveal.is-visible {
         min-height: 14.25rem;
         margin-bottom: 0.4rem;
         padding: 0.6rem;
+        width: 100%;
+        justify-items: center;
     }
 
     .astral-kpis {
@@ -4197,6 +4220,67 @@ body.js-ready .reveal.is-visible {
     }
 
     .oracle-spotlight-actions .btn-emuna {
+        width: 100%;
+        max-width: 23rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .astral-spotlight-grid,
+    .astral-spotlight-grid.framed-panel {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 1.05rem;
+        padding: 1rem;
+    }
+
+    .astral-spotlight-main,
+    .astral-spotlight-side {
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+        gap: 0.95rem;
+    }
+
+    .astral-spotlight-main > p,
+    .astral-spotlight-main > h2,
+    .astral-spotlight-actions,
+    .astral-preview,
+    .astral-kpis {
+        width: min(100%, 23rem);
+        max-width: 23rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .astral-spotlight-pain,
+    .astral-spotlight-main p:last-of-type,
+    .astral-kpi,
+    .astral-kpi strong,
+    .astral-kpi span {
+        text-align: center;
+    }
+
+    .astral-preview {
+        min-height: 14.25rem;
+        justify-items: center;
+    }
+
+    .astral-wheel {
+        width: min(100%, 15.6rem);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .astral-spotlight-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.44rem;
+    }
+
+    .astral-spotlight-actions .btn-emuna {
         width: 100%;
         max-width: 23rem;
         margin-left: auto;
