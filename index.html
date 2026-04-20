@@ -717,6 +717,14 @@
 
     <button class="btn-emuna floating-install hidden" id="floatingInstallButton" type="button" aria-label="Instalar app">Instalar App</button>
 
+    <aside class="update-toast hidden" id="updateToast" aria-live="polite" aria-atomic="true">
+        <p class="update-toast-title">Hay una nueva version de Emuna lista.</p>
+        <div class="update-toast-actions">
+            <button class="btn-emuna update-toast-button" id="updateAppButton" type="button">Actualizar app</button>
+            <button class="update-toast-dismiss" id="dismissUpdateToast" type="button" aria-label="Cerrar aviso de actualizacion">Ahora no</button>
+        </div>
+    </aside>
+
     <script src="js/app.js" defer></script>
 </body>
 </html>
