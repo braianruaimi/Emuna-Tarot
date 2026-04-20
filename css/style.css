@@ -3615,10 +3615,34 @@ body.js-ready .reveal.is-visible {
     .oracle-spotlight-main,
     .oracle-spotlight-side {
         gap: 0.92rem;
+        align-items: center;
+        text-align: center;
     }
 
     .oracle-spotlight-main {
-        align-items: stretch;
+        align-items: center;
+    }
+
+    .oracle-preview,
+    .oracle-kpis,
+    .oracle-spotlight-actions {
+        width: min(100%, 23rem);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .oracle-preview-fan {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .oracle-kpi {
+        text-align: center;
+    }
+
+    .oracle-kpi strong,
+    .oracle-kpi span {
+        display: block;
         text-align: center;
     }
 
@@ -3950,6 +3974,12 @@ body.js-ready .reveal.is-visible {
     .oracle-spotlight-actions,
     .astral-spotlight-actions {
         gap: 0.44rem;
+    }
+
+    .oracle-preview,
+    .oracle-kpis,
+    .oracle-spotlight-actions {
+        width: 100%;
     }
 
     .oracle-spotlight-actions .btn-emuna,
