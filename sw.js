@@ -1,10 +1,10 @@
-const CACHE_NAME = 'emuna-tarot-v14';
+const CACHE_NAME = 'emuna-tarot-v15';
 const APP_SHELL = [
     './',
     'index.html',
     'cartaastral/index.html',
     'tarotsiono/index.html',
-    'css/style.css',
+    'css/style.css?v=20260420b',
     'js/app.js',
     'manifest.json',
     'lunaroja.jfif',
