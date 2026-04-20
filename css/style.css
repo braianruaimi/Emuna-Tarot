@@ -4141,6 +4141,69 @@ body.js-ready .reveal.is-visible {
     }
 }
 
+@media (pointer: coarse) {
+    .oracle-spotlight-grid,
+    .oracle-spotlight-grid.framed-panel {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 1.05rem;
+        padding: 1rem;
+    }
+
+    .oracle-spotlight-main,
+    .oracle-spotlight-side {
+        width: 100%;
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+        gap: 0.92rem;
+    }
+
+    .oracle-spotlight-main > p,
+    .oracle-spotlight-main > h2,
+    .oracle-spotlight-actions,
+    .oracle-preview,
+    .oracle-kpis {
+        width: min(100%, 23rem);
+        max-width: 23rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .oracle-spotlight-main p:last-of-type,
+    .oracle-kpi,
+    .oracle-kpi strong,
+    .oracle-kpi span {
+        text-align: center;
+    }
+
+    .oracle-preview {
+        min-height: 15rem;
+        justify-items: center;
+    }
+
+    .oracle-preview-fan {
+        width: min(100%, 20.4rem);
+        height: 14.2rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .oracle-spotlight-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.44rem;
+    }
+
+    .oracle-spotlight-actions .btn-emuna {
+        width: 100%;
+        max-width: 23rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
