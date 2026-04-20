@@ -82,7 +82,7 @@ const form = document.querySelector('#contactForm');
 const formStatus = document.querySelector('#formStatus');
 const submitButton = document.querySelector('#submitButton');
 const installButton = document.querySelector('#installButton');
-const floatingInstallButton = document.querySelector('#floatingInstallButton');
+// const floatingInstallButton = document.querySelector('#floatingInstallButton');
 const updateToast = document.querySelector('#updateToast');
 const updateAppButton = document.querySelector('#updateAppButton');
 const dismissUpdateToastButton = document.querySelector('#dismissUpdateToast');
@@ -361,7 +361,7 @@ let deferredInstallPrompt = null;
 let waitingServiceWorker = null;
 let shouldRefreshForUpdate = false;
 
-const installControls = [installButton, floatingInstallButton].filter(Boolean);
+const installControls = [installButton].filter(Boolean);
 
 const toggleUpdateToast = (shouldShow) => {
     if (!updateToast) {
