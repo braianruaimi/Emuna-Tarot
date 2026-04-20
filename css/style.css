@@ -1645,7 +1645,7 @@ h1 {
 }
 
 .astral-spotlight {
-    padding-top: 0.35rem;
+    padding-top: 1rem;
 }
 
 .astral-spotlight-grid,
@@ -3494,6 +3494,11 @@ body.js-ready .reveal.is-visible {
 }
 
 @media (max-width: 767px) {
+    .oracle-spotlight,
+    .astral-spotlight {
+        padding-top: 0.9rem;
+    }
+
     .hero {
         min-height: 28.6rem;
         align-items: start;
@@ -3658,13 +3663,13 @@ body.js-ready .reveal.is-visible {
     }
 
     .astral-spotlight-grid.framed-panel {
-        gap: 1.1rem;
-        padding: 1.15rem;
+        gap: 1.05rem;
+        padding: 1.1rem;
     }
 
     .astral-spotlight-main,
     .astral-spotlight-side {
-        gap: 0.95rem;
+        gap: 0.92rem;
     }
 
     .astral-spotlight-main {
