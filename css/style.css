@@ -3615,34 +3615,31 @@ body.js-ready .reveal.is-visible {
     .oracle-spotlight-main,
     .oracle-spotlight-side {
         gap: 0.92rem;
-        align-items: center;
-        text-align: center;
     }
 
     .oracle-spotlight-main {
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .oracle-spotlight-side {
         align-items: center;
+        text-align: center;
     }
 
     .oracle-preview,
     .oracle-kpis,
     .oracle-spotlight-actions {
-        width: min(100%, 23rem);
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
 
-    .oracle-preview-fan {
-        margin-left: auto;
-        margin-right: auto;
+    .oracle-kpis {
+        max-width: 24rem;
     }
 
     .oracle-kpi {
-        text-align: center;
-    }
-
-    .oracle-kpi strong,
-    .oracle-kpi span {
-        display: block;
         text-align: center;
     }
 
@@ -3794,11 +3791,15 @@ body.js-ready .reveal.is-visible {
 
     .oracle-preview {
         min-height: 15rem;
+        width: 100%;
+        justify-items: center;
     }
 
     .oracle-preview-fan {
         width: min(100%, 20.4rem);
         height: 14.2rem;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .oracle-mini-card {
@@ -3974,18 +3975,16 @@ body.js-ready .reveal.is-visible {
     .oracle-spotlight-actions,
     .astral-spotlight-actions {
         gap: 0.44rem;
-    }
-
-    .oracle-preview,
-    .oracle-kpis,
-    .oracle-spotlight-actions {
-        width: 100%;
+        justify-items: center;
     }
 
     .oracle-spotlight-actions .btn-emuna,
     .astral-spotlight-actions .btn-emuna {
         min-height: 2.58rem;
         font-size: 0.8rem;
+        max-width: 24rem;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .site-header {
